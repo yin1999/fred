@@ -11,6 +11,25 @@
   "author": "Florian Dieminger",
   "license": "MPL-2.0",
   "description": "",
+  "browserslist": [
+    "Chrome > 0 and last 2.5 years",
+    "ChromeAndroid > 0 and last 2.5 years",
+    "Edge > 0 and last 2.5 years",
+    "Firefox > 0 and last 2.5 years",
+    "FirefoxAndroid > 0 and last 2.5 years",
+    "Safari > 0 and last 2.5 years",
+    "iOS > 0 and last 2.5 years",
+    "Firefox ESR",
+    "not dead"
+  ],
+  "postcss": {
+    "plugins": {
+      "postcss-preset-env": {
+        "stage": 2,
+        "minimumVendorImplementations": 2
+      }
+    }
+  },
   "dependencies": {
     "@fluent/bundle": "^0.18.0",
     "@lit-labs/ssr": "^3.3.1",
@@ -25,6 +44,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@rsbuild/core": "1.2.3"
+    "@rsbuild/core": "1.2.3",
+    "postcss-preset-env": "^10.1.5"
   }
 }
