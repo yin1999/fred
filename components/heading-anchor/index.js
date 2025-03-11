@@ -4,9 +4,9 @@ import { unsafeStatic, html as hh } from "lit-html/static.js";
 import "./index.css";
 
 /**
- * @param (number) level
- * @param (string?) id
- * @param (string) title
+ * @param {number} level
+ * @param {string?} id
+ * @param {string} title
  */
 export function Heading(level, id, title) {
   return id
