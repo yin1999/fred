@@ -1,5 +1,6 @@
 const FLT_REGEX = /\.flt$/;
 
+/** @returns {import("@rsbuild/core").RsbuildPlugin} */
 export const pluginFluent = () => ({
   name: "mdn-fluent-plugin",
   setup(api) {

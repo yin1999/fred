@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SVG_REGEX = /\.svg$/;
 
+/** @returns {import("@rsbuild/core").RsbuildPlugin} */
 export const pluginSvg = () => ({
   name: "mdn-svg-plugin",
   setup(api) {

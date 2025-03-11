@@ -1,3 +1,7 @@
+/**
+ * @this {import("@rspack/core").LoaderContext}
+ * @param {string} contents
+ */
 function mdnsvgLoader(contents) {
   this?.cacheable?.();
 
