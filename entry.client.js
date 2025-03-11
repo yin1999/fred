@@ -10,11 +10,13 @@ window.addEventListener("DOMContentLoaded", () => {
   [...(document.querySelectorAll('pre[class~="brush:"]') || [])].forEach(
     (pre) => {
       const code = pre.firstChild;
-      code.innerHTML = Prism.highlight(
-        code.textContent,
-        Prism.languages.html,
-        "html",
-      );
+      if (code instanceof HTMLElement && Prism.languages.html) {
+        code.innerHTML = Prism.highlight(
+          code.textContent || "",
+          Prism.languages.html,
+          "html",
+        );
+      }
     },
   );
 });

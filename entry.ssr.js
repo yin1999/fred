@@ -4,11 +4,18 @@ import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 import { SettingsBody } from "./pages/settings/index.js";
 import l10n from "./fluent.js";
 
+/**
+ * @param {string} path 
+ */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
   console.log(`using ${external_url}`);
   return await (await fetch(external_url)).json();
 }
+
+/**
+ * @param {string} path 
+ */
 export async function render(path) {
   let result;
   if (path.endsWith("settings")) {
