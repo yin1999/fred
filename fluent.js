@@ -9,6 +9,10 @@ const whitelistedTags = ["i", "strong", "br"];
 const whitelistedAttributes = ["title", "aria-label"];
 
 class Fluent {
+  /**
+   * @param {string} locale
+   * @param {string[]} resources
+   */
   constructor(locale = "en-US", resources = []) {
     this.usBundle = Fluent.constructBundle(new FluentBundle(locale), [
       USStrings,
@@ -22,6 +26,10 @@ class Fluent {
     }
   }
 
+  /**
+   * @param {FluentBundle} bundle 
+   * @param {string[]} resources 
+   */
   static constructBundle(bundle, resources = []) {
     resources.forEach((r) => {
       const errors = bundle.addResource(new FluentResource(r), {
@@ -34,6 +42,10 @@ class Fluent {
     return bundle;
   }
 
+  /**
+   * @param {readonly string[]} requested 
+   * @param {string[]} available 
+   */
   static init(requested = navigator.languages, available) {
     this.locales = this.resolveLocale(requested, available);
     return this.load(...this.locales);
@@ -43,6 +55,9 @@ class Fluent {
     return languages;
   }
 
+  /**
+   * @returns {string}
+   */
   get(...parameters) {
     if (typeof parameters[0] === "string") {
       const id = parameters[0];
@@ -61,6 +76,9 @@ class Fluent {
     return Fluent.sanitize(message, tags);
   }
 
+  /**
+   * @param {string} message 
+   */
   static sanitize(message, tags = {}) {
     const allowedAttributes = {};
     Object.values(tags).forEach((t) => {
@@ -97,6 +115,10 @@ class Fluent {
     );
   }
 
+  /**
+   * @param {string} id
+   * @returns {string}
+   */
   getMessage(id, attr = null, args = {}, bundle = this.bundle, us = false) {
     const parentMessage = bundle ? bundle.getMessage(id) : undefined;
     let message;
@@ -126,6 +148,7 @@ class Fluent {
       message = parentMessage.value;
     }
 
+    /** @type {Error[]} */
     const errors = [];
     const formatted = bundle.formatPattern(message, args, errors);
     if (errors.length) {
