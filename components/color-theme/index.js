@@ -5,7 +5,7 @@ import light from "../icon/sun.svg?mdnsvg";
 import dark from "../icon/moon.svg?mdnsvg";
 import { LitElement } from "lit";
 
-class ColorTheme extends LitElement {
+export class ColorTheme extends LitElement {
   static styles = css`
     .color-theme {
       position: relative;

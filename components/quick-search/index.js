@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
 
-export class Quickserach extends LitElement {
+export class QuickSearch extends LitElement {
   static styles = css`
     .quick-search {
       display: grid;
@@ -108,4 +108,4 @@ export class Quickserach extends LitElement {
   }
 }
 
-customElements.define("quick-search", Quickserach);
+customElements.define("quick-search", QuickSearch);
