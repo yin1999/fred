@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rsbuild build",
     "dev": "node ./server.js",
-    "preview": "node ./prod-server.js"
+    "preview": "node ./prod-server.js",
+    "tsc": "tsc"
   },
   "author": "Florian Dieminger",
   "license": "MPL-2.0",
@@ -45,6 +46,10 @@
   },
   "devDependencies": {
     "@rsbuild/core": "1.2.3",
-    "postcss-preset-env": "^10.1.5"
+    "@types/express": "^5.0.0",
+    "@types/insane": "^1.0.0",
+    "@types/prismjs": "^1.26.5",
+    "postcss-preset-env": "^10.1.5",
+    "typescript": "^5.8.2"
   }
 }

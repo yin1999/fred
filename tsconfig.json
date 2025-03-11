@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    // general options:
+    "allowJs": true,
+    "checkJs": true,
+    "maxNodeModuleJsDepth": 0,
+    "noEmit": true,
+    "target": "es2022",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    // fix for badly-formed types in dependencies:
+    "skipLibCheck": true,
+    // rules:
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    // temporary, while migrating:
+    // "noImplicitAny": false
+  },
+  "exclude": ["node_modules", "dist", "legacy"]
+}
