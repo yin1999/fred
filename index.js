@@ -3,12 +3,15 @@ import { RenderResultReadable } from "@lit-labs/ssr/lib/render-result-readable.j
 import express from "express";
 import { Doc } from "./pages/doc/index.js";
 
+/**
+ * @param {string} path 
+ */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
   console.log(`using ${external_url}`);
   return await (await fetch(external_url)).json();
 }
-const app = new express();
+const app = express();
 app.use(express.static("."));
 app.get("/*mdnUrl", async (req, res) => {
   const context = await fetch_from_rari(req.path);
