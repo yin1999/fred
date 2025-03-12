@@ -2,7 +2,10 @@ import { html } from "lit-html";
 
 import "./index.css";
 
-export function Menu(context) {
+/**
+ * @param {Fred.Context} _context 
+ */
+export function Menu(_context) {
   return html`<nav class="menu">
     <div class="menu__tabs">
       <button

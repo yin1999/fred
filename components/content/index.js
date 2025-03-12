@@ -5,6 +5,9 @@ import { Heading } from "../heading-anchor/index.js";
 
 import "./index.css";
 
+/**
+ * @param {Fred.Context<Rari.DocPage>} context 
+ */
 export function Content(context) {
   return html`<div class="content">
     <h1>${context?.doc?.title}</h1>
@@ -12,6 +15,9 @@ export function Content(context) {
   </div>`;
 }
 
+/**
+ * @param {Rari.Section} section 
+ */
 function Section({ type, value }) {
   switch (type) {
     case "browser_compatibility":
@@ -21,6 +27,9 @@ function Section({ type, value }) {
   }
 }
 
+/**
+ * @param {Rari.Prose} section 
+ */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
   return hh`<section aria-labelledby="${id}">
@@ -28,6 +37,9 @@ function Prose({ id, title, content, isH3 }) {
   </section>`;
 }
 
+/**
+ * @param {Rari.Compat} section 
+ */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
   return hh`<section aria-labelledby="${id}">

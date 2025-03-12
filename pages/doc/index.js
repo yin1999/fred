@@ -7,6 +7,9 @@ import { Footer } from "../../components/footer/index.js";
 import "./index.css";
 import "../../components/index.css";
 
+/**
+ * @param {Fred.Context<Rari.DocPage>} context 
+ */
 export function DocBody(context) {
   return html`
     <body class="page-layout">
@@ -19,6 +22,9 @@ export function DocBody(context) {
   `;
 }
 
+/**
+ * @param {Fred.Context<Rari.DocPage>} context 
+ */
 export function Doc(context) {
   return html`
     <!DOCTYPE html>

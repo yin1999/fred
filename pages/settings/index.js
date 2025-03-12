@@ -6,6 +6,9 @@ import { Footer } from "../../components/footer/index.js";
 import "./index.css";
 import "../../components/index.css";
 
+/**
+ * @param {Fred.Context} context 
+ */
 export function SettingsBody(context) {
   return html`
     <body class="page-layout">

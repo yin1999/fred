@@ -7,6 +7,9 @@ import { Menu } from "../menu/index.js";
 
 import "./index.css";
 
+/**
+ * @param {Fred.Context} context 
+ */
 export function Navigation(context) {
   return html`<nav class="navigation">
     <div class="navigation__logo">${Logo(context)}</div>

@@ -45,6 +45,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@mdn/rari": "^0.1.28",
     "@rsbuild/core": "1.2.3",
     "@types/express": "^5.0.0",
     "@types/insane": "^1.0.0",

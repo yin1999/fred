@@ -8,7 +8,7 @@ const languages = [["en-US", "English"]];
 const whitelistedTags = ["i", "strong", "br"];
 const whitelistedAttributes = ["title", "aria-label"];
 
-class Fluent {
+export class Fluent {
   /**
    * @param {string} locale
    * @param {string[]} resources
@@ -158,6 +158,7 @@ class Fluent {
   }
 }
 
+/** @type {Map<string, Fluent>} */
 let fluent = new Map();
 
 async function l10n(locale = "en-US") {

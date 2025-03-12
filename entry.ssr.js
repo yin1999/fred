@@ -5,7 +5,8 @@ import { SettingsBody } from "./pages/settings/index.js";
 import l10n from "./fluent.js";
 
 /**
- * @param {string} path 
+ * @param {string} path
+ * @returns {Promise<Fred.Context<Rari.DocPage>>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;

@@ -5,12 +5,14 @@ import { Doc } from "./pages/doc/index.js";
 
 /**
  * @param {string} path 
+ * @returns {Promise<Fred.Context<Rari.DocPage>>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
   console.log(`using ${external_url}`);
   return await (await fetch(external_url)).json();
 }
+
 const app = express();
 app.use(express.static("."));
 app.get("/*mdnUrl", async (req, res) => {

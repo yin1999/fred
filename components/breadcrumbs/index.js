@@ -2,6 +2,9 @@ import { html } from "lit-html";
 
 import "./index.css";
 
+/**
+ * @param {Fred.Context<Rari.DocPage>} context 
+ */
 export function BreadCrumbs(context) {
   return html`<div class="breadcrumbs">
     <div class="breadcrumbs__path">
