@@ -1,11 +1,17 @@
 const dropdownButtons = document.querySelectorAll('.dropdown');
 
+/**
+ * @param {Element} button 
+ */
 function toggleDropdown(button) {
   const isExpanded = button.getAttribute('aria-expanded') === 'true';
-  const dropdown = document.getElementById(button.getAttribute('aria-controls'));
+  const dropdownId = button.getAttribute('aria-controls');
+  const dropdown = dropdownId ? document.getElementById(dropdownId) : null;
 
-  button.setAttribute('aria-expanded', !isExpanded);
-  dropdown.toggleAttribute('hidden');
+  if (dropdown) {
+    button.setAttribute('aria-expanded', String(!isExpanded));
+    dropdown.toggleAttribute('hidden');
+  }
 }
 
 dropdownButtons.forEach(button => {
@@ -16,9 +22,10 @@ dropdownButtons.forEach(button => {
 
 document.addEventListener('click', (event) => {
   dropdownButtons.forEach(button => {
-    const dropdown = document.getElementById(button.getAttribute('aria-controls'));
+    const dropdownId = button.getAttribute('aria-controls')
+    const dropdown = dropdownId ? document.getElementById(dropdownId) : null;
 
-    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+    if (event.target instanceof Node && !button.contains(event.target) && dropdown && !dropdown.contains(event.target)) {
       if (button.getAttribute('aria-expanded') === 'true') {
         toggleDropdown(button);
       }
