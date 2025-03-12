@@ -1,5 +1,4 @@
 import { defineConfig } from "@rsbuild/core";
-import { pluginSvg } from "./plugin-mdnsvg/svg.js";
 import { pluginFluent } from "./plugin-fluent/fluent.js";
 
 export default defineConfig({
@@ -51,6 +50,21 @@ export default defineConfig({
   },
   tools: {
     htmlPlugin: false,
+    rspack: {
+      module: {
+        rules: [
+          {
+            test: /\.svg$/,
+            loader: "svgo-loader",
+          },
+          {
+            test: /\.svg$/,
+            resourceQuery: "mdnsvg",
+            loader: "./plugin-mdnsvg/loader.js",
+          }
+        ]
+      }
+    }
   },
   performance: {
     chunkSplit: {
