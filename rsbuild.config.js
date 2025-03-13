@@ -13,7 +13,7 @@ export default defineConfig({
         distPath: {
           root: "dist/client",
         },
-        assetPrefix: "/client/",
+        assetPrefix: "/static/client/",
       },
       dev: {
         assetPrefix: "/client/",
@@ -34,7 +34,10 @@ export default defineConfig({
         distPath: {
           root: "dist/ssr",
         },
-        assetPrefix: "/ssr/",
+        filename: {
+          js: "[name].cjs",
+        },
+        assetPrefix: "/static/ssr/",
       },
       dev: {
         assetPrefix: "/ssr/",

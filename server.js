@@ -1,37 +1,17 @@
 import express from "express";
 import fs from "node:fs";
 import { createRsbuild, loadConfig, logger } from "@rsbuild/core";
+import { renderHTML } from "./build/utils.js";
 
 /**
  * @import { Request, Response } from "express";
  * @import { RsbuildDevServer, ManifestData } from "@rsbuild/core";
  */
 
-const templateHtml = fs.readFileSync("./template.html", "utf-8");
-
 /** @type {string} */
 let ssrManifest;
 /** @type {string} */
 let clientManifest;
-
-/**
- * @param {string} manifest
- * @param {string} entry
- */
-function tagsFromManifest(manifest, entry = "index") {
-  /** @type {ManifestData} */
-  const { entries } = JSON.parse(manifest);
-
-  const { js = [], css = [] } = entries[entry]?.initial || {};
-
-  const scriptTags = js
-    .map((url) => `<script src="${url}" defer></script>`)
-    .join("\n");
-  const styleTags = css
-    .map((file) => `<link rel="stylesheet" href="${file}">`)
-    .join("\n");
-  return { scriptTags, styleTags };
-}
 
 /**
  * @param {RsbuildDevServer} serverAPI 
@@ -46,28 +26,7 @@ const serverRender = (serverAPI) =>
     const indexModule = await serverAPI.environments.ssr?.loadBundle("index");
     const markup = await indexModule?.render(req.path);
 
-    const { scriptTags: ssrScriptTags, styleTags: ssrStyleTags } =
-      tagsFromManifest(ssrManifest);
-    const { scriptTags: clientScriptTags, styleTags: clientStyleTags } =
-      tagsFromManifest(clientManifest);
-    const { scriptTags: legacyScriptTags, styleTags: legacyStyleTags } =
-      tagsFromManifest(clientManifest, "legacy");
-
-    const legacyTags = req?.path?.endsWith("settings")
-      ? [legacyScriptTags, legacyStyleTags]
-      : [];
-
-    const tags = [
-      //ssrScriptTags,
-      ssrStyleTags,
-      clientScriptTags,
-      clientStyleTags,
-      ...legacyTags,
-    ].join("\n");
-    console.log(tags);
-    const html = templateHtml
-      .replace("<!--app-content-->", markup || "")
-      .replace("<!--app-head-->", tags);
+    const html = renderHTML(ssrManifest, clientManifest, req?.path?.endsWith("settings"), markup);
 
     res.writeHead(200, {
       "Content-Type": "text/html",

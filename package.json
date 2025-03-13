@@ -7,7 +7,8 @@
     "build": "rsbuild build",
     "dev": "node ./server.js",
     "preview": "node ./prod-server.js",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "rari": "rari"
   },
   "author": "Florian Dieminger",
   "license": "MPL-2.0",

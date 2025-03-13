@@ -29,3 +29,12 @@ export async function render(path) {
   }
   return await collectResult(result);
 }
+
+/**
+ * @param {Rari.BuiltPage} context 
+ */
+export async function renderWithContext(context) {
+  context.l10n = await l10n(context.locale);
+  const result = r(DocBody(context));
+  return await collectResult(result);
+}
