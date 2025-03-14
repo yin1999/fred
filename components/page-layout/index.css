@@ -1,0 +1,15 @@
+.page-layout {
+    display: grid;
+    grid-template-rows:
+        min-content
+        min-content
+        1fr
+        min-content;
+    margin-inline: auto;
+}
+
+.page-layout__header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
