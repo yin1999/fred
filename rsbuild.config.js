@@ -2,7 +2,7 @@ import { defineConfig } from "@rsbuild/core";
 import { pluginFluent } from "./plugin-fluent/fluent.js";
 
 export default defineConfig({
-  plugins: [pluginSvg(), pluginFluent()],
+  plugins: [pluginFluent()],
   environments: {
     client: {
       output: {
