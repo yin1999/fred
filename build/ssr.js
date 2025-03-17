@@ -5,21 +5,15 @@ import { fdir } from "fdir";
 import ssr from "../dist/ssr/index.cjs";
 import { renderHTML } from "./utils.js";
 
-const BUILD_OUT_ROOT = "./out"
+const BUILD_OUT_ROOT = "./out";
 
-const ssrManifest = await readFile(
-  "./dist/ssr/manifest.json",
-  "utf-8",
-);
-const clientManifest = await readFile(
-  "./dist/client/manifest.json",
-  "utf-8",
-);
+const ssrManifest = await readFile("./dist/ssr/manifest.json", "utf-8");
+const clientManifest = await readFile("./dist/client/manifest.json", "utf-8");
 
 /**
  * @template T
- * @param {T[]} array 
- * @param {number} size 
+ * @param {T[]} array
+ * @param {number} size
  * @returns {Generator<T[]>}
  */
 export function* chunks(array, size) {
@@ -28,31 +22,52 @@ export function* chunks(array, size) {
   }
 }
 
+/**
+ * @param {number} seconds
+ * @returns {string}
+ */
+export function formatDuration(seconds) {
+  return seconds > 60
+    ? `${(seconds / 60).toFixed(1)} minutes`
+    : `${seconds.toFixed(1)} seconds`;
+}
+
 export async function ssrAllDocuments() {
   const files = await findDocuments();
+
+  const start = Date.now();
 
   const renderedFiles = [];
   for (const chunk of chunks(files, 1000)) {
     const out = await Promise.all(chunk.map(ssrSingleDocument).filter(Boolean));
     renderedFiles.push(...out);
   }
+
+  const end = Date.now();
+
+  const count = renderedFiles.length;
+  const seconds = (end - start) / 1000;
+  const took = formatDuration(seconds);
+
+  console.log(
+    `Rendered ${count.toLocaleString()} pages in ${took}, at a rate of ${(
+      count / seconds
+    ).toFixed(1)} documents per second.`
+  );
 }
 
 async function findDocuments() {
   const api = new fdir()
     .withFullPaths()
     .withErrors()
-    .filter(
-      (filePath) => filePath.includes("/en-us/docs/") &&
-        filePath.endsWith("index.json")
-    )
+    .filter((filePath) => filePath.endsWith("/index.json"))
     .crawl(BUILD_OUT_ROOT);
   const docs = await api.withPromise();
   return docs;
 }
 
 /**
- * @param {string} file 
+ * @param {string} file
  * @returns {Promise<string | undefined>}
  */
 async function ssrSingleDocument(file) {
@@ -63,11 +78,15 @@ async function ssrSingleDocument(file) {
     );
     return;
   }
-  const markup = await ssr.renderWithContext(context);
-  const html = renderHTML(ssrManifest, clientManifest, false, markup);
-  const outputFile = file.replace(/.json$/, ".html");
-  await writeFile(outputFile, html);
-  return outputFile;
+  try {
+    const markup = await ssr.renderWithContext(context);
+    const html = renderHTML(ssrManifest, clientManifest, false, markup);
+    const outputFile = file.replace(/.json$/, ".html");
+    await writeFile(outputFile, html);
+    return outputFile;
+  } catch (e) {
+    console.error(`ERROR: Failed to render ${context.url}: ${e}`);
+  }
 }
 
 ssrAllDocuments();
