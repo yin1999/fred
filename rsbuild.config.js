@@ -1,8 +1,9 @@
 import { defineConfig } from "@rsbuild/core";
 import { pluginFluent } from "./plugin-fluent/fluent.js";
+import { pluginSvg } from "./plugin-mdnsvg/svg.js";
 
 export default defineConfig({
-  plugins: [pluginFluent()],
+  plugins: [pluginFluent(), pluginSvg()],
   environments: {
     client: {
       output: {
@@ -55,13 +56,13 @@ export default defineConfig({
         rules: [
           {
             test: /\.svg$/,
-            loader: "svgo-loader",
+            resourceQuery: /mdnsvg/,
+            loader: "./plugin-mdnsvg/loader.js",
           },
           {
             test: /\.svg$/,
-            resourceQuery: "mdnsvg",
-            loader: "./plugin-mdnsvg/loader.js",
-          }
+            loader: "svgo-loader",
+          },
         ]
       }
     }
