@@ -1,5 +1,5 @@
 import { html } from "lit-html";
-import { unsafeStatic, html as hh } from "lit-html/static.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 import { Heading } from "../heading-anchor/index.js";
 
@@ -32,8 +32,8 @@ function Section({ type, value }) {
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return hh`<section aria-labelledby="${id}">
-    ${Heading(level, id, title)} ${unsafeStatic(content)}
+  return html`<section aria-labelledby="${id}">
+    ${Heading(level, id, title)} ${unsafeHTML(content)}
   </section>`;
 }
 
@@ -42,7 +42,7 @@ function Prose({ id, title, content, isH3 }) {
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return hh`<section aria-labelledby="${id}">
+  return html`<section aria-labelledby="${id}">
     ${Heading(level, id, title)} <bcd-table query="${query}"></bcd-table>
   </section>`;
 }

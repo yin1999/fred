@@ -1,12 +1,14 @@
-import { unsafeStatic, html as hh } from "lit-html/static.js";
+import { html } from "lit-html";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 import "./index.css";
+
 
 /**
  * @param {Fred.Context<Rari.DocPage>} context 
  */
 export function LeftSidebar(context) {
-  return hh`<nav class="left-sidebar">
-    ${unsafeStatic(context?.doc?.sidebarHTML)}
+  return html`<nav class="left-sidebar">
+    ${unsafeHTML(context?.doc?.sidebarHTML)}
   </nav>`;
 }
