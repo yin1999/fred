@@ -46,11 +46,14 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@mdn/rari": "^0.1.28",
     "@rsbuild/core": "1.2.3",
     "@types/express": "^5.0.0",
     "@types/insane": "^1.0.0",
     "@types/prismjs": "^1.26.5",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
     "lefthook": "^1.11.4",
     "postcss-preset-env": "^10.1.5",
     "prettier": "^3.5.3",
