@@ -52,7 +52,8 @@ export function Scoring({ result }) {
             href=${test.link}
             target="_blank"
             rel="noreferrer"
-            class=${test.link.startsWith("/") ? "" : "external"}>
+            class=${test.link.startsWith("/") ? "" : "external"}
+          >
             ${test.title}
           </a>
         </td>
@@ -72,8 +73,8 @@ export function Scoring({ result }) {
         <td data-header="Reason" .innerHTML=${test.score_description}></td>
         <td
           data-header="Advice"
-          .innerHTML=${test.recommendation ||
-          `<p class="obs-none">None</p>`}></td>
+          .innerHTML=${test.recommendation || `<p class="obs-none">None</p>`}
+        ></td>
       </tr>
     `;
   });

@@ -136,14 +136,16 @@ export class ColorTheme extends LitElement {
         class="color-theme__button dropdown"
         aria-expanded="false"
         aria-controls="color-theme__dropdown-1"
-        @click=${this._toggleDropDown}>
+        @click=${this._toggleDropDown}
+      >
         ${this._getCurrent()} Theme
       </button>
       <div
         class="color-theme__dropdown"
         id="color-theme__dropdown-1"
         data-side="right"
-        hidden>
+        hidden
+      >
         <ul class="color-theme__list">
           <li>
             <button class="color-theme__option" @click=${setDefault}>
