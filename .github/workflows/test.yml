@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Run prettier
-        run: npx prettier --check .
+        run: npx prettier --check . || (exit_code=$? && npx prettier --write . && git diff --color && exit $exit_code)
 
       - name: Run ESLint
         run: npx eslint .
