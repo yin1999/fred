@@ -54,5 +54,8 @@
     "postcss-preset-env": "^10.1.5",
     "svgo-loader": "^4.0.0",
     "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }
