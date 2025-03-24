@@ -131,9 +131,10 @@ export class ComparisonTable extends LitElement {
             if (data.error) {
               message = data.message;
             }
-          } finally {
-            throw Error(message);
+          } catch {
+            // Ignore.
           }
+          throw Error(message);
         }
         return await res.json();
       } catch (e) {

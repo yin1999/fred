@@ -1,5 +1,9 @@
 import { LitElement, css, html } from "lit";
-import { createRef, ref, Ref } from "lit/directives/ref.js";
+import { createRef, ref } from "lit/directives/ref.js";
+
+/**
+ * @import { Ref } from "lit/directives/ref.js"
+ */
 
 export class FormProgress extends LitElement {
   static styles = css``;

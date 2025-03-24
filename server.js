@@ -72,7 +72,7 @@ export async function startDevServer() {
     try {
       await serverRenderMiddleware(req, res);
     } catch (err) {
-      logger.error("SSR render error, downgrade to CSR...");
+      logger.error("SSR render error, downgrade to CSR...", err);
       next();
     }
   });

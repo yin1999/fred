@@ -26,14 +26,14 @@ export function hostAsRedirectChain(host, result) {
       return host;
     }
     return `${firstUrl.hostname} → ${lastUrl.hostname}`;
-  } catch (e) {
+  } catch {
     return host;
   }
 }
 
 /**
  *
- * @param {string | null | undefined} term
+ * @param {string | null | undefined} term
  * @returns {null | string}
  */
 export function formatMinus(term) {

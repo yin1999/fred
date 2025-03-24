@@ -62,7 +62,7 @@ export function getCurrentSupport(support) {
     (item) => !item.version_removed && (item.prefix || item.alternative_name),
   );
   if (altnamePrefixSupportItem)
-    return { support: SUPPORT.altnamePrefix, n, ...altnamePrefixSupportItem };
+    return { support: SUPPORT.altnamePrefix, ...altnamePrefixSupportItem };
 
   // Partial support
   const partialSupportItem = asList(support).find(
