@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import "./results.js";
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
@@ -6,7 +6,7 @@ import { Feedback } from "../feedback.js";
 import "./index.css";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  */
 
 /**

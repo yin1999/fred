@@ -1,9 +1,9 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { TEST_NAMES_IN_ORDER } from "../constants";
 import { formatMinus, PassIcon } from "../utils";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
@@ -18,7 +18,7 @@ function ScoreModifier({ overallScore, scoreModifier }) {
   );
 
   return html`
-    <span class="${!bonusEligible && scoreModifier > 0 ? "not-counted" : ""}">
+    <span class=${!bonusEligible && scoreModifier > 0 ? "not-counted" : ""}>
       ${!bonusEligible && scoreModifier > 0
         ? html`0<sup><a href="#bonus-points-explanation">*</a></sup>`
         : formattedScoreModifier}
@@ -60,10 +60,10 @@ export function Scoring({ result }) {
             <tr>
               <td data-header="Test">
                 <a
-                  href="${test.link}"
+                  href=${test.link}
                   target="_blank"
                   rel="noreferrer"
-                  class="${test.link.startsWith("/") ? "" : "external"}">
+                  class=${test.link.startsWith("/") ? "" : "external"}>
                   ${test.title}
                 </a>
               </td>

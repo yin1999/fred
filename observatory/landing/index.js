@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
@@ -14,7 +14,7 @@ import mdnSvg from "../assets/mdn.svg?mdnsvg";
 import "./form.js";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  */
 
 /**

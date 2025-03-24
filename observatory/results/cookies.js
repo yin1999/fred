@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import {
   PassIcon,
   Timestamp,
@@ -7,7 +7,7 @@ import {
 } from "../utils";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 

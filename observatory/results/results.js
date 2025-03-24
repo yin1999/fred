@@ -6,7 +6,7 @@ import { Rating } from "./rating.js";
 import { Tabs } from "./tabs.js";
 
 import { OBSERVATORY_API_URL } from "../constants.js";
-import { nothing } from "lit-html";
+import { nothing } from "lit";
 
 /**
  * @import { PropertyDeclarations } from "lit"

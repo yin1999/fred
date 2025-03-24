@@ -1,7 +1,7 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  */
 /**
  * @param {Fred.Context<Rari.SPAPage>} _context

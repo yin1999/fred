@@ -1,8 +1,8 @@
-import { html, nothing } from "lit-html";
+import { html, nothing } from "lit";
 import { formatDateTime, formatMinus } from "../utils";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 

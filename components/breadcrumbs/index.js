@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import "./index.css";
 
@@ -10,7 +10,7 @@ export function BreadCrumbs(context) {
     <div class="breadcrumbs__path">
       ${(context?.doc?.parents || []).map(
         ({ uri, title }) =>
-          html`<a class="breadcrumbs__link" href="${uri}"> ${title} </a>
+          html`<a class="breadcrumbs__link" href=${uri}> ${title} </a>
             <svg
               class="breadcrumbs__icon icon"
               width="16"

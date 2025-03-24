@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { Navigation } from "../../components/navigation/index.js";
 import { Footer } from "../../components/footer/index.js";
 
@@ -8,7 +8,7 @@ import { Landing } from "../../observatory/landing/index.js";
 import { Results } from "../../observatory/results/index.js";
 
 /**
- * @import { TemplateResult } from "lit-html"
+ * @import { TemplateResult } from "lit"
  * @import { SPAPage } from "@mdn/rari"
  */
 
@@ -56,7 +56,7 @@ export function ObservatoryBreadCrumbs(_context) {
     <div class="breadcrumbs__path">
       ${[{ title: "HTTP Observatory", uri: "/en-US/observatory/" }].map(
         ({ uri, title }) =>
-          html`<a class="breadcrumbs__link" href="${uri}"> ${title} </a>
+          html`<a class="breadcrumbs__link" href=${uri}> ${title} </a>
             <svg
               class="breadcrumbs__icon icon"
               width="16"

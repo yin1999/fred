@@ -1,7 +1,7 @@
-import { html, nothing } from "lit-html";
+import { html, nothing } from "lit";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 

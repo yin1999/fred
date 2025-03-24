@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { Scoring } from "./scoring";
 import { CSP } from "./csp";
 import { Cookies } from "./cookies";
@@ -7,7 +7,7 @@ import { History } from "./history";
 import { Comparison } from "./comparison";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 

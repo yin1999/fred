@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { SCORING_TABLE } from "../constants";
 import { formatMinus } from "../utils";
@@ -31,7 +31,7 @@ export function Tooltip(result) {
         <tbody>
           ${SCORING_TABLE.map((st) => {
             return html`
-              <tr class="${result.scan.grade === st.grade ? "current" : ""}">
+              <tr class=${result.scan.grade === st.grade ? "current" : ""}>
                 <td>${formatMinus(st.grade)}</td>
                 <td>
                   ${st.scoreText}

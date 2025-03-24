@@ -1,10 +1,10 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import passSvg from "./assets/pass-icon.svg?mdnsvg";
 import failSvg from "./assets/fail-icon.svg?mdnsvg";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("./constants").ObservatoryResult} ObservatoryResult
  */
 
@@ -173,7 +173,7 @@ export function HeaderLink({ header }) {
   // Simple approach: always show the link, it will 404 if the page doesn't exist
   // Alternative: you could maintain a list of known valid headers
   return html`
-    <a href="${headerPath}" target="_blank" rel="noreferrer">
+    <a href=${headerPath} target="_blank" rel="noreferrer">
       ${displayHeaderName}
     </a>
   `;

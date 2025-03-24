@@ -1,8 +1,8 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { HeaderLink } from "../utils";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 

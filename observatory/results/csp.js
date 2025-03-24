@@ -1,8 +1,8 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { PassIcon } from "../utils";
 
 /**
- * @import { TemplateResult } from "lit-html"
+ * @import { TemplateResult } from "lit"
  * @import { ObservatoryResult, ObservatoryPolicyItem, ObservatoryCSPPolicy } from "../constants"
  */
 

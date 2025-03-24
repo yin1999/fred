@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { formatMinus, hostAsRedirectChain } from "../utils";
 
@@ -8,7 +8,7 @@ import "./human_duration";
 import "./rescan_button";
 
 /**
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
@@ -32,7 +32,7 @@ export function Rating({ result, host, rescan }) {
             class="info-tooltip"
             tabindex="0">
             <div
-              class="${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}">
+              class=${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}>
               ${formatMinus(result.scan.grade)}
             </div>
             ${Tooltip(result)}

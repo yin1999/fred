@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { html } from "lit-html";
+import { html } from "lit";
 import { Navigation } from "../../components/navigation/index.js";
 import { BreadCrumbs } from "../../components/breadcrumbs/index.js";
 import { Footer } from "../../components/footer/index.js";
