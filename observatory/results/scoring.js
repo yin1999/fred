@@ -14,7 +14,7 @@ import { formatMinus, PassIcon } from "../utils";
 function ScoreModifier({ overallScore, scoreModifier }) {
   const bonusEligible = overallScore >= 90;
   const formattedScoreModifier = formatMinus(
-    `${scoreModifier > 0 ? `+${scoreModifier}` : scoreModifier}`
+    `${scoreModifier > 0 ? `+${scoreModifier}` : scoreModifier}`,
   );
 
   return html`
@@ -63,8 +63,7 @@ export function Scoring({ result }) {
                   href="${test.link}"
                   target="_blank"
                   rel="noreferrer"
-                  class="${test.link.startsWith("/") ? "" : "external"}"
-                >
+                  class="${test.link.startsWith("/") ? "" : "external"}">
                   ${test.title}
                 </a>
               </td>
@@ -83,13 +82,11 @@ export function Scoring({ result }) {
                   </td>`}
               <td
                 data-header="Reason"
-                .innerHTML=${test.score_description}
-              ></td>
+                .innerHTML=${test.score_description}></td>
               <td
                 data-header="Advice"
                 .innerHTML=${test.recommendation ||
-                `<p class="obs-none">None</p>`}
-              ></td>
+                `<p class="obs-none">None</p>`}></td>
             </tr>
           `;
         })}

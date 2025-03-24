@@ -19,8 +19,7 @@ export function Tooltip(result) {
       popover
       id="grade-popover"
       aria-describedby="grade-table"
-      class="tooltip-popup"
-    >
+      class="tooltip-popup">
       ${arrowSvg}
       <table class="grade-tooltip" id="grades-table" role="tooltip">
         <thead>

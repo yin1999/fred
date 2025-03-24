@@ -40,8 +40,7 @@ export class HumanDuration extends LitElement {
     return html`
       <time
         datetime="${this.date.toDateString()}"
-        title=${formatDateTime(this.date)}
-      >
+        title=${formatDateTime(this.date)}>
         ${this._text}
       </time>
     `;

@@ -167,7 +167,7 @@ export function CookiePrefix({ cookieName }) {
 export function HeaderLink({ header }) {
   const displayHeaderName = upperCaseHeaderName(header);
   const headerPath = `/en-US/docs/Web/HTTP/Headers/${encodeURIComponent(
-    displayHeaderName
+    displayHeaderName,
   )}`;
 
   // Simple approach: always show the link, it will 404 if the page doesn't exist

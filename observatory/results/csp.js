@@ -85,8 +85,7 @@ export function CSP({ result }) {
       <div
         class="detail-header-content"
         .innerHTML=${result.tests["content-security-policy"]
-          ?.score_description ?? `<p class="obs-none">None</p>`}
-      ></div>
+          ?.score_description ?? `<p class="obs-none">None</p>`}></div>
     </div>
 
     <table class="csp">

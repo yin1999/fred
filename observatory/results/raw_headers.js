@@ -39,7 +39,7 @@ export function RawHeaders({ result }) {
               <td data-header="Header">${HeaderLink({ header })}</td>
               <td data-header="Value">${value}</td>
             </tr>
-          `
+          `,
         )}
       </tbody>
     </table>

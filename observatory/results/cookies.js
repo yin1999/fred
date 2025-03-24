@@ -40,8 +40,7 @@ export function Cookies({ result }) {
       <div
         class="detail-header-content"
         .innerHTML=${result.tests["cookies"]?.score_description ??
-        `<p class="obs-none">None</p>`}
-      ></div>
+        `<p class="obs-none">None</p>`}></div>
     </div>
     <table class="cookies">
       <thead>
@@ -117,7 +116,7 @@ export function Cookies({ result }) {
                 ${CookiePrefix({ cookieName: key })}
               </td>
             </tr>
-          `
+          `,
         )}
       </tbody>
     </table>

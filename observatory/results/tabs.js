@@ -59,8 +59,7 @@ export function Tabs({ result, selectedTab = 0, onTabSelect }) {
       <ol
         class="tabs-list"
         role="tablist"
-        aria-labelledby="scan-results-header"
-      >
+        aria-labelledby="scan-results-header">
         ${tabs.map(
           (tab, i) => html`
             <li id="tabs-${i}" class="tabs-list-item">
@@ -72,15 +71,13 @@ export function Tabs({ result, selectedTab = 0, onTabSelect }) {
                 role="tab"
                 .checked=${i === selectedTab}
                 aria-controls="tab-container-${i}"
-                @change=${() => onTabSelect(i, tab.key)}
-              />
+                @change=${() => onTabSelect(i, tab.key)} />
               <label for="tab-${i}" id="tab-label-${i}">${tab.label}</label>
               <section
                 class="tab-content"
                 role="tabpanel"
                 aria-labelledby="tab-label-${i}"
-                id="tab-container-${i}"
-              >
+                id="tab-container-${i}">
                 <div class="scroll-container">${tab.element}</div>
               </section>
             </li>
