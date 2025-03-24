@@ -193,6 +193,17 @@ function GradeSVG({ gradeDistribution, result }) {
   const yTickIncr = (height - bottomSpace - topSpace) / (yMarks.length - 1);
   const yTickMax = Math.max(...yMarks);
 
+  const rows = gradeDistribution.map(
+    (item) =>
+      html` <tr>
+        <th>
+          ${formatMinus(item.grade)}
+          ${item.grade === result.scan.grade ? "(Current grade)" : ""}
+        </th>
+        <td>${item.count} sites</td>
+      </tr>`,
+  );
+
   return html`
     <table id="grade-svg-a11y-table" class="visually-hidden">
       <caption>
@@ -205,16 +216,7 @@ function GradeSVG({ gradeDistribution, result }) {
         </tr>
       </thead>
       <tbody>
-        ${gradeDistribution.map(
-          (item) =>
-            html` <tr>
-              <th>
-                ${formatMinus(item.grade)}
-                ${item.grade === result.scan.grade ? "(Current grade)" : ""}
-              </th>
-              <td>${item.count} sites</td>
-            </tr>`,
-        )}
+        ${rows}
       </tbody>
     </table>
     ${svg`

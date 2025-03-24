@@ -41,6 +41,43 @@ export function Scoring({ result }) {
     return html`No tests found.`;
   }
 
+  const rows = TEST_NAMES_IN_ORDER.map((name) => {
+    const test = result.tests[name];
+    if (!test) return null;
+
+    return html`
+      <tr>
+        <td data-header="Test">
+          <a
+            href=${test.link}
+            target="_blank"
+            rel="noreferrer"
+            class=${test.link.startsWith("/") ? "" : "external"}>
+            ${test.title}
+          </a>
+        </td>
+        ${test.pass === null
+          ? html`<td data-header="Score">-</td>`
+          : html` <td class="score" data-header="Score">
+              <span>
+                <span class="obs-score-value">
+                  ${ScoreModifier({
+                    overallScore: result.scan.score || 0,
+                    scoreModifier: test.score_modifier,
+                  })}
+                </span>
+                ${PassIcon({ pass: test.pass })}
+              </span>
+            </td>`}
+        <td data-header="Reason" .innerHTML=${test.score_description}></td>
+        <td
+          data-header="Advice"
+          .innerHTML=${test.recommendation ||
+          `<p class="obs-none">None</p>`}></td>
+      </tr>
+    `;
+  });
+
   return html`
     <table class="tests">
       <thead>
@@ -52,44 +89,7 @@ export function Scoring({ result }) {
         </tr>
       </thead>
       <tbody>
-        ${TEST_NAMES_IN_ORDER.map((name) => {
-          const test = result.tests[name];
-          if (!test) return null;
-
-          return html`
-            <tr>
-              <td data-header="Test">
-                <a
-                  href=${test.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  class=${test.link.startsWith("/") ? "" : "external"}>
-                  ${test.title}
-                </a>
-              </td>
-              ${test.pass === null
-                ? html`<td data-header="Score">-</td>`
-                : html` <td class="score" data-header="Score">
-                    <span>
-                      <span class="obs-score-value">
-                        ${ScoreModifier({
-                          overallScore: result.scan.score || 0,
-                          scoreModifier: test.score_modifier,
-                        })}
-                      </span>
-                      ${PassIcon({ pass: test.pass })}
-                    </span>
-                  </td>`}
-              <td
-                data-header="Reason"
-                .innerHTML=${test.score_description}></td>
-              <td
-                data-header="Advice"
-                .innerHTML=${test.recommendation ||
-                `<p class="obs-none">None</p>`}></td>
-            </tr>
-          `;
-        })}
+        ${rows}
       </tbody>
     </table>
     ${showFootnote
