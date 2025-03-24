@@ -8,7 +8,8 @@ pre-push:
   parallel: true
   jobs:
     - run: npx tsc --noEmit
-      stage_fixed: true
+
+    - run: npx eslint --cache
 
 output:
   - summary
