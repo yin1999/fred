@@ -53,6 +53,8 @@
     "@types/insane": "^1.0.0",
     "@types/prismjs": "^1.26.5",
     "eslint": "^9.23.0",
+    "eslint-plugin-lit": "^2.0.0",
+    "eslint-plugin-wc": "^3.0.0",
     "globals": "^16.0.0",
     "lefthook": "^1.11.4",
     "postcss-preset-env": "^10.1.5",
