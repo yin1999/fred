@@ -28,6 +28,7 @@ export default defineConfig([
           varsIgnorePattern: "^_",
         },
       ],
+      "n/no-unsupported-features/node-builtins": ["off"],
     },
   },
 ]);
