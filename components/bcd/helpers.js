@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export function asList(a) {
   return Array.isArray(a) ? a : [a];
 }

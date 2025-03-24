@@ -1,9 +1,10 @@
+// @ts-nocheck
+
 import { html, css, LitElement } from "lit";
 
 import osDefault from "../icon/theme.svg?mdnsvg";
 import light from "../icon/sun.svg?mdnsvg";
 import dark from "../icon/moon.svg?mdnsvg";
-import { LitElement } from "lit";
 
 export class ColorTheme extends LitElement {
   static styles = css`

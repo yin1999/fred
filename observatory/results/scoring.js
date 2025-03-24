@@ -3,8 +3,8 @@ import { TEST_NAMES_IN_ORDER } from "../constants";
 import { formatMinus, PassIcon } from "../utils";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -29,7 +29,7 @@ function ScoreModifier({ overallScore, scoreModifier }) {
 /**
  *
  * @param {{ result: ObservatoryResult}} result
- * @returns { TemplateResult }
+ * @returns {TemplateResult}
  */
 export function Scoring({ result }) {
   const showFootnote =

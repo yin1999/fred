@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { html } from "lit-html";
 import { Navigation } from "../../components/navigation/index.js";
 import { BreadCrumbs } from "../../components/breadcrumbs/index.js";

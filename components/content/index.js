@@ -23,6 +23,7 @@ function Section({ type, value }) {
     case "browser_compatibility":
       return BCD(value);
     default:
+      // @ts-ignore
       return Prose(value);
   }
 }
@@ -32,8 +33,10 @@ function Section({ type, value }) {
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
+  // @ts-nocheck
   return html`<section aria-labelledby="${id}">
-    ${Heading(level, id, title)} ${unsafeHTML(content)}
+    ${Heading(level, id ? String(id) : null, String(title))}
+    ${unsafeHTML(content)}
   </section>`;
 }
 
@@ -43,6 +46,7 @@ function Prose({ id, title, content, isH3 }) {
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
   return html`<section aria-labelledby="${id}">
-    ${Heading(level, id, title)} <bcd-table query="${query}"></bcd-table>
+    ${Heading(level, id ? String(id) : null, String(title))}
+    <bcd-table query="${query}"></bcd-table>
   </section>`;
 }

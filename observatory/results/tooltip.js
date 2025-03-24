@@ -6,7 +6,7 @@ import starsSvg from "../assets/stars.svg?mdnsvg";
 import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
 
 /**
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**

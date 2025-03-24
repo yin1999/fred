@@ -1,6 +1,5 @@
 import { html } from "lit-html";
 import { Navigation } from "../../components/navigation/index.js";
-import { BreadCrumbs } from "../../components/breadcrumbs/index.js";
 import { Footer } from "../../components/footer/index.js";
 
 import "./index.css";
@@ -49,10 +48,10 @@ export function ObservatoryResults(context) {
 
 /**
  *
- * @param {Fred.Context<SPAPage>} context
+ * @param {Fred.Context<SPAPage>} _context
  * @returns {TemplateResult}
  */
-export function ObservatoryBreadCrumbs(context) {
+export function ObservatoryBreadCrumbs(_context) {
   return html`<div class="breadcrumbs">
     <div class="breadcrumbs__path">
       ${[{ title: "HTTP Observatory", uri: "/en-US/observatory/" }].map(

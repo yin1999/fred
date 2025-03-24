@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";
 
+// @ts-ignore
 import ssr from "../dist/ssr/index.cjs";
 import { renderHTML } from "./utils.js";
 

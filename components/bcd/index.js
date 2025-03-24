@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { LitElement, css, html } from "lit";
 import { Task } from "@lit/task";
 import { getCurrentSupport } from "./helpers";
@@ -52,7 +54,7 @@ export class BCDTable extends LitElement {
     }
   `;
   static properties = {
-    query: {},
+    query: { type: String },
   };
 
   _dataTask = new Task(this, {

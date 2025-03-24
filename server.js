@@ -5,7 +5,7 @@ import { renderHTML } from "./build/utils.js";
 
 /**
  * @import { Request, Response } from "express";
- * @import { RsbuildDevServer, ManifestData } from "@rsbuild/core";
+ * @import { RsbuildDevServer } from "@rsbuild/core";
  */
 
 /** @type {string} */
