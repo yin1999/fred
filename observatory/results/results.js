@@ -34,8 +34,8 @@ export class Results extends LitElement {
    */
   static properties = {
     host: { type: String },
-    selectedTab: { type: Number },
-    _usePostInApi: { type: Boolean },
+    selectedTab: { state: true, type: Number },
+    _usePostInApi: { state: true, type: Boolean },
   };
 
   _apiTask = new Task(this, {
