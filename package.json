@@ -52,6 +52,7 @@
     "@types/insane": "^1.0.0",
     "@types/prismjs": "^1.26.5",
     "postcss-preset-env": "^10.1.5",
+    "prettier": "^3.5.3",
     "svgo-loader": "^4.0.0",
     "typescript": "^5.8.2"
   },
