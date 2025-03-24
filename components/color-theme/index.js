@@ -127,12 +127,16 @@ export class ColorTheme extends LitElement {
   _themeChanged() {}
 
   render() {
+    const setDefault = () => this._setMode("osDefault");
+    const setLight = () => this._setMode("light");
+    const setDark = () => this._setMode("dark");
+
     return html`<div class="color-theme">
       <button
         class="color-theme__button dropdown"
         aria-expanded="false"
         aria-controls="color-theme__dropdown-1"
-        @click=${(e) => this._toggleDropDown(e)}>
+        @click=${this._toggleDropDown}>
         ${this._getCurrent()} Theme
       </button>
       <div
@@ -142,23 +146,17 @@ export class ColorTheme extends LitElement {
         hidden>
         <ul class="color-theme__list">
           <li>
-            <button
-              class="color-theme__option"
-              @click=${() => this._setMode("osDefault")}>
+            <button class="color-theme__option" @click=${setDefault}>
               ${osDefault} OS default
             </button>
           </li>
           <li>
-            <button
-              class="color-theme__option"
-              @click=${() => this._setMode("light")}>
+            <button class="color-theme__option" @click=${setLight}>
               ${light} Light
             </button>
           </li>
           <li>
-            <button
-              class="color-theme__option"
-              @click=${() => this._setMode("dark")}>
+            <button class="color-theme__option" @click=${setDark}>
               ${dark} Dark
             </button>
           </li>
