@@ -8,11 +8,16 @@ pre-commit:
       stage_fixed: true
 
 pre-push:
-  parallel: true
+  piped: true
   jobs:
-    - run: npx tsc --noEmit
+    - run: npm install
 
-    - run: npx eslint --cache
+    - name: eslint/tsc
+      group:
+        parallel: true
+        jobs:
+          - run: npx eslint --cache
+          - run: npx tsc --noEmit
 
 output:
   - summary
