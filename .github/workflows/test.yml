@@ -28,3 +28,9 @@ jobs:
 
       - name: Run prettier
         run: npx prettier --check .
+
+      - name: Run ESLint
+        run: npx eslint .
+
+      - name: Run tsc
+        run: npx tsc --noEmit
