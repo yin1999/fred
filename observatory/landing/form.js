@@ -63,7 +63,7 @@ export class FormProgress extends LitElement {
             type="text"
             name="host"
             id="host"
-            value="${this._hostname}"
+            .value=${this._hostname}
             autofocus
             ${ref(this.inputRef)} />
           <button type="submit" ?disabled=${this._queryRunning}>Scan</button>
