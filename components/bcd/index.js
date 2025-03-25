@@ -121,7 +121,7 @@ function Table(data) {
 
 function Browsers(data) {
   const cells = Object.entries(data.browsers).map(([browser]) =>
-    browser != "ie" ? html`<td>${browser}</td>` : null,
+    browser == "ie" ? null : html`<td>${browser}</td>`,
   );
 
   return html`<tr>

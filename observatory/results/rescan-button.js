@@ -48,8 +48,9 @@ export class RescanButton extends LitElement {
     const progressPercent = (remainingSecs * 100) / 60;
 
     return html`
-      ${!isExpired
-        ? html` <button disabled>
+      ${isExpired
+        ? html`<button>Rescan</button>`
+        : html` <button disabled>
             <div
               class="progress"
               role="progressbar"
@@ -57,8 +58,7 @@ export class RescanButton extends LitElement {
               style="background: conic-gradient(var(--button-color) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
             ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
-          </button>`
-        : html`<button>Rescan</button>`}
+          </button>`}
     `;
   }
 }
