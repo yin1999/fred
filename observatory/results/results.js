@@ -76,16 +76,16 @@ export class Results extends LitElement {
     super.connectedCallback();
     this._updateSelectedTab = this._updateSelectedTab.bind(this);
     this.selectedTab = this._getSelectedTab();
-    window.addEventListener("hashchange", this._updateSelectedTab);
+    globalThis.addEventListener("hashchange", this._updateSelectedTab);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener("hashchange", this._updateSelectedTab);
+    globalThis.removeEventListener("hashchange", this._updateSelectedTab);
   }
 
   firstUpdated() {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(globalThis.location.search);
     this.host = params.get("host") ?? undefined;
   }
 
@@ -97,7 +97,7 @@ export class Results extends LitElement {
    * @returns {number}
    */
   _getSelectedTab() {
-    const hash = window.location.hash.replace("#", "");
+    const hash = globalThis.location.hash.replace("#", "");
     const tabs = [
       "scoring",
       "csp",
@@ -130,10 +130,10 @@ export class Results extends LitElement {
    */
   _handleTabSelect(index, key) {
     this.selectedTab = index;
-    window.history.replaceState(
+    globalThis.history.replaceState(
       "",
       "",
-      window.location.pathname + window.location.search + "#" + key,
+      globalThis.location.pathname + globalThis.location.search + "#" + key,
     );
   }
 

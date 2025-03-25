@@ -39,7 +39,7 @@ export class FormProgress extends LitElement {
       if (!response.ok) {
         throw new Error(`API request failed: ${response.statusText}`);
       }
-      window.location.href = `observatory/analyze?host=${encodeURIComponent(
+      globalThis.location.href = `observatory/analyze?host=${encodeURIComponent(
         this._hostname,
       )}`;
     } catch (error) {
