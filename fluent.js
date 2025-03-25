@@ -92,14 +92,16 @@ export class Fluent {
     /** @type Record<string, string[]> */
     const allowedAttributes = {};
     for (const t of Object.values(tags)) {
-      allowedAttributes[t.tag] = Object.keys(t)
-        .filter((x) => x !== "tag")
-        .concat(whitelistedAttributes);
+      allowedAttributes[t.tag] = [
+        ...Object.keys(t).filter((x) => x !== "tag"),
+        ...whitelistedAttributes,
+      ];
     }
 
-    const allowedTags = Object.values(tags)
-      .map((t) => t.tag)
-      .concat(whitelistedTags);
+    const allowedTags = [
+      ...Object.values(tags).map((t) => t.tag),
+      ...whitelistedTags,
+    ];
 
     return insane(
       message,
