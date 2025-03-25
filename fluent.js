@@ -40,7 +40,7 @@ export class Fluent {
       const errors = bundle.addResource(new FluentResource(r), {
         allowOverrides: true,
       });
-      if (errors.length) {
+      if (errors.length > 0) {
         console.error(errors);
       }
     });
@@ -169,7 +169,7 @@ export class Fluent {
     /** @type {Error[]} */
     const errors = [];
     const formatted = bundle?.formatPattern(message, args, errors);
-    if (errors.length) {
+    if (errors.length > 0) {
       console.error(errors);
     }
     return formatted;

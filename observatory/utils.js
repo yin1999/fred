@@ -16,7 +16,7 @@ import failSvg from "./assets/fail-icon.svg?mdnsvg";
  */
 export function hostAsRedirectChain(host, result) {
   const chain = result.tests.redirection?.route;
-  if (!chain || chain.length < 1) {
+  if (!chain || chain.length === 0) {
     return host;
   }
   try {
