@@ -48,7 +48,6 @@ export class BCDTable extends LitElement {
             .more {
               grid-column: 1/-1;
             }
-          }
         }
       }
     }
@@ -97,7 +96,10 @@ function Table(data) {
     data.data,
   ]);
 
-  const rows = [firstRow, ...Object.entries(data.data).map(Row)];
+  const rows = [
+    firstRow,
+    ...Object.entries(data.data).map((item) => Row(item)),
+  ];
 
   return (
     data &&
@@ -133,7 +135,9 @@ function Row([key, row]) {
     return null;
   }
 
-  const cells = Object.entries(row?.__compat?.support ?? {}).map(Cell);
+  const cells = Object.entries(row?.__compat?.support ?? {}).map((item) =>
+    Cell(item),
+  );
 
   return html`<tr>
     <td><code>${key}</code></td>

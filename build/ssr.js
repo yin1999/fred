@@ -41,7 +41,9 @@ export async function ssrAllDocuments() {
 
   const renderedFiles = [];
   for (const chunk of chunks(files, 1000)) {
-    const out = await Promise.all(chunk.map(ssrSingleDocument).filter(Boolean));
+    const out = await Promise.all(
+      chunk.map((file) => ssrSingleDocument(file)).filter(Boolean),
+    );
     renderedFiles.push(...out);
   }
 
