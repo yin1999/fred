@@ -50,27 +50,25 @@ export class FormProgress extends LitElement {
   }
 
   render() {
-    if (this._queryRunning) {
-      return html` <progress></progress>`;
-    } else {
-      return html`<form @submit=${this._handleSubmit}>
-        <div class="input-group">
-          <label htmlFor="host" class="visually-hidden">
-            Domain name or URL
-          </label>
-          <input
-            placeholder="Scan a website for free (e.g. mdn.dev)"
-            type="text"
-            name="host"
-            id="host"
-            .value=${this._hostname}
-            autofocus
-            ${ref(this.inputRef)}
-          />
-          <button type="submit" ?disabled=${this._queryRunning}>Scan</button>
-        </div>
-      </form>`;
-    }
+    return this._queryRunning
+      ? html` <progress></progress>`
+      : html`<form @submit=${this._handleSubmit}>
+          <div class="input-group">
+            <label htmlFor="host" class="visually-hidden">
+              Domain name or URL
+            </label>
+            <input
+              placeholder="Scan a website for free (e.g. mdn.dev)"
+              type="text"
+              name="host"
+              id="host"
+              .value=${this._hostname}
+              autofocus
+              ${ref(this.inputRef)}
+            />
+            <button type="submit" ?disabled=${this._queryRunning}>Scan</button>
+          </div>
+        </form>`;
   }
 }
 
