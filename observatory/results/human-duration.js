@@ -21,7 +21,7 @@ export class HumanDuration extends LitElement {
     this._text = humanizedDurationFromNow(this.date);
     this._interval = setInterval(() => {
       this._text = humanizedDurationFromNow(this.date);
-    }, 10000);
+    }, 10_000);
   }
 
   disconnectedCallback() {
