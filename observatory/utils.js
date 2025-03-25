@@ -34,11 +34,11 @@ export function hostAsRedirectChain(host, result) {
 /**
  *
  * @param {string | null | undefined} term
- * @returns {null | string}
+ * @returns {undefined | string}
  */
 export function formatMinus(term) {
   if (!term) {
-    return null;
+    return undefined;
   }
   // replace dash with unicode minus symbol
   // −
@@ -95,7 +95,7 @@ export function humanizedDurationFromNow(date) {
 }
 
 /**
- * @param {{pass: boolean | null}} props
+ * @param {{pass: boolean | undefined}} props
  * @returns {TemplateResult}
  */
 export function PassIcon({ pass }) {

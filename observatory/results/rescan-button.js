@@ -18,7 +18,7 @@ export class RescanButton extends LitElement {
     this.from = new Date();
     this.duration = 60;
     this._remainingTime = 0;
-    this._interval = null;
+    this._interval = undefined;
   }
 
   connectedCallback() {
@@ -33,7 +33,7 @@ export class RescanButton extends LitElement {
     super.disconnectedCallback();
     if (this._interval) {
       clearInterval(this._interval);
-      this._interval = null;
+      this._interval = undefined;
     }
   }
 

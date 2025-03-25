@@ -79,11 +79,11 @@ export class ColorTheme extends LitElement {
 
   constructor() {
     super();
-    this._mode = null;
+    this._mode = undefined;
   }
 
   firstUpdated() {
-    let mode = null;
+    let mode = undefined;
     try {
       mode = localStorage.getItem("theme");
     } catch (e) {
