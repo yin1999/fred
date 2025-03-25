@@ -21,7 +21,7 @@ export function hostAsRedirectChain(host, result) {
   }
   try {
     const firstUrl = new URL(chain[0] || "");
-    const lastUrl = new URL(chain[chain.length - 1] || "");
+    const lastUrl = new URL(chain.at(-1) || "");
     if (firstUrl.hostname === lastUrl.hostname) {
       return host;
     }
