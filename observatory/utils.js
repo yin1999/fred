@@ -44,7 +44,7 @@ export function formatMinus(term) {
   // −
   // MINUS SIGN
   // Unicode: U+2212, UTF-8: E2 88 92
-  return `${term}`.replaceAll(/-/g, "−");
+  return `${term}`.replaceAll("-", "−");
 }
 
 /**
