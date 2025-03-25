@@ -57,11 +57,11 @@ export async function startDevServer() {
     // update manifest info when rebuild
     ssrManifest = await fs.promises.readFile(
       "./dist/ssr/manifest.json",
-      "utf-8",
+      "utf8",
     );
     clientManifest = await fs.promises.readFile(
       "./dist/client/manifest.json",
-      "utf-8",
+      "utf8",
     );
     rsbuildServer.printUrls();
   });

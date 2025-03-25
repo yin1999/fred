@@ -9,8 +9,8 @@ import { renderHTML } from "./utils.js";
 
 const BUILD_OUT_ROOT = "./out";
 
-const ssrManifest = await readFile("./dist/ssr/manifest.json", "utf-8");
-const clientManifest = await readFile("./dist/client/manifest.json", "utf-8");
+const ssrManifest = await readFile("./dist/ssr/manifest.json", "utf8");
+const clientManifest = await readFile("./dist/client/manifest.json", "utf8");
 
 /**
  * @template T
@@ -75,7 +75,7 @@ async function findDocuments() {
  * @returns {Promise<string | undefined>}
  */
 async function ssrSingleDocument(file) {
-  const context = JSON.parse(await readFile(file, "utf-8"));
+  const context = JSON.parse(await readFile(file, "utf8"));
   if (!context?.url) {
     console.warn(
       `WARNING: Skipped rendering HTML. Document is missing url: ${file}`,
