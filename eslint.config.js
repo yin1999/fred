@@ -33,7 +33,6 @@ export default defineConfig([
       "n/no-unsupported-features/node-builtins": ["off"],
       "unicorn/prevent-abbreviations": ["off"],
       "unicorn/template-indent": ["off"],
-      "unicorn/throw-new-error": ["off"],
       "unicorn/catch-error-name": ["off"],
     },
   },
