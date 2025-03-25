@@ -14,14 +14,14 @@ function toggleDropdown(button) {
   }
 }
 
-dropdownButtons.forEach((button) => {
+for (const button of dropdownButtons) {
   button.addEventListener("click", () => {
     toggleDropdown(button);
   });
-});
+}
 
 document.addEventListener("click", (event) => {
-  dropdownButtons.forEach((button) => {
+  for (const button of dropdownButtons) {
     const dropdownId = button.getAttribute("aria-controls");
     const dropdown = dropdownId ? document.getElementById(dropdownId) : null;
 
@@ -35,5 +35,5 @@ document.addEventListener("click", (event) => {
         toggleDropdown(button);
       }
     }
-  });
+  }
 });

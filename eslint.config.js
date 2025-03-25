@@ -31,7 +31,6 @@ export default defineConfig([
         },
       ],
       "n/no-unsupported-features/node-builtins": ["off"],
-      "unicorn/no-array-for-each": ["off"],
       "unicorn/no-await-expression-member": ["off"],
       "unicorn/no-lonely-if": ["off"],
       "unicorn/no-negated-condition": ["off"],

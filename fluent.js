@@ -36,14 +36,14 @@ export class Fluent {
    * @param {string[]} resources
    */
   static constructBundle(bundle, resources = []) {
-    resources.forEach((r) => {
+    for (const r of resources) {
       const errors = bundle.addResource(new FluentResource(r), {
         allowOverrides: true,
       });
       if (errors.length > 0) {
         console.error(errors);
       }
-    });
+    }
     return bundle;
   }
 
@@ -91,11 +91,11 @@ export class Fluent {
   static sanitize(message, tags = {}) {
     /** @type Record<string, string[]> */
     const allowedAttributes = {};
-    Object.values(tags).forEach((t) => {
+    for (const t of Object.values(tags)) {
       allowedAttributes[t.tag] = Object.keys(t)
         .filter((x) => x !== "tag")
         .concat(whitelistedAttributes);
-    });
+    }
 
     const allowedTags = Object.values(tags)
       .map((t) => t.tag)
@@ -111,9 +111,9 @@ export class Fluent {
           const name = token.attrs["data-l10n-name"];
           if (name) {
             // @ts-ignore
-            Object.entries(tags[name]).forEach(([k, v]) => {
+            for (const [k, v] of Object.entries(tags[name])) {
               token.attrs[k] = v;
-            });
+            }
           }
           if (
             whitelistedTags.includes(token.tag) ||
