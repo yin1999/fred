@@ -39,7 +39,7 @@ export class RescanButton extends LitElement {
 
   _calculateRemainingTime() {
     const endTime = this.from.getTime() + this.duration * 1000;
-    return Math.max(0, endTime - new Date().getTime());
+    return Math.max(0, endTime - Date.now());
   }
 
   render() {

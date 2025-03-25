@@ -72,7 +72,7 @@ const YEAR = DAY * 364;
  * @returns {string}
  */
 export function humanizedDurationFromNow(date) {
-  const currentTime = new Date().getTime();
+  const currentTime = Date.now();
   const targetTime = date.getTime();
   const diffSecs = Math.round((targetTime - currentTime) / 1000);
 

@@ -31,7 +31,6 @@ export default defineConfig([
         },
       ],
       "n/no-unsupported-features/node-builtins": ["off"],
-      "unicorn/prefer-date-now": ["off"],
       "unicorn/prefer-global-this": ["off"],
       "unicorn/prefer-includes": ["off"],
       "unicorn/prefer-query-selector": ["off"],
