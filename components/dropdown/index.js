@@ -6,7 +6,9 @@ const dropdownButtons = document.querySelectorAll(".dropdown");
 function toggleDropdown(button) {
   const isExpanded = button.getAttribute("aria-expanded") === "true";
   const dropdownId = button.getAttribute("aria-controls");
-  const dropdown = dropdownId ? document.getElementById(dropdownId) : undefined;
+  const dropdown = dropdownId
+    ? document.querySelector(`#${dropdownId}`)
+    : undefined;
 
   if (dropdown) {
     button.setAttribute("aria-expanded", String(!isExpanded));
@@ -24,7 +26,7 @@ document.addEventListener("click", (event) => {
   for (const button of dropdownButtons) {
     const dropdownId = button.getAttribute("aria-controls");
     const dropdown = dropdownId
-      ? document.getElementById(dropdownId)
+      ? document.querySelector(`#${dropdownId}`)
       : undefined;
 
     if (

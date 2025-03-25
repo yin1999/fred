@@ -117,9 +117,8 @@ export class ColorTheme extends LitElement {
   _toggleDropDown() {
     const button = this.shadowRoot.querySelector(".dropdown");
     const isExpanded = button.getAttribute("aria-expanded") === "true";
-    const dropdown = this.shadowRoot.getElementById(
-      button.getAttribute("aria-controls"),
-    );
+    const dropdownId = button.getAttribute("aria-controls");
+    const dropdown = this.shadowRoot.querySelector(`#${dropdownId}`);
 
     button.setAttribute("aria-expanded", !isExpanded);
     dropdown.toggleAttribute("hidden");
