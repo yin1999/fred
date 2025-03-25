@@ -27,7 +27,7 @@ export async function render(path) {
   if (path.endsWith("settings")) {
     // @ts-ignore
     result = r(SettingsBody());
-  } else if (path.indexOf("observatory/analyze") !== -1) {
+  } else if (path.includes("observatory/analyze")) {
     /** @type {Fred.Context<Rari.SPAPage>} */
     const context = {
       noIndexing: true,
