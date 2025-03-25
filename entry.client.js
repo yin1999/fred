@@ -10,9 +10,7 @@ import Prism from "prismjs";
 
 console.log("ENtER");
 window.addEventListener("DOMContentLoaded", () => {
-  for (const pre of [
-    ...(document.querySelectorAll('pre[class~="brush:"]') || []),
-  ]) {
+  for (const pre of document.querySelectorAll('pre[class~="brush:"]') || []) {
     const code = pre.firstChild;
     if (code instanceof HTMLElement && Prism.languages.html) {
       code.innerHTML = Prism.highlight(

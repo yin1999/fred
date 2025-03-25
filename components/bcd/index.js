@@ -104,7 +104,7 @@ function Table(data) {
   return (
     data &&
     html`<figure
-      style="--cols: ${[...Object.keys(data.browsers).filter((b) => b != "ie")]
+      style="--cols: ${Object.keys(data.browsers).filter((b) => b != "ie")
         .length + 1};"
     >
       <table>
