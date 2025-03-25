@@ -88,8 +88,8 @@ async function ssrSingleDocument(file) {
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
     return outputFile;
-  } catch (e) {
-    console.error(`ERROR: Failed to render ${context.url}: ${e}`);
+  } catch (error) {
+    console.error(`ERROR: Failed to render ${context.url}: ${error}`);
     return;
   }
 }

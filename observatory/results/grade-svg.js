@@ -137,8 +137,8 @@ export class ComparisonTable extends LitElement {
           throw new Error(message);
         }
         return await res.json();
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
         throw new Error("Observatory API request for comparison data failed");
       }
     },

@@ -64,9 +64,9 @@ export class Results extends LitElement {
           throw new Error(message);
         }
         return await res.json();
-      } catch (e) {
+      } catch (error) {
         throw new Error("Observatory API request for scan data failed", {
-          cause: e,
+          cause: error,
         });
       }
     },

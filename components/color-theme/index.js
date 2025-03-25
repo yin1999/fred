@@ -86,8 +86,8 @@ export class ColorTheme extends LitElement {
     let mode;
     try {
       mode = localStorage.getItem("theme");
-    } catch (e) {
-      console.warn("Unable to read theme from localStorage", e);
+    } catch (error) {
+      console.warn("Unable to read theme from localStorage", error);
     }
     this._mode = mode;
   }
@@ -95,8 +95,8 @@ export class ColorTheme extends LitElement {
   _setMode(mode) {
     try {
       localStorage.setItem("theme", mode);
-    } catch (e) {
-      console.warn("Unable to write theme to localStorage", e);
+    } catch (error) {
+      console.warn("Unable to write theme to localStorage", error);
     }
     this._mode = mode;
     document.querySelector(":root").style.colorScheme =
