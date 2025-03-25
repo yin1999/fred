@@ -139,7 +139,7 @@ export function Timestamp({ expires }) {
 export function upperCaseHeaderName(input) {
   return input
     .split("-")
-    .map((p) => (p && p[0] ? p[0].toUpperCase() + p.substring(1) : ""))
+    .map((p) => (p && p[0] ? p[0].toUpperCase() + p.slice(1) : ""))
     .join("-");
 }
 
