@@ -12,22 +12,25 @@ import { html, nothing } from "lit";
  */
 export function Trend({ result }) {
   switch (arrowState(result)) {
-    case "up":
+    case "up": {
       return html`
         <div class="trend">
           <span class="arrow-up" aria-hidden="true"> ↗︎ </span>
           since last scan
         </div>
       `;
-    case "down":
+    }
+    case "down": {
       return html`
         <div class="trend">
           <span class="arrow-down" aria-hidden="true"> ↘︎ </span>
           since last scan
         </div>
       `;
-    default:
+    }
+    default: {
       return nothing;
+    }
   }
 }
 

@@ -70,13 +70,15 @@ export class Fluent {
     if (typeof parameters[0] === "string") {
       const id = parameters[0];
       switch (parameters.length) {
-        case 2:
+        case 2: {
           if (typeof parameters[1] === "string") {
             return this.get({ id, attr: parameters[1] });
           }
           return this.get({ id, args: parameters[1] });
-        default:
+        }
+        default: {
           return this.get({ id });
+        }
       }
     }
     const { id, attr, args, tags } = parameters[0];

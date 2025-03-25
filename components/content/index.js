@@ -20,11 +20,13 @@ export function Content(context) {
  */
 function Section({ type, value }) {
   switch (type) {
-    case "browser_compatibility":
+    case "browser_compatibility": {
       return BCD(value);
-    default:
+    }
+    default: {
       // @ts-ignore
       return Prose(value);
+    }
   }
 }
 

@@ -106,12 +106,15 @@ export class ColorTheme extends LitElement {
 
   _getCurrent() {
     switch (this._mode) {
-      case "light":
+      case "light": {
         return light;
-      case "dark":
+      }
+      case "dark": {
         return dark;
-      default:
+      }
+      default: {
         return osDefault;
+      }
     }
   }
   _toggleDropDown() {
