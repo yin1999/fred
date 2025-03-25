@@ -31,7 +31,6 @@ export default defineConfig([
         },
       ],
       "n/no-unsupported-features/node-builtins": ["off"],
-      "unicorn/prefer-set-has": ["off"],
       "unicorn/prefer-spread": ["off"],
       "unicorn/prefer-string-replace-all": ["off"],
       "unicorn/prefer-string-slice": ["off"],
