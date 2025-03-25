@@ -29,11 +29,10 @@ document.addEventListener("click", (event) => {
       event.target instanceof Node &&
       !button.contains(event.target) &&
       dropdown &&
-      !dropdown.contains(event.target)
+      !dropdown.contains(event.target) &&
+      button.getAttribute("aria-expanded") === "true"
     ) {
-      if (button.getAttribute("aria-expanded") === "true") {
-        toggleDropdown(button);
-      }
+      toggleDropdown(button);
     }
   }
 });
