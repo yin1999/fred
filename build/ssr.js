@@ -94,4 +94,4 @@ async function ssrSingleDocument(file) {
   }
 }
 
-ssrAllDocuments();
+await ssrAllDocuments();

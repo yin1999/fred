@@ -97,4 +97,4 @@ export async function startDevServer() {
   };
 }
 
-startDevServer();
+await startDevServer();
