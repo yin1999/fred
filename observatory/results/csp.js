@@ -80,7 +80,7 @@ export function CSP({ result }) {
   }
 
   const rows = policyTests.map((pt) => {
-    if (!policy[pt]) return undefined;
+    if (!policy[pt]) return;
     /** @type {ObservatoryPolicyItem} */
     const p = policy[pt];
 

@@ -72,7 +72,7 @@ export class BCDTable extends LitElement {
 
         return response.json();
       } else {
-        return undefined;
+        return;
       }
     },
     args: () => [this.query],
@@ -132,7 +132,7 @@ function Browsers(data) {
 
 function Row([key, row]) {
   if (key == "__compat") {
-    return undefined;
+    return;
   }
 
   const cells = Object.entries(row?.__compat?.support ?? {}).map((item) =>
@@ -147,7 +147,7 @@ function Row([key, row]) {
 
 function Cell([browser, cell]) {
   if (browser == "ie") {
-    return undefined;
+    return;
   }
   let support = getCurrentSupport(cell);
   return html`<td>

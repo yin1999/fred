@@ -134,13 +134,7 @@ export class Fluent {
    * @param {string} id
    * @returns {string}
    */
-  getMessage(
-    id,
-    attr = undefined,
-    args = {},
-    bundle = this.bundle,
-    us = false,
-  ) {
+  getMessage(id, attr, args = {}, bundle = this.bundle, us = false) {
     const parentMessage = bundle ? bundle.getMessage(id) : undefined;
     let message;
 

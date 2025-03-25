@@ -38,7 +38,7 @@ export function hostAsRedirectChain(host, result) {
  */
 export function formatMinus(term) {
   if (!term) {
-    return undefined;
+    return;
   }
   // replace dash with unicode minus symbol
   // −

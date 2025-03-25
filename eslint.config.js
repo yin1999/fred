@@ -31,7 +31,6 @@ export default defineConfig([
         },
       ],
       "n/no-unsupported-features/node-builtins": ["off"],
-      "unicorn/no-useless-undefined": ["off"],
       "unicorn/numeric-separators-style": ["off"],
       "unicorn/prefer-at": ["off"],
       "unicorn/prefer-date-now": ["off"],
