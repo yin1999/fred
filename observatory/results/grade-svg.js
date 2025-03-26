@@ -1,8 +1,8 @@
-import { LitElement, css, html, nothing, svg } from "lit";
 import { Task } from "@lit/task";
+import { LitElement, css, html, nothing, svg } from "lit";
 
-import { formatMinus } from "../utils";
 import { OBSERVATORY_API_URL } from "../constants.js";
+import { formatMinus } from "../utils";
 
 export class ComparisonTable extends LitElement {
   static properties = {

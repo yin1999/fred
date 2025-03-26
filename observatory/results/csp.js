@@ -1,4 +1,5 @@
 import { html } from "lit";
+
 import { PassIcon } from "../utils";
 
 /** @type {(keyof Observatory.CSPPolicy)[]} */

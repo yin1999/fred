@@ -1,8 +1,9 @@
 import { html } from "lit";
+
 import {
+  CookiePrefix,
   PassIcon,
   Timestamp,
-  CookiePrefix,
   upperCaseHeaderName,
 } from "../utils";
 
