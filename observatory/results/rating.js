@@ -8,14 +8,9 @@ import "./human-duration";
 import "./rescan-button";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
-
-/**
  *
- * @param {{result: ObservatoryResult, host: string, rescan: function}} props
- * @returns {TemplateResult}
+ * @param {{result: Observatory.Result, host: string, rescan: function}} props
+ * @returns {Lit.TemplateResult}
  */
 export function Rating({ result, host, rescan }) {
   return html`

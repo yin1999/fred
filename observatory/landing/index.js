@@ -14,12 +14,8 @@ import mdnSvg from "../assets/mdn.svg?mdnsvg";
 import "./form.js";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- */
-
-/**
  * @param {Fred.Context<Rari.SPAPage>} context
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function Landing(context) {
   return html`

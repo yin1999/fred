@@ -7,14 +7,9 @@ import {
 } from "../utils";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
-
-/**
  *
- * @param {{result: ObservatoryResult}} props
- * @returns { TemplateResult }
+ * @param {{result: Observatory.Result}} props
+ * @returns { Lit.TemplateResult }
  */
 export function Cookies({ result }) {
   const cookies = result.tests["cookies"]?.data;

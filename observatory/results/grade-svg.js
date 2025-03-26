@@ -4,11 +4,6 @@ import { Task } from "@lit/task";
 import { formatMinus } from "../utils";
 import { OBSERVATORY_API_URL } from "../constants.js";
 
-/**
- * @import { TemplateResult } from "lit"
- * @import { ObservatoryResult, GradeDistribution } from "../constants"
- */
-
 export class ComparisonTable extends LitElement {
   static properties = {
     result: { type: Object },
@@ -115,7 +110,7 @@ export class ComparisonTable extends LitElement {
 
   constructor() {
     super();
-    /** @type {ObservatoryResult | undefined} */
+    /** @type {Observatory.Result | undefined} */
     this.result = undefined;
   }
 
@@ -169,8 +164,8 @@ customElements.define("mdn-observatory-comparison-table", ComparisonTable);
 
 /**
  *
- * @param {{gradeDistribution: GradeDistribution[], result: ObservatoryResult}} props
- * @returns {TemplateResult}
+ * @param {{gradeDistribution: Observatory.GradeDistribution[], result: Observatory.Result}} props
+ * @returns {Lit.TemplateResult}
  */
 function GradeSVG({ gradeDistribution, result }) {
   const width = 1200;
@@ -332,7 +327,7 @@ function GradeSVG({ gradeDistribution, result }) {
 
 /**
  * Calculate
- * @param {GradeDistribution[]} gradeDistribution
+ * @param {Observatory.GradeDistribution[]} gradeDistribution
  * @returns {number[]}
  */
 function calculateTicks(gradeDistribution) {

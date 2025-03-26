@@ -8,10 +8,6 @@ import { Tabs } from "./tabs.js";
 import { OBSERVATORY_API_URL } from "../constants.js";
 import { nothing } from "lit";
 
-/**
- * @import { PropertyDeclarations } from "lit"
- */
-
 export class Results extends LitElement {
   static styles = css`
     :host {
@@ -30,7 +26,7 @@ export class Results extends LitElement {
   }
 
   /**
-   * @type PropertyDeclarations
+   * @type Lit.PropertyDeclarations
    */
   static properties = {
     host: { type: String },

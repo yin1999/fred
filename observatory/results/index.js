@@ -6,12 +6,8 @@ import { Feedback } from "../feedback.js";
 import "./index.css";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- */
-
-/**
  * @param {Fred.Context<Rari.SPAPage>} context
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function Results(context) {
   return html` <section class="main">

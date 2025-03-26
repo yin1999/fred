@@ -6,12 +6,11 @@ import starsSvg from "../assets/stars.svg?mdnsvg";
 import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
 
 /**
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
  *
- * @param {ObservatoryResult} result
+ * @param {Observatory.Result} result
  */
 export function Tooltip(result) {
   const rows = SCORING_TABLE.map((st) => {

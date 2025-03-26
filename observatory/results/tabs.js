@@ -7,17 +7,12 @@ import { History } from "./history";
 import { Comparison } from "./comparison";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
-
-/**
  * @param {{
- *   result: ObservatoryResult,
+ *   result: Observatory.Result,
  *   selectedTab: number,
  *   onTabSelect: (index: number, key: string) => void
  * }} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function Tabs({ result, selectedTab = 0, onTabSelect }) {
   const tabs = [

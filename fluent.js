@@ -4,7 +4,7 @@ import USStrings from "./l10n/en-us.flt";
 import DEStrings from "./l10n/de.flt";
 
 /**
- * @typedef {import("insane").AllowedTags} AllowedTags
+ * @import { AllowedTags } from "insane";
  */
 
 const languages = [["en-US", "English"]];
