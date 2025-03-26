@@ -4,19 +4,20 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    ignore:
-      - dependency-name: "@mdn/*"
     groups:
       deps:
         dependency-type: production
+        update-types:
+          - minor
+          - patch
         exclude-patterns:
           - "@mdn/*"
       deps-dev:
         dependency-type: development
+        update-types:
+          - minor
+          - patch
         exclude-patterns:
-          - "@mdn/*"
-      mdn:
-        patterns:
           - "@mdn/*"
     commit-message:
       prefix: "chore(deps): "
