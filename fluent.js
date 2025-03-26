@@ -1,7 +1,8 @@
 import { FluentBundle, FluentResource } from "@fluent/bundle";
 import insane from "insane";
-import USStrings from "./l10n/en-us.flt";
+
 import DEStrings from "./l10n/de.flt";
+import USStrings from "./l10n/en-us.flt";
 
 /**
  * @import { AllowedTags } from "insane";

@@ -1,9 +1,9 @@
 import { html } from "lit";
 
-import { SCORING_TABLE } from "../constants";
-import { formatMinus } from "../utils";
 import starsSvg from "../assets/stars.svg?mdnsvg";
 import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
+import { SCORING_TABLE } from "../constants";
+import { formatMinus } from "../utils";
 
 /**
  */

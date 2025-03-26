@@ -5,6 +5,7 @@ import { fdir } from "fdir";
 // @ts-ignore
 // eslint-disable-next-line n/no-missing-import
 import ssr from "../dist/ssr/index.cjs";
+
 import { renderHTML } from "./utils.js";
 
 const BUILD_OUT_ROOT = "./out";

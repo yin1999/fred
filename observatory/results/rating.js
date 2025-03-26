@@ -2,8 +2,8 @@ import { html } from "lit";
 
 import { formatMinus, hostAsRedirectChain } from "../utils";
 
-import { Trend } from "./trend";
 import { Tooltip } from "./tooltip";
+import { Trend } from "./trend";
 import "./human-duration";
 import "./rescan-button";
 
