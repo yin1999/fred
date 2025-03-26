@@ -3,6 +3,7 @@ import globals from "globals";
 import js from "@eslint/js";
 import * as lit from "eslint-plugin-lit";
 import n from "eslint-plugin-n";
+import prettierConfig from "eslint-config-prettier/flat";
 import * as wc from "eslint-plugin-wc";
 import unicorn from "eslint-plugin-unicorn";
 
@@ -35,4 +36,5 @@ export default defineConfig([
       "unicorn/template-indent": ["off"],
     },
   },
+  prettierConfig,
 ]);

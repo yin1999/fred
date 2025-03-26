@@ -54,6 +54,7 @@
     "@types/insane": "^1.0.0",
     "@types/prismjs": "^1.26.5",
     "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-lit": "^2.0.0",
     "eslint-plugin-n": "^17.16.2",
     "eslint-plugin-unicorn": "^58.0.0",
