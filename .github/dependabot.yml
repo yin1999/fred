@@ -5,14 +5,14 @@ updates:
     schedule:
       interval: "daily"
     groups:
-      deps:
+      prod:
         dependency-type: production
         update-types:
           - minor
           - patch
         exclude-patterns:
           - "@mdn/*"
-      deps-dev:
+      dev:
         dependency-type: development
         update-types:
           - minor
