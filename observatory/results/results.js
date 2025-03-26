@@ -27,7 +27,7 @@ export class Results extends LitElement {
   }
 
   /**
-   * @type Lit.PropertyDeclarations
+   * @type { Lit.PropertyDeclarations }
    */
   static properties = {
     host: { type: String },

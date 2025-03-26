@@ -17,6 +17,7 @@ const clientManifest = await readFile("./dist/client/manifest.json", "utf8");
  * @template T
  * @param {T[]} array
  * @param {number} size
+ * @yields {T[]}
  * @returns {Generator<T[]>}
  */
 export function* chunks(array, size) {

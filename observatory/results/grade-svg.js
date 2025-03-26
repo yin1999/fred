@@ -355,27 +355,26 @@ function calculateTicks(gradeDistribution) {
  *
  * Examples:
  *
- *  |range    |rounded=false|rounded=true|
- *  |---------|-------------|------------|
- *  |  1      |  1          |  1         |
- *  |  2      |  2          |  2         |
- *  |  3      |  5          |  5         |
- *  |  4      |  5          |  5         |
- *  |  5      |  5          |  5         |
- *  |  6      |  10         |  5         |
- *  |  7      |  10         |  10        |
- *  |  8      |  10         |  10        |
- *  |  9      |  10         |  10        |
- *  |  10     |  10         |  10        |
- *  |  34     |  50         |  50        |
- *  |  450    |  500        |  500       |
- *  |  560    |  1000       |  500       |
- *  |  6780   |  10000      |  5000      |
- *  |  10     |  10         |  10        |
- *  |  100    |  100        |  100       |
- *  |  1000   |  1000       |  1000      |
- *  |  10000  |  10000      |  10000     |
- *
+ * |range    |rounded=false|rounded=true|
+ * |---------|-------------|------------|
+ * |  1      |  1          |  1         |
+ * |  2      |  2          |  2         |
+ * |  3      |  5          |  5         |
+ * |  4      |  5          |  5         |
+ * |  5      |  5          |  5         |
+ * |  6      |  10         |  5         |
+ * |  7      |  10         |  10        |
+ * |  8      |  10         |  10        |
+ * |  9      |  10         |  10        |
+ * |  10     |  10         |  10        |
+ * |  34     |  50         |  50        |
+ * |  450    |  500        |  500       |
+ * |  560    |  1000       |  500       |
+ * |  6780   |  10000      |  5000      |
+ * |  10     |  10         |  10        |
+ * |  100    |  100        |  100       |
+ * |  1000   |  1000       |  1000      |
+ * |  10000  |  10000      |  10000     |
  * @param {number} range The input value
  * @param {boolean} round If false, the returned value will always be greater than `range`, otherwise it can be rounded off
  * @returns {number} a number according to `1|2|5 * 10^x`, where x is derived from `range` to be in the same order of magnitude

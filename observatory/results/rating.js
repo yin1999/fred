@@ -9,7 +9,7 @@ import "./rescan-button";
 
 /**
  *
- * @param {{result: Observatory.Result, host: string, rescan: function}} props
+ * @param {{result: Observatory.Result, host: string, rescan: Function}} props
  * @returns {Lit.TemplateResult}
  */
 export function Rating({ result, host, rescan }) {
