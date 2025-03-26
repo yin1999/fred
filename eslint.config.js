@@ -3,6 +3,7 @@ import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
 // @ts-ignore
 import importPlugin from "eslint-plugin-import";
+import jsdoc from "eslint-plugin-jsdoc";
 import * as lit from "eslint-plugin-lit";
 import n from "eslint-plugin-n";
 import unicorn from "eslint-plugin-unicorn";
@@ -10,6 +11,7 @@ import * as wc from "eslint-plugin-wc";
 import globals from "globals";
 
 export default defineConfig([
+  jsdoc.configs["flat/recommended"],
   n.configs["flat/recommended"],
   wc.configs["flat/best-practice"],
   lit.configs["flat/all"],
@@ -33,6 +35,13 @@ export default defineConfig([
           varsIgnorePattern: "^_",
         },
       ],
+      "jsdoc/no-undefined-types": "off",
+      "jsdoc/require-jsdoc": "off",
+      "jsdoc/require-param-description": "off",
+      "jsdoc/require-param-type": "off",
+      "jsdoc/require-returns": "off",
+      "jsdoc/require-returns-description": "off",
+      "jsdoc/require-returns-type": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "unicorn/prevent-abbreviations": ["off"],
       "unicorn/template-indent": ["off"],
