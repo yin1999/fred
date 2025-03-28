@@ -15,12 +15,12 @@ pre-commit:
       stage_fixed: true
 
     - name: stylelint
-      run: npx stylelint --fix {staged_files}
+      run: npx stylelint --fix --cache {staged_files}
       glob: "*.css"
       stage_fixed: true
 
     - name: stylelint (global)
-      run: npx stylelint --fix '**/*.css' --ignore-path .gitignore
+      run: npx stylelint --fix '**/*.css' --cache --ignore-path .gitignore
       glob: ".stylelintrc.json"
       stage_fixed: true
 
@@ -36,7 +36,7 @@ pre-push:
           - name: eslint
             run: npx eslint --cache
           - name: stylelint
-            run: npx stylelint '**/*.css' --ignore-path .gitignore
+            run: npx stylelint '**/*.css' --cache --ignore-path .gitignore
 
 output:
   - summary
