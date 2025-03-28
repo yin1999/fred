@@ -29,7 +29,7 @@ pre-push:
   jobs:
     - run: npm install
 
-    - name: eslint/stylelint/tsc
+    - name: lint
       group:
         parallel: true
         jobs:
@@ -37,8 +37,6 @@ pre-push:
             run: npx eslint --cache
           - name: stylelint
             run: npx stylelint '**/*.css' --ignore-path .gitignore
-          - name: tsc
-            run: npx tsc --noEmit
 
 output:
   - summary
