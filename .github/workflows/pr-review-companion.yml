@@ -24,14 +24,13 @@ concurrency:
 
 env:
   PREFIX: fred-pr${{ github.event.pull_request.number }}
-  HOST: "review.mdn.allizom.net"
 
 jobs:
   deploy:
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]'
     environment:
       name: review
-      url: https://${{ env.PREFIX }}.${{ env.HOST }}
+      url: https://${{ env.PREFIX }}.${{ vars.HOST }}
     runs-on: ubuntu-latest
     env:
       BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
@@ -185,6 +184,6 @@ jobs:
             gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
           fi
         env:
-          BODY: "${{ github.sha }} was deployed to: https://${{ env.PREFIX }}.${{ env.HOST }}/"
+          BODY: "${{ github.sha }} was deployed to: https://${{ env.PREFIX }}.${{ vars.HOST }}/"
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
