@@ -92,7 +92,7 @@ export class Fluent {
       message,
       {
         allowedAttributes,
-        allowedTags: /** @type AllowedTags[] */ (allowedTags),
+        allowedTags: /** @type { AllowedTags[] } */ (allowedTags),
         allowedSchemes: ["http", "https", "mailto"],
         filter(token) {
           // TODO: use element names directly
