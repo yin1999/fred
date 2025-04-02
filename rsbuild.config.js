@@ -64,7 +64,17 @@ export default defineConfig({
             oneOf: [
               {
                 resourceQuery: /lit/,
-                loader: "./build/loaders/lit-css.js",
+                use: [
+                  "./build/loaders/lit-css.js",
+                  {
+                    loader: "postcss-loader",
+                    options: {
+                      postcssOptions: {
+                        plugins: ["postcss-import"],
+                      },
+                    },
+                  },
+                ],
               },
               {
                 use: [rspack.CssExtractRspackPlugin.loader, "css-loader"],
