@@ -9,6 +9,7 @@ import {
   ObservatoryResults,
 } from "./pages/observatory/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
+import { runWithContext } from "./symmetric-context/server.js";
 
 /**
  * @param {string} path
@@ -41,21 +42,23 @@ export async function render(path, page) {
   }
   const context = await addFluent(locale, page);
 
-  let component;
-  if (path.endsWith("settings")) {
-    component = SettingsBody(context);
-  } else if (path.includes("observatory/analyze")) {
-    // @ts-expect-error
-    component = ObservatoryResults(context);
-  } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
-    // @ts-expect-error
-    component = ObservatoryBody(context);
-  } else if (path.endsWith("/en-US/")) {
-    // @ts-expect-error
-    component = HomePage(context);
-  } else {
-    // @ts-expect-error
-    component = Doc(context);
-  }
-  return await collectResult(r(component));
+  return runWithContext({ locale }, async () => {
+    let component;
+    if (path.endsWith("settings")) {
+      component = SettingsBody(context);
+    } else if (path.includes("observatory/analyze")) {
+      // @ts-expect-error
+      component = ObservatoryResults(context);
+    } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
+      // @ts-expect-error
+      component = ObservatoryBody(context);
+    } else if (path.endsWith("/en-US/")) {
+      // @ts-expect-error
+      component = HomePage(context);
+    } else {
+      // @ts-expect-error
+      component = Doc(context);
+    }
+    return await collectResult(r(component));
+  });
 }
