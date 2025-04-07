@@ -12,20 +12,21 @@ import "./index.css";
 export function Content(context) {
   return html`<div class="content">
     <h1>${context?.doc?.title}</h1>
-    ${context?.doc?.body.map((section) => Section(section))}
+    ${context?.doc?.body.map((section) => Section(context, section))}
   </div>`;
 }
 
 /**
+ * @param {Fred.Context<Rari.DocPage>} context
  * @param {import("@mdn/rari").Section} section
  */
-export function Section({ type, value }) {
+export function Section(context, { type, value }) {
   switch (type) {
     case "browser_compatibility": {
       return BCD(value);
     }
     case "specifications": {
-      return SpecificationsSection(value);
+      return SpecificationsSection(context, value);
     }
     default: {
       return Prose(value);
@@ -57,12 +58,13 @@ function BCD({ id, title, query, isH3 }) {
 }
 
 /**
+ * @param {Fred.Context<Rari.DocPage>} context
  * @param {import("@mdn/rari").SpecificationSection} section
  */
-function SpecificationsSection({ id, title, specifications, isH3 }) {
+function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;
   return html`<section aria-labelledby=${id}>
     ${Heading(level, id ? String(id) : null, String(title))}
-    ${SpecificationsList(specifications)}
+    ${SpecificationsList(context, specifications)}
   </section>`;
 }

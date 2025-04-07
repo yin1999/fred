@@ -1,15 +1,15 @@
 import { html } from "lit";
 
 /**
+ * @param {Fred.Context<Rari.DocPage>} context
  * @param {import("@mdn/rari").Specification[]} specifications
  */
-export function SpecificationsList(specifications) {
+export function SpecificationsList(context, specifications) {
   if (specifications.length === 0) {
-    return html`This feature does not appear to be defined in any specification.`;
+    return html`${context.l10n`This feature does not appear to be defined in any specification.`}`;
   }
 
-  return html`This feature is defined in the following
-    <a href="/en-US/docs/Glossary/Specification">specifications</a>:
+  return html`${context.l10n`This feature is defined in the following specifications`}:
     <ul>
       ${specifications.map(
         (spec) =>
