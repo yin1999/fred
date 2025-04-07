@@ -17,7 +17,7 @@ export function Content(context) {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {Fred.Context} context
  * @param {import("@mdn/rari").Section} section
  */
 export function Section(context, { type, value }) {
@@ -58,7 +58,7 @@ function BCD({ id, title, query, isH3 }) {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {Fred.Context} context
  * @param {import("@mdn/rari").SpecificationSection} section
  */
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {

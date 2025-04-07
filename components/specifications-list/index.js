@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {Fred.Context} context
  * @param {import("@mdn/rari").Specification[]} specifications
  */
 export function SpecificationsList(context, specifications) {
