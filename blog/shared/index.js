@@ -85,7 +85,6 @@ export function Author(context, { blogMeta }) {
   if (!author) {
     return nothing;
   }
-  console.log("author", author);
   return MaybeLink(context, {
     link: author.link,
     className: "author",
