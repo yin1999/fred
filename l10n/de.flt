@@ -1,3 +1,7 @@
+content-feedback_question = War diese Übersetzung hilfreich?
+content-feedback_reason = Warum war diese Übersetzung nicht hilfreich?
+content-feedback_thanks = Vielen Dank für die Rückmeldung!
+
 reference_toc_header = In diesem Artikel
 
 footer_tagline = Dein Bauplan für ein besseres Internet.
@@ -14,3 +18,7 @@ blog_post_not_found = Blogartikel nicht gefunden.
 
 page_previous = Voriger Artikel
 page_next = Nächster Artikel
+
+No = Nein
+Submit = Abschicken
+Yes = Ja

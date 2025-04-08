@@ -1,3 +1,6 @@
+article-footer_last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</timestamp> by <a data-l10n-name="contributors">MDN contributors</a>.
+article-footer_source_title = Folder: { $folder } (Opens in a new tab)
+
 reference_toc_header = In this article
 
 footer_mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
