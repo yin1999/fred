@@ -1,6 +1,7 @@
-{
-  "extends": ["stylelint-config-standard"],
-  "rules": {
+/** @type {import('stylelint').Config} */
+export default {
+  extends: ["stylelint-config-standard"],
+  rules: {
     "color-hex-length": "long",
     "custom-property-empty-line-before": null,
     "custom-property-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*(--default)?$",
@@ -9,6 +10,6 @@
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,
     "selector-class-pattern": null,
-    "selector-id-pattern": null
-  }
-}
+    "selector-id-pattern": null,
+  },
+};
