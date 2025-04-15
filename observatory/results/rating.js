@@ -4,8 +4,8 @@ import { formatMinus, hostAsRedirectChain } from "../utils.js";
 
 import { Tooltip } from "./tooltip.js";
 import { Trend } from "./trend.js";
-import "./human-duration";
-import "./rescan-button";
+import "./human-duration.js";
+import "./rescan-button.js";
 
 /**
  *
