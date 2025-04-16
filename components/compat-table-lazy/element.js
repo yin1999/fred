@@ -1,18 +1,18 @@
 import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
 
-import "./compat-table.js";
+import "../compat-table/element.js";
 import {
   BCD_BASE_URL,
   DEFAULT_LOCALE,
   ISSUE_METADATA_TEMPLATE,
-} from "./constants.js";
+} from "../compat-table/constants.js";
 
 /**
  * @typedef {{data: BCD.Identifier, browsers: BCD.Browsers}} Compat
  */
 
-export class LazyCompatTable extends LitElement {
+export class MDNCompatTableLazy extends LitElement {
   static properties = {
     query: {},
     locale: {},
@@ -89,6 +89,7 @@ export class LazyCompatTable extends LitElement {
 
   render() {
     return this._dataTask.render({
+      initial: () => html`<p>Loading...</p>`,
       pending: () => html`<p>Loading...</p>`,
 
       complete:
@@ -97,16 +98,16 @@ export class LazyCompatTable extends LitElement {
          */
         (compat) =>
           compat
-            ? html`<compat-table
+            ? html`<mdn-compat-table
                 query=${this.query}
                 locale=${this.locale}
                 .data=${compat.data}
                 .browserInfo=${compat.browsers}
-              ></compat-table>`
+              ></mdn-compat-table>`
             : html`<p>No compatibility data found</p>`,
       error: (error) => html`<p>${error}</p>`,
     });
   }
 }
 
-customElements.define("lazy-compat-table", LazyCompatTable);
+customElements.define("mdn-compat-table-lazy", MDNCompatTableLazy);

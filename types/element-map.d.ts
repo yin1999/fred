@@ -5,6 +5,8 @@ declare global {
     "mdn-button": import("../components/button/element.js").MDNButton;
     "mdn-code-example": import("../components/code-example/element.js").MDNCodeExample;
     "mdn-color-theme": import("../components/color-theme/element.js").MDNColorTheme;
+    "mdn-compat-table": import("../components/compat-table/element.js").MDNCompatTable;
+    "mdn-compat-table-lazy": import("../components/compat-table-lazy/element.js").MDNCompatTableLazy;
     "mdn-content-feedback": import("../components/content-feedback/element.js").MDNContentFeedback;
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
