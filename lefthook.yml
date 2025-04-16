@@ -40,6 +40,13 @@ pre-push:
           - name: tsc
             run: npx tsc
 
+post-merge:
+  only:
+    - ref: main
+  commands:
+    install:
+      run: npm install --ignore-scripts
+
 output:
   - summary
   - failure
