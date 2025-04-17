@@ -12,40 +12,33 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
-    ...super.properties,
-    _mode: { attribute: false },
+    _mode: { state: true },
+    _dropdown: { state: true },
   };
 
   constructor() {
     super();
-    this._mode = null;
+    this._mode = "light dark";
+    this._dropdown = false;
   }
 
-  firstUpdated() {
-    let mode = null;
-    try {
-      mode = localStorage.getItem("theme");
-    } catch (error) {
-      console.warn("Unable to read theme from localStorage", error);
+  /** @param {MouseEvent} event */
+  _setMode({ target }) {
+    if (target instanceof HTMLElement) {
+      const mode = target.dataset.mode;
+      if (mode) {
+        this._mode = mode;
+        try {
+          localStorage.setItem("theme", mode);
+        } catch (error) {
+          console.warn("Unable to write theme to localStorage", error);
+        }
+        this._dropdown = false;
+      }
     }
-    this._mode = mode;
   }
 
-  // @ts-expect-error
-  _setMode(mode) {
-    try {
-      localStorage.setItem("theme", mode);
-    } catch (error) {
-      console.warn("Unable to write theme to localStorage", error);
-    }
-    this._mode = mode;
-    // @ts-expect-error
-    document.querySelector(":root").style.colorScheme =
-      mode === "osDefault" ? "light dark" : mode;
-    this._toggleDropDown();
-  }
-
-  _getCurrent() {
+  get _icon() {
     switch (this._mode) {
       case "light": {
         return light;
@@ -58,62 +51,85 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
       }
     }
   }
-  _toggleDropDown() {
-    // @ts-expect-error
-    const button = this.shadowRoot.querySelector(".dropdown");
-    // @ts-expect-error
-    const isExpanded = button.getAttribute("aria-expanded") === "true";
-    // @ts-expect-error
-    const dropdownId = button.getAttribute("aria-controls");
-    // @ts-expect-error
-    const dropdown = this.shadowRoot.querySelector(`#${dropdownId}`);
 
-    // @ts-expect-error
-    button.setAttribute("aria-expanded", !isExpanded);
-    // @ts-expect-error
-    dropdown.toggleAttribute("hidden");
+  _toggleDropDown() {
+    this._dropdown = !this._dropdown;
   }
-  _themeChanged() {}
+
+  /**
+   * @param {import("lit").PropertyValues<this>} changedProperties
+   */
+  willUpdate(changedProperties) {
+    if (changedProperties.has("_mode") && globalThis.document) {
+      document.documentElement.style.colorScheme = this._mode;
+    }
+  }
 
   render() {
-    const setDefault = () => this._setMode("osDefault");
-    const setLight = () => this._setMode("light");
-    const setDark = () => this._setMode("dark");
-
     return html`<div class="color-theme">
       <button
         class="color-theme__button dropdown"
-        aria-expanded="false"
+        aria-expanded=${this._dropdown}
         aria-controls="color-theme__dropdown-1"
         @click=${this._toggleDropDown}
       >
-        ${this._getCurrent()} ${this.l10n`Theme`}
+        ${this._icon} ${this.l10n`Theme`}
       </button>
       <div
         class="color-theme__dropdown"
         id="color-theme__dropdown-1"
         data-side="right"
-        hidden
+        ?hidden=${!this._dropdown}
       >
         <ul class="color-theme__list">
           <li>
-            <button class="color-theme__option" @click=${setDefault}>
+            <button
+              class="color-theme__option"
+              data-mode="light dark"
+              @click=${this._setMode}
+            >
               ${osDefault} ${this.l10n("theme_default")`OS default`}
             </button>
           </li>
           <li>
-            <button class="color-theme__option" @click=${setLight}>
+            <button
+              class="color-theme__option"
+              data-mode="light"
+              @click=${this._setMode}
+            >
               ${light} ${this.l10n`Light`}
             </button>
           </li>
           <li>
-            <button class="color-theme__option" @click=${setDark}>
+            <button
+              class="color-theme__option"
+              data-mode="dark"
+              @click=${this._setMode}
+            >
               ${dark} ${this.l10n`Dark`}
             </button>
           </li>
         </ul>
       </div>
     </div>`;
+  }
+
+  firstUpdated() {
+    // we have to do this here and immediately cause a re-render
+    // as doing so in connectedCallback causes a hydration error:
+    // https://github.com/lit/lit/issues/1434
+
+    // this logic is also reflected in "/entry.inline.js"
+
+    let mode;
+    try {
+      mode = localStorage.getItem("theme");
+    } catch (error) {
+      console.warn("Unable to read theme from localStorage", error);
+    }
+    if (mode) {
+      this._mode = mode;
+    }
   }
 }
 

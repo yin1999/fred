@@ -1,4 +1,7 @@
 import { html } from "@lit-labs/ssr";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+
+import inlineScript from "../entry.inline.js?source&csp=true";
 
 /**
  * @param {import("@rspack/core").StatsCompilation} [manifest]
@@ -41,11 +44,11 @@ export function renderHTML(context, markup, manifest) {
   const tags = [ssrStyleTags, clientScriptTags, clientStyleTags];
   return html`
     <!doctype html>
-    <html lang="en">
+    <html lang="en" style="color-scheme: light dark;">
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        ${tags}
+        ${unsafeHTML(`<script>${inlineScript}</script>`)} ${tags}
         <title>${context.pageTitle || "MDN"}</title>
       </head>
       ${markup}
