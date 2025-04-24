@@ -11,6 +11,7 @@ declare global {
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
+    "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
   }
 }

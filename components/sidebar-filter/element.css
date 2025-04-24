@@ -1,0 +1,102 @@
+@import url("../visually-hidden/index.css");
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .sidebar-filter {
+    display: flex;
+    place-items: center;
+  }
+
+  .sidebar-filter-label {
+    position: absolute;
+    top: 0.125em;
+    left: 0.375em; /* Move icon inside field. */
+
+    .icon {
+      color: var(--color-text-primary);
+    }
+  }
+
+  .clear-sidebar-filter-button {
+    --button-bg: none;
+    --button-color: var(--color-text-primary);
+    --button-border-color: none;
+    position: absolute;
+    right: 0;
+
+    &:hover {
+      --button-color: var(--color-text-secondary);
+    }
+  }
+
+  .sidebar-filter-input-field {
+    width: 100%;
+
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 1.75em;
+
+    color: var(--color-text-primary);
+
+    border: 1px solid var(--color-border-primary);
+    border-radius: 1em;
+
+    &:focus {
+      outline: 0 none;
+      border-color: light-dark(#0085f2, #5e9eff);
+
+      .icon {
+        color: var(--color-border-primary);
+      }
+    }
+
+    &[value=""]:not(:focus, .is-active) {
+      /** Filter collapsed. */
+      width: 5em;
+
+      ~ .sidebar-filter-count,
+      ~ .clear-sidebar-filter-button {
+        display: none;
+      }
+    }
+
+    &:focus,
+    &.is-active {
+      /** Filter is focused or active. */
+      padding-right: 7em;
+    }
+
+    ~ .sidebar-filter-count {
+      position: absolute;
+      right: 2.5em;
+
+      font-size: var(--type-tiny-font-size);
+
+      color: var(--color-text-secondary);
+
+      white-space: nowrap;
+
+      background: var(--mark-color);
+      border-radius: 1em;
+    }
+  }
+
+  /** Commons. */
+
+  .button {
+    /* Reset. */
+    appearance: none;
+    background: none;
+    border: none;
+  }
+
+  .icon {
+    svg {
+      width: 1em;
+      height: 1em;
+    }
+  }
+}
