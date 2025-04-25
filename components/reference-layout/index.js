@@ -8,6 +8,7 @@ import "./index.css";
 import "../definition-list/index.css";
 import "../formal-definition/index.css";
 import "../formal-syntax/index.css";
+import "../prev-next/index.css";
 
 /**
  * @param {Fred.Context<Rari.DocPage>} context
