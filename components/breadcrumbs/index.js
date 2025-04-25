@@ -1,7 +1,6 @@
 import { html, nothing } from "lit";
 
 import bookmarkSvg from "../icon/bookmark.svg?lit";
-import globeSvg from "../icon/globe.svg?lit";
 
 import dividerSvg from "./divider.svg?lit";
 
@@ -34,7 +33,13 @@ export function BreadCrumbs(context) {
       ${path}
       <mdn-color-theme></mdn-color-theme>
       <button class="breadcrumbs__component">${bookmarkSvg} Save</button>
-      <button class="breadcrumbs__component">${globeSvg} English (US)</button>
+      <mdn-language-switcher
+        .locale=${context.locale}
+        .translations=${"doc" in context && "other_translations" in context.doc
+          ? context.doc.other_translations
+          : []}
+        .url=${context.url}
+      ></mdn-language-switcher>
     </div>
   `;
 }
