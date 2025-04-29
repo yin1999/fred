@@ -27,7 +27,7 @@ const common = {
   },
   experiments: {
     outputModule: true,
-    // futureDefaults: true
+    futureDefaults: true,
   },
   plugins: [
     /** @type {import("@rspack/core").Plugin} */
@@ -85,9 +85,15 @@ const common = {
         loader: "./build/loaders/fluent.js",
       },
       {
+        // don't do anything with css, because we don't want direct imports to work
+        // in server components: we have a path-based system for loading the correct
+        // styles. set type to javascript/auto to disable native rspack css handling
+        test: /\.css$/i,
+        type: "javascript/auto",
+      },
+      {
         test: /\.css$/i,
         resourceQuery: /lit/,
-        type: "javascript/auto",
         use: [
           "./build/loaders/lit-css.js",
           {
@@ -194,7 +200,6 @@ export default [
       rules: [
         {
           test: /\.css$/i,
-          type: "javascript/auto",
           use: [
             rspack.CssExtractRspackPlugin.loader,
             "css-loader",
