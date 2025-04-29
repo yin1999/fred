@@ -3,7 +3,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { toCamelCase } from "../../build/utils.js";
 import inlineScript from "../../entry.inline.js?source&csp=true";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class OuterLayout extends ServerComponent {
   /**

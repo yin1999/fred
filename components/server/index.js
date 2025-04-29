@@ -1,4 +1,4 @@
-import { getSymmetricContext } from "../symmetric-context/both.js";
+import { getSymmetricContext } from "../../symmetric-context/both.js";
 
 export class ServerComponent {
   /**
