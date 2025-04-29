@@ -22,7 +22,7 @@ import { runWithContext } from "./symmetric-context/server.js";
 /**
  * @param {string} path
  * @param {Rari.BuiltPage} page
- * @param {import("@rspack/core").StatsCompilation[]} manifest
+ * @param {import("@rspack/core").StatsCompilation} manifest
  */
 export async function render(path, page, manifest) {
   const locale = path.split("/")[1] || "en-US";

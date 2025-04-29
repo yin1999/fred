@@ -30,11 +30,6 @@ const common = {
     // futureDefaults: true
   },
   plugins: [
-    new rspack.CssExtractRspackPlugin({
-      filename: isProd ? "[name].[contenthash].css" : "[name].css",
-      // chunkFilename: "[name].[contenthash].css",
-      runtime: false,
-    }),
     /** @type {import("@rspack/core").Plugin} */
     new StatsWriterPlugin({
       fields: ["publicPath", "entrypoints"],
@@ -135,31 +130,15 @@ export default [
     target: "node22",
     async entry() {
       return {
-        // TODO: move all css to client bundle?
         // TODO: prohibit css imports in js in server bundle?
         index: [
           ...(await new fdir()
             .withFullPaths()
-            .filter(
-              (filePath) =>
-                filePath.endsWith("/element.js") ||
-                filePath.endsWith("/global.css"),
-            )
+            .filter((filePath) => filePath.endsWith("/element.js"))
             .crawl(path.join(__dirname, "components"))
             .withPromise()),
           "./entry.ssr.js",
         ],
-        ...Object.fromEntries(
-          (
-            await new fdir()
-              .withFullPaths()
-              .filter((filePath) => filePath.endsWith("/index.css"))
-              .crawl(path.join(__dirname, "components"))
-              .withPromise()
-          )
-            // eslint-disable-next-line unicorn/no-await-expression-member
-            .map((file) => ["styles-" + file.split("/").at(-2), file]),
-        ),
       };
     },
     plugins: [isProd && new CSPHashPlugin()],
@@ -178,13 +157,38 @@ export default [
   }),
   merge(common, {
     name: "client",
-    entry: {
-      index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
-        (x) => typeof x === "string",
-      ),
+    async entry() {
+      return {
+        index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
+          (x) => typeof x === "string",
+        ),
+        "styles-global": await new fdir()
+          .withFullPaths()
+          .filter((filePath) => filePath.endsWith("/global.css"))
+          .crawl(path.join(__dirname, "components"))
+          .withPromise(),
+        ...Object.fromEntries(
+          (
+            await new fdir()
+              .withFullPaths()
+              .filter((filePath) => filePath.endsWith("/index.css"))
+              .crawl(path.join(__dirname, "components"))
+              .withPromise()
+          )
+            // eslint-disable-next-line unicorn/no-await-expression-member
+            .map((file) => ["styles-" + file.split("/").at(-2), file]),
+        ),
+      };
     },
     target: ["web", "browserslist"],
-    plugins: [!isProd && new GenerateElementMapPlugin()],
+    plugins: [
+      new rspack.CssExtractRspackPlugin({
+        filename: isProd ? "[name].[contenthash].css" : "[name].css",
+        // chunkFilename: "[name].[contenthash].css",
+        runtime: false,
+      }),
+      !isProd && new GenerateElementMapPlugin(),
+    ],
     output: {
       path: path.resolve(__dirname, "dist/client"),
       filename: isProd ? "[name].[contenthash].js" : "[name].js",
