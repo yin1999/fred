@@ -86,24 +86,17 @@ const common = {
       },
       {
         test: /\.css$/i,
-        loader: "postcss-loader",
+        resourceQuery: /lit/,
         type: "javascript/auto",
-        oneOf: [
+        use: [
+          "./build/loaders/lit-css.js",
           {
-            resourceQuery: /lit/,
-            use: [
-              "./build/loaders/lit-css.js",
-              {
-                loader: "css-loader",
-                options: {
-                  exportType: "string",
-                },
-              },
-            ],
+            loader: "css-loader",
+            options: {
+              exportType: "string",
+            },
           },
-          {
-            use: [rspack.CssExtractRspackPlugin.loader, "css-loader"],
-          },
+          "postcss-loader",
         ],
       },
       {
@@ -130,8 +123,8 @@ export default [
     target: "node22",
     async entry() {
       return {
-        // TODO: prohibit css imports in js in server bundle?
         index: [
+          // load custom elements
           ...(await new fdir()
             .withFullPaths()
             .filter((filePath) => filePath.endsWith("/element.js"))
@@ -162,11 +155,13 @@ export default [
         index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
           (x) => typeof x === "string",
         ),
+        // load `components/*/global.css` files into global style entrypoint
         "styles-global": await new fdir()
           .withFullPaths()
           .filter((filePath) => filePath.endsWith("/global.css"))
           .crawl(path.join(__dirname, "components"))
           .withPromise(),
+        // load `components/*/index.css` files into per-component style entrypoints
         ...Object.fromEntries(
           (
             await new fdir()
@@ -194,6 +189,19 @@ export default [
       filename: isProd ? "[name].[contenthash].js" : "[name].js",
       clean: true,
       publicPath: "/static/client/",
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/i,
+          type: "javascript/auto",
+          use: [
+            rspack.CssExtractRspackPlugin.loader,
+            "css-loader",
+            "postcss-loader",
+          ],
+        },
+      ],
     },
   }),
 ];
