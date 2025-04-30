@@ -200,6 +200,7 @@ export default [
       rules: [
         {
           test: /\.css$/i,
+          resourceQuery: /^$/,
           use: [
             rspack.CssExtractRspackPlugin.loader,
             "css-loader",
