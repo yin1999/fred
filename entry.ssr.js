@@ -32,9 +32,9 @@ for (const [name, def] of customElements.__definitions) {
 /**
  * @param {string} path
  * @param {Rari.BuiltPage} page
- * @param {import("@rspack/core").StatsCompilation} manifest
+ * @param {Fred.CompilationStats} compilationStats
  */
-export async function render(path, page, manifest) {
+export async function render(path, page, compilationStats) {
   const locale = path.split("/")[1] || "en-US";
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
@@ -104,7 +104,14 @@ export async function render(path, page, manifest) {
       })();
       const { componentsUsed = new Set() } = asyncLocalStorage.getStore() || {};
       return await collectResult(
-        r(OuterLayout.render(context, component, manifest, componentsUsed)),
+        r(
+          OuterLayout.render(
+            context,
+            component,
+            compilationStats,
+            componentsUsed,
+          ),
+        ),
       );
     }),
   );
