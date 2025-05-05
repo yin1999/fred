@@ -165,8 +165,10 @@ jobs:
           path: ${{ env.BUILD_OUT_ROOT }}
           destination: "${{ vars.GCP_BUCKET_NAME }}/${{ env.PREFIX }}"
           resumable: false
-          concurrency: 500
+          headers: |-
+            cache-control: no-store
           parent: false
+          concurrency: 500
           process_gcloudignore: false
 
       - name: Post message in PR
