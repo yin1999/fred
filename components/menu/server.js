@@ -435,11 +435,6 @@ export class Menu extends ServerComponent {
                           Using the web animation API
                         </a>
                       </li>
-                      <li>
-                        <a href="" aria-label="See all Web API guides">
-                          See all…
-                        </a>
-                      </li>
                     </ul>
                   </dd>
                 </dl>
@@ -520,11 +515,6 @@ export class Menu extends ServerComponent {
                       <li>
                         <a href="/en-US/docs/Web/Progressive_web_apps">
                           Progressive web apps
-                        </a>
-                      </li>
-                      <li>
-                        <a href="" aria-label="See all web technology topics">
-                          See all…
                         </a>
                       </li>
                     </ul>
