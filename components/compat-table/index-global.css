@@ -1,5 +1,7 @@
 /* Compat (global) */
 
+@import url("../external-link/global.css");
+
 :host {
   --compat-background-primary: var(
     --color-background-primary,
@@ -112,20 +114,4 @@ button {
   appearance: none;
   background: none;
   border: medium;
-}
-
-.external::after {
-  display: inline-flex;
-
-  width: 10px;
-  height: 10px;
-
-  margin-left: 4px;
-
-  content: "";
-
-  background-color: var(--compat-icon-primary);
-
-  mask-image: url("../icon/external.svg");
-  mask-size: cover;
 }
