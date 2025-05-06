@@ -75,7 +75,9 @@ export class Footer extends ServerComponent {
               <li><a href="/en-US/about">${context.l10n`About`}</a></li>
               <li><a href="/en-US/blog/">${context.l10n`Blog`}</a></li>
               <li>
-                <a href="https://www.mozilla.org/en-US/careers/listings/"
+                <a
+                  class="external"
+                  href="https://www.mozilla.org/en-US/careers/listings/"
                   >${context.l10n`Careers`}</a
                 >
               </li>
@@ -92,7 +94,9 @@ export class Footer extends ServerComponent {
           <dd>
             <ul>
               <li>
-                <a href="https://support.mozilla.org/products/mdn-plus"
+                <a
+                  class="external"
+                  href="https://support.mozilla.org/products/mdn-plus"
                   >${context.l10n`Product help`}</a
                 >
               </li>
@@ -112,11 +116,17 @@ export class Footer extends ServerComponent {
                 <a href="/en-US/community">${context.l10n`MDN Community`}</a>
               </li>
               <li>
-                <a href="https://discourse.mozilla.org/c/mdn/236"
+                <a
+                  class="external"
+                  href="https://discourse.mozilla.org/c/mdn/236"
                   >${context.l10n`MDN Forum`}</a
                 >
               </li>
-              <li><a href="/discord">${context.l10n`MDN Chat`}</a></li>
+              <li>
+                <a class="external" href="/discord"
+                  >${context.l10n`MDN Chat`}</a
+                >
+              </li>
             </ul>
           </dd>
         </dl>
@@ -134,7 +144,7 @@ export class Footer extends ServerComponent {
               </li>
               <li><a href="/en-US/plus">${context.l10n`MDN Plus`}</a></li>
               <li>
-                <a href="https://hacks.mozilla.org/"
+                <a class="external" href="https://hacks.mozilla.org/"
                   >${context.l10n`Hacks Blog`}</a
                 >
               </li>
