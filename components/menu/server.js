@@ -35,15 +35,21 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a href="/en-US/docs/Web/HTML/Element">Elements</a>
+                        <a href="/en-US/docs/Web/HTML/Reference/Elements"
+                          >Elements</a
+                        >
                       </li>
                       <li>
-                        <a href="/en-US/docs/Web/HTML/Global_attributes">
+                        <a
+                          href="/en-US/docs/Web/HTML/Reference/Global_attributes"
+                        >
                           Global attributes
                         </a>
                       </li>
                       <li>
-                        <a href="/en-US/docs/Web/HTML/Attributes">Attributes</a>
+                        <a href="/en-US/docs/Web/HTML/Reference/Attributes"
+                          >Attributes</a
+                        >
                       </li>
                       <li>
                         <a
@@ -61,7 +67,7 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a href="/en-US/docs/Web/HTML/Responsive_images">
+                        <a href="/en-US/docs/Web/HTML/Guides/Responsive_images">
                           Responsive images
                         </a>
                       </li>
@@ -73,7 +79,9 @@ export class Menu extends ServerComponent {
                         </a>
                       </li>
                       <li>
-                        <a href="/en-US/docs/Web/HTML/Date_and_time_formats">
+                        <a
+                          href="/en-US/docs/Web/HTML/Guides/Date_and_time_formats"
+                        >
                           Date & time formats
                         </a>
                       </li>
@@ -630,16 +638,16 @@ export class Menu extends ServerComponent {
                     <ul>
                       <li>
                         <a
-                          href="/en-US/docs/Learn_web_development/Howto/Solve_HTML_problems/Use_data_attributes"
+                          href="/en-US/docs/Web/HTML/How_to/Use_data_attributes"
                         >
                           How to use data attributes
                         </a>
                       </li>
                       <li>
                         <a
-                          href="/en-US/docs/Learn_web_development/Howto/Solve_HTML_problems/Use_JavaScript_within_a_webpage"
+                          href="/en-US/docs/Web/HTML/How_to/Add_JavaScript_to_your_web_page"
                         >
-                          How to use JS in a webpage
+                          Add JavaScript to your web page
                         </a>
                       </li>
                     </ul>
