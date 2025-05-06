@@ -23,6 +23,7 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
 
       await import("../components/live-sample-result/element.js");
       const result = document.createElement("mdn-live-sample-result");
+      result.liveId = liveId;
       result.code = playCode;
       result.srcPrefix = livePath;
       result.allow = iframe.allow || undefined;

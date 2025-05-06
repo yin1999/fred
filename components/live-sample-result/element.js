@@ -9,6 +9,7 @@ export class MDNLiveSampleResult extends LitElement {
   static styles = styles;
 
   static properties = {
+    liveId: { attribute: "live-id" },
     code: { type: Object },
     allowed: {},
     sandbox: {},
@@ -18,6 +19,8 @@ export class MDNLiveSampleResult extends LitElement {
 
   constructor() {
     super();
+    /** @type {string | undefined} */
+    this.liveId = undefined;
     this.code = {};
     /** @type {string | undefined} */
     this.allow = undefined;
@@ -29,11 +32,56 @@ export class MDNLiveSampleResult extends LitElement {
     this.height = undefined;
   }
 
+  _openFullscreen(replace = false) {
+    if (this._runnerSrc) {
+      if (replace || this._fullscreenReplace) {
+        location.replace(this._runnerSrc);
+      } else {
+        location.href = this._runnerSrc;
+      }
+    } else {
+      this._fullscreenPending = true;
+      if (replace) {
+        this._fullscreenReplace = true;
+      }
+    }
+  }
+
+  /** @param {MouseEvent} event */
+  _fullscreenClick(event) {
+    if (
+      this.liveId &&
+      event.target instanceof HTMLAnchorElement &&
+      event.target.hash === `#livesample_fullscreen=${this.liveId}`
+    ) {
+      event.preventDefault();
+      this._openFullscreen();
+    }
+  }
+
+  /** @param {CustomEvent<string>} event */
+  _runnerSrcUpdated({ detail }) {
+    this._runnerSrc = detail;
+    if (this._fullscreenPending) {
+      this._openFullscreen();
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._fullscreenClick = this._fullscreenClick.bind(this);
+    document.addEventListener("click", this._fullscreenClick);
+    if (location.hash === `#livesample_fullscreen=${this.liveId}`) {
+      this._openFullscreen();
+    }
+  }
+
   render() {
     return html`
       <div class="code-example">
         <div class="example-header"></div>
         <mdn-play-runner
+          @mdn-play-runner-src=${this._runnerSrcUpdated}
           .code=${this.code}
           .allow=${this.allow}
           .sandbox=${this.sandbox}
@@ -44,6 +92,11 @@ export class MDNLiveSampleResult extends LitElement {
         ></mdn-play-runner>
       </div>
     `;
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener("click", this._fullscreenClick);
   }
 }
 

@@ -131,6 +131,13 @@ export class MDNPlayRunner extends LitElement {
       // update iframe src without adding to browser history
       this._iframe.value?.contentWindow?.location.replace(src);
       this.src = src;
+      this.dispatchEvent(
+        new CustomEvent("mdn-play-runner-src", {
+          bubbles: true,
+          composed: true,
+          detail: src,
+        }),
+      );
     },
   });
 
