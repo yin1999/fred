@@ -1,9 +1,10 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 
 import { styleMap } from "lit/directives/style-map.js";
 
 import styles from "./element.css?lit";
 import "../play-runner/element.js";
+import "../button/element.js";
 
 export class MDNLiveSampleResult extends LitElement {
   static styles = styles;
@@ -15,13 +16,15 @@ export class MDNLiveSampleResult extends LitElement {
     sandbox: {},
     srcPrefix: { attribute: "src-prefix" },
     height: {},
+    breakoutLink: { state: true },
   };
 
   constructor() {
     super();
     /** @type {string | undefined} */
     this.liveId = undefined;
-    this.code = {};
+    /** @type {Record<string, string> | undefined} */
+    this.code = undefined;
     /** @type {string | undefined} */
     this.allow = undefined;
     /** @type {string | undefined} */
@@ -30,6 +33,8 @@ export class MDNLiveSampleResult extends LitElement {
     this.srcPrefix = undefined;
     /** @type {string | undefined} */
     this.height = undefined;
+    /** @type {string | undefined} */
+    this.breakoutLink = undefined;
   }
 
   _openFullscreen(replace = false) {
@@ -65,6 +70,9 @@ export class MDNLiveSampleResult extends LitElement {
     if (this._fullscreenPending) {
       this._openFullscreen();
     }
+    const playUrl = new URL("/en-US/play", location.href);
+    playUrl.search = new URL(this._runnerSrc).search;
+    this.breakoutLink = playUrl.href;
   }
 
   connectedCallback() {
@@ -79,7 +87,13 @@ export class MDNLiveSampleResult extends LitElement {
   render() {
     return html`
       <div class="code-example">
-        <div class="example-header"></div>
+        <div class="example-header">
+          ${this.breakoutLink
+            ? html`<mdn-button variant="secondary" href=${this.breakoutLink}
+                >Play</mdn-button
+              >`
+            : nothing}
+        </div>
         <mdn-play-runner
           @mdn-play-runner-src=${this._runnerSrcUpdated}
           .code=${this.code}
