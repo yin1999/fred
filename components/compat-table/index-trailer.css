@@ -23,13 +23,13 @@
 
 .bc-supports-yes {
   .bcd-cell-text-copy {
-    color: var(--color-green);
+    color: var(--color-text-green);
   }
 }
 
 .bc-supports-partial {
   .bcd-cell-text-copy {
-    color: var(--color-yellow);
+    color: var(--color-text-yellow);
   }
 }
 
