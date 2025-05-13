@@ -16,7 +16,12 @@ export class BreadcrumbsBar extends ServerComponent {
       <div class="breadcrumbs-bar" data-scheme=${colorScheme}>
         ${Breadcrumbs.render(context)}
         <mdn-color-theme></mdn-color-theme>
-        <button class="breadcrumbs-bar__component">${bookmarkSvg} Save</button>
+        <button
+          class="breadcrumbs-bar__component"
+          title=${context.l10n`Save in Collection`}
+        >
+          ${bookmarkSvg} <span>${context.l10n`Save`}</span>
+        </button>
         <mdn-language-switcher
           locale=${context.locale}
           translations=${JSON.stringify(

@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: end;
 
+  max-width: 100vw; /* Workaround, remove later. */
   height: var(--breadcrumbs-bar-height);
 
   padding-block: 0.2rem;
@@ -27,6 +28,14 @@
     padding-inline: calc(
       (100% - 1440px + (var(--breadcrumbs-bar-side-padding) * 2)) / 2
     );
+  }
+
+  @media screen and (width <= 768px) {
+    column-gap: 0.5rem;
+  }
+
+  @media screen and (width <= 480px) {
+    column-gap: 0.25rem;
   }
 }
 
@@ -84,5 +93,11 @@
 
   svg {
     fill: var(--color-text-primary);
+  }
+
+  @media screen and (width <= 768px) {
+    > span {
+      display: none;
+    }
   }
 }
