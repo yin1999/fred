@@ -1,4 +1,7 @@
 .breadcrumbs {
+  --breadcrumbs-divider-color: var(--color-text-secondary);
+  --breadcrumbs-link-color: var(--color-text-primary);
+
   display: flex;
 
   align-items: center;
@@ -14,16 +17,29 @@
     place-items: center;
 
     a {
-      color: var(--color-text-primary);
+      color: var(--breadcrumbs-link-color);
 
       &:not(:hover) {
         text-decoration: none;
       }
     }
 
-    svg {
-      margin-inline: 0.5rem;
-      fill: var(--color-text-secondary);
+    &:not(:last-child)::after {
+      width: 1em;
+      height: 1em;
+
+      margin-inline: 0.75em;
+
+      vertical-align: middle;
+
+      content: "";
+
+      background-color: var(--breadcrumbs-divider-color);
+
+      mask-image: url("./divider.svg");
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: auto;
     }
   }
 }
