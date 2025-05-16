@@ -1,7 +1,7 @@
 :root {
-  --top-nav-height: 4.125rem;
-  --breadcrumbs-bar-height: 2rem;
   --sticky-header-height: calc(
     var(--top-nav-height) + var(--breadcrumbs-bar-height)
   );
+
+  --z-index-sticky-header: 100;
 }
