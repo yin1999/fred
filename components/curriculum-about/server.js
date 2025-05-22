@@ -4,7 +4,7 @@ import { PageLayout } from "../page-layout/server.js";
 import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
-export class Curriculum extends ServerComponent {
+export class CurriculumAbout extends ServerComponent {
   /**
    * @param {Fred.Context<Rari.CurriculumPage>} context
    */
