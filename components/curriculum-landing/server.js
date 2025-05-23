@@ -34,13 +34,13 @@ const Topic = {
 
 export class CurriculumLanding extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.CurriculumPage>} context
-   * @returns {Lit.TemplateResult}
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const doc = context.doc;
 
-    /** @type {(Lit.TemplateResult | nothing)[]} */
+    /** @type {(import("@lit").TemplateResult | nothing)[]} */
     const content = [];
     for (const [i, section] of doc.body.entries()) {
       if (i === 0) {
@@ -74,9 +74,9 @@ export class CurriculumLanding extends ServerComponent {
   }
 
   /**
-   * @param {Fred.Context<Rari.CurriculumPage>} context
-   * @param {Rari.Section} section - The section object containing header data.
-   * @returns {Lit.TemplateResult} The Lit HTML template for the header.
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+   * @param {import("@rari").Section} section - The section object containing header data.
+   * @returns {import("@lit").TemplateResult} The Lit HTML template for the header.
    */
   renderHeader(context, section) {
     const doc = context.doc;
@@ -98,9 +98,9 @@ export class CurriculumLanding extends ServerComponent {
   }
 
   /**
-   * @param {Fred.Context<Rari.CurriculumPage>} _context
-   * @param {Rari.Section} section - The section object containing about data.
-   * @returns {Lit.TemplateResult | nothing} The Lit HTML template for the about section.
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
+   * @param {import("@rari").Section} section - The section object containing about data.
+   * @returns {import("@lit").TemplateResult | nothing} The Lit HTML template for the about section.
    */
   renderSection(_context, section) {
     const { id, title, content, isH3 } = section.value;
@@ -129,9 +129,9 @@ export class CurriculumLanding extends ServerComponent {
 
   /**
    * Renders the About the Curriculum section.
-   * @param {Fred.Context<Rari.CurriculumPage>} _context
-   * @param {Rari.Section} section - The section object containing about data.
-   * @returns {Lit.TemplateResult} The Lit HTML template for the about section.
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
+   * @param {import("@rari").Section} section - The section object containing about data.
+   * @returns {import("@lit").TemplateResult} The Lit HTML template for the about section.
    */
   renderAbout(_context, section) {
     const { title, content, id } = section.value;
@@ -174,9 +174,9 @@ export class CurriculumLanding extends ServerComponent {
 
   /**
    * Renders the Modules section, including the modules list, partner banner, and stairway.
-   * @param {Fred.Context<Rari.CurriculumPage>} context
-   * @param {Rari.Section} section - The section object containing modules data.
-   * @returns {Lit.TemplateResult} The Lit HTML template for the modules section.
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+   * @param {import("@rari").Section} section - The section object containing modules data.
+   * @returns {import("@lit").TemplateResult} The Lit HTML template for the modules section.
    */
   renderModules(context, section) {
     const doc = context.doc;
@@ -230,9 +230,9 @@ export class CurriculumLanding extends ServerComponent {
   /**
    * Renders the ModulesListList structure, including the tab labels and the selected modules list.
    * On the server, this defaults to rendering the 'Core modules' list (index 1) content.
-   * @param {Fred.Context<Rari.CurriculumPage>} context
-   * @param {Rari.CurriculumIndexEntry[]} modules - Array of module list groups (e.g., Started, Core, Extensions).
-   * @returns {Lit.TemplateResult | Lit.nothing} The Lit HTML template for the module list list, or undefined if no modules.
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+   * @param {import("@rari").CurriculumIndexEntry[]} modules - Array of module list groups (e.g., Started, Core, Extensions).
+   * @returns {import("@lit").TemplateResult | import("@lit").nothing} The Lit HTML template for the module list list, or undefined if no modules.
    */
   renderModulesListList(context, modules) {
     if (!modules || modules.length === 0) {
@@ -290,9 +290,9 @@ export class CurriculumLanding extends ServerComponent {
   /**
    * Renders a single list of modules.
    * Corresponds to the inner ModulesList component in the React version.
-   * @param {Fred.Context<Rari.CurriculumPage>} context
-   * @param {Rari.CurriculumIndexEntry[]} modules - Array of module entries within a group.
-   * @returns {Lit.TemplateResult | Lit.nothing} The Lit HTML template for the module list.
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+   * @param {import("@rari").CurriculumIndexEntry[]} modules - Array of module entries within a group.
+   * @returns {import("@lit").TemplateResult | import("@lit").nothing} The Lit HTML template for the module list.
    */
   renderModulesList(context, modules) {
     if (!modules || modules.length === 0) {
@@ -328,8 +328,8 @@ export class CurriculumLanding extends ServerComponent {
   /**
    * Renders the PartnerBanner structure.
    * Corresponds to the PartnerBanner component in the React version.
-   * @param {Fred.Context<Rari.CurriculumPage>} _context
-   * @returns {Lit.TemplateResult} The Lit HTML template for the partner banner.
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
+   * @returns {import("@lit").TemplateResult} The Lit HTML template for the partner banner.
    */
   renderPartnerBanner(_context) {
     // Paths need to be correct relative to the server rendering context
@@ -380,9 +380,9 @@ export class CurriculumLanding extends ServerComponent {
    * Renders a placeholder SVG structure for the TopicIcon.
    * In a real server-rendering setup, the SVG content would ideally be embedded or referenced correctly.
    * This placeholder includes basic circle and path elements styled by CSS.
-   * @param {Fred.Context<Rari.CurriculumPage>} _context
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
    * @param {string} topic - The topic string.
-   * @returns {Lit.TemplateResult | nothing} The Lit HTML template for the topic icon SVG.
+   * @returns {import("@lit").TemplateResult | nothing} The Lit HTML template for the topic icon SVG.
    */
   renderTopicIcon(_context, topic) {
     const className = `topic-icon topic-${this.topic2css(topic)}`;
@@ -443,9 +443,9 @@ export class CurriculumLanding extends ServerComponent {
 
 /**
  *
- * @param {Lit.SVGTemplateResult} original
+ * @param {import("@lit").SVGTemplateResult} original
  * @param {{[key: string]: string}} attrs
- * @returns {Lit.SVGTemplateResult}
+ * @returns {import("@lit").SVGTemplateResult}
  */
 
 function addAttrs(original, attrs) {

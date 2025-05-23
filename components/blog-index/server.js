@@ -6,9 +6,9 @@ import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
 /**
- * @param {Fred.Context} _context
+ * @param {import("@fred").Context} _context
  * @param {object} params
- * @param {Rari.BlogImage} params.image
+ * @param {import("@rari").BlogImage} params.image
  * @param {string} params.slug
  * @param {number} params.width
  * @param {number} params.height
@@ -24,8 +24,8 @@ export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
 
 /**
  *
- * @param {Fred.Context} context
- * @param {Rari.BlogMeta} blogMeta
+ * @param {import("@fred").Context} context
+ * @param {import("@rari").BlogMeta} blogMeta
  */
 function PostPreview(context, blogMeta) {
   return html`<article class="blog-index__article">
@@ -59,8 +59,8 @@ function PostPreview(context, blogMeta) {
 export class BlogIndex extends ServerComponent {
   /**
    *
-   * @param {Fred.Context<Rari.BlogPage>} context
-   * @returns {Lit.TemplateResult}
+   * @param {import("@fred").Context<import("@rari").BlogPage>} context
+   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const content = BlogContainer(
