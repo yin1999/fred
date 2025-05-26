@@ -182,6 +182,8 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
         </form>
         <ul>
           ${this._queryIndex.render({
+            initial: () => html`<progress></progress>`,
+            pending: () => html`<progress></progress>`,
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`
