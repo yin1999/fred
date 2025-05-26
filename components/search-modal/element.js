@@ -96,6 +96,29 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     }
   }
 
+  /** @param {KeyboardEvent} event */
+  _globalKeydown(event) {
+    const target = event.composedPath()?.[0] || event.target;
+    const isTextField =
+      target instanceof HTMLElement &&
+      (["TEXTAREA", "INPUT"].includes(target.tagName) ||
+        target.isContentEditable);
+
+    if (isTextField) {
+      return;
+    }
+
+    const keyPressed = event.key;
+    const ctrlOrMetaPressed = event.ctrlKey || event.metaKey;
+    const isSlash = keyPressed === "/" && !ctrlOrMetaPressed;
+    const isCtrlK = keyPressed === "k" && ctrlOrMetaPressed && !event.shiftKey;
+
+    if (isSlash || isCtrlK) {
+      event.preventDefault();
+      this._click();
+    }
+  }
+
   _queryIndex = new Task(this, {
     args: () => [this._index, this._query],
     task: async ([index, query]) => {
@@ -105,6 +128,17 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       return quickSearch(query, index);
     },
   });
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._globalKeydown = this._globalKeydown.bind(this);
+    document.addEventListener("keydown", this._globalKeydown);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener("keydown", this._globalKeydown);
+  }
 
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
