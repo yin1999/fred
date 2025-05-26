@@ -43,7 +43,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     };
   }
 
-  _click() {
+  _showModal() {
     this._loadIndex();
     this.shadowRoot?.querySelector("dialog")?.showModal();
   }
@@ -118,7 +118,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
     if (isSlash || isCtrlK) {
       event.preventDefault();
-      this._click();
+      this._showModal();
     }
   }
 
@@ -149,7 +149,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       <button
         class="mdn-search"
         title=${this.l10n`Search the site`}
-        @click=${this._click}
+        @click=${this._showModal}
       >
         <svg viewBox="0 -960 960 960" width="24" height="24">
           <path
