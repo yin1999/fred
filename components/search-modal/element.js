@@ -25,6 +25,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   }
 
   async _loadIndex() {
+    if (this._index) {
+      return;
+    }
     const res = await fetch(`/${this.locale}/search-index.json`);
     /** @type {import("./types.js").SearchIndexItem[]} */
     const items = await res.json();
