@@ -117,6 +117,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       return;
     }
 
+    const selection = globalThis.getSelection()?.toString();
     const keyPressed = event.key;
     const ctrlOrMetaPressed = event.ctrlKey || event.metaKey;
     const isSlash = keyPressed === "/" && !ctrlOrMetaPressed;
@@ -125,6 +126,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     if (isSlash || isCtrlK) {
       event.preventDefault();
       this._showModal();
+      if (selection) {
+        this._query = selection;
+      }
     }
   }
 
@@ -168,7 +172,12 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       </button>
       <dialog @keydown=${this._keydown} @focusin=${this._focus}>
         <form @submit=${this._submit}>
-          <input type="text" autofocus @input=${this._input} />
+          <input
+            type="text"
+            .value=${this._query}
+            autofocus
+            @input=${this._input}
+          />
         </form>
         <ul>
           ${this._queryIndex.render({
