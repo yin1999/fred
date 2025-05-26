@@ -17,7 +17,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   constructor() {
     super();
-    /** @type {import("./types.js").SearchIndex | undefined} */
+    /** @type {Promise<import("./types.js").SearchIndex> | undefined} */
     this._index = undefined;
     this._query = "";
     this._selected = 0;
@@ -28,6 +28,11 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     if (this._index) {
       return;
     }
+
+    this._index = this._fetchIndex();
+  }
+
+  async _fetchIndex() {
     const res = await fetch(`/${this.locale}/search-index.json`);
     /** @type {import("./types.js").SearchIndexItem[]} */
     const items = await res.json();
@@ -37,7 +42,8 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       title: title.toLowerCase(),
       slugTail: url.split("/").pop()?.toLowerCase() || "",
     }));
-    this._index = {
+
+    return {
       flex,
       items,
     };
@@ -128,7 +134,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       if (!index || !query) {
         return;
       }
-      return quickSearch(query, index);
+      return quickSearch(query, await index);
     },
   });
 
@@ -136,10 +142,13 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     super.connectedCallback();
     this._globalKeydown = this._globalKeydown.bind(this);
     document.addEventListener("keydown", this._globalKeydown);
+    this._loadIndex = this._loadIndex.bind(this);
+    this.renderRoot.addEventListener("mouseover", this._loadIndex);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.renderRoot.removeEventListener("mouseover", this._loadIndex);
     document.removeEventListener("keydown", this._globalKeydown);
   }
 
