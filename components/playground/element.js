@@ -2,6 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
@@ -189,7 +190,7 @@ ${"```"}`,
     permalink.search = new URLSearchParams({ id }).toString();
     this._permalink = permalink.toString();
 
-    // TODO: gleanClick(`${PLAYGROUND}: load-shared`);
+    gleanClick("playground", { type: "load-shared" });
     const code = await response.json();
     return stateToSession(code);
   }
