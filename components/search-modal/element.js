@@ -52,6 +52,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   _showModal() {
     this._loadIndex();
     this.shadowRoot?.querySelector("dialog")?.showModal();
+    this.shadowRoot?.querySelector("input")?.select();
   }
 
   /** @param {InputEvent} event */
