@@ -29,6 +29,7 @@ export class ReferenceLayout extends ServerComponent {
             <mdn-placement-sidebar></mdn-placement-sidebar>
           </aside>
           <div class="reference-layout__content__body">
+            <mdn-survey></mdn-survey>
             ${sections} ${ArticleFooter.render(context)}
           </div>
         </main>
