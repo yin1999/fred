@@ -35,7 +35,7 @@ function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
   // @ts-nocheck
   return html`<section
-    class="section__prose"
+    class="section"
     aria-labelledby=${ifDefined(id ?? undefined)}
   >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
@@ -49,7 +49,10 @@ function Prose({ id, title, content, isH3 }) {
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
+  return html`<section
+    class="section"
+    aria-labelledby=${ifDefined(id ?? undefined)}
+  >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
     <mdn-compat-table-lazy
       locale="en-US"
@@ -64,7 +67,10 @@ function BCD({ id, title, query, isH3 }) {
  */
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
+  return html`<section
+    class="section"
+    aria-labelledby=${ifDefined(id ?? undefined)}
+  >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
     ${SpecificationsList(context, specifications)}
   </section>`;

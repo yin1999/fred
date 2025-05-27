@@ -1,6 +1,6 @@
 @import url("../code-example/common.css");
 
-.section__prose {
+.section {
   line-height: var(--font-line-content);
 
   h1,
