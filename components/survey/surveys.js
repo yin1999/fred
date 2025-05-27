@@ -50,9 +50,7 @@ export const SURVEYS = [
       return /^\/[a-z]{2}(-[A-Z]{2})?\/docs\/Web\/CSS/.test(mdn_url);
     },
     src: (mdn_url) => {
-      const url = new URL(
-        "https://survey.alchemer.com/s3/8073795/Feedback-zur-deutschen-Version-von-MDN",
-      );
+      const url = new URL("https://www.example.com/");
       url.searchParams.set("referrer", mdn_url);
       return url.toString();
     },
