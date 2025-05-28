@@ -3,5 +3,11 @@
     /* Same as `.content h1` (generic-content) */
     font-size: var(--font-size-largest);
     font-weight: normal;
+
+    &::after {
+      /* Same color as ::before in search-modal */
+      color: light-dark(var(--color-blue-50), var(--color-blue-80));
+      content: "_";
+    }
   }
 }
