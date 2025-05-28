@@ -3,6 +3,7 @@ import { html } from "lit";
 import { FeaturedArticles } from "../featured-articles/server.js";
 import { HomepageHero } from "../homepage-hero/server.js";
 import { PageLayout } from "../page-layout/server.js";
+import { RecentContributions } from "../recent-contributions/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class HomePage extends ServerComponent {
@@ -22,16 +23,12 @@ export class HomePage extends ServerComponent {
             <h2>${context.l10n`Featured articles`}</h2>
             ${FeaturedArticles.render(context.hyData.featuredArticles)}
           </section>
-          <section>
+          <section class="homepage-section">
             <h2>${context.l10n`Recent contributions`}</h2>
-            <ul>
-              ${context.hyData.recentContributions.items.map(
-                (contribution) =>
-                  html`<li>
-                    <a href=${contribution.url}>${contribution.title}</a>
-                  </li>`,
-              )}
-            </ul>
+            ${RecentContributions.render(
+              context.hyData.recentContributions.items,
+              context.locale,
+            )}
           </section>
         </div>
       `,
