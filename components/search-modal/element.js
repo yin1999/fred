@@ -160,7 +160,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
     return html`
-      <dialog @keydown=${this._keydown} @focusin=${this._focus}>
+      <dialog @keydown=${this._keydown} @focusin=${this._focus} closedby="any">
         <form @submit=${this._submit}>
           <input
             type="text"
