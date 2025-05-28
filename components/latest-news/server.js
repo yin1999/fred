@@ -43,7 +43,7 @@ export class LatestNews extends ServerComponent {
 /**
  *
  * @param {number} seconds
- * @returns {[number, unit: Intl.RelativeTimeFormatUnit]}
+ * @returns {[number, Intl.RelativeTimeFormatUnit]}
  */
 function getRelativeTime(seconds) {
   /** @type {Array<{amount: number, unit: Intl.RelativeTimeFormatUnit}>} */
