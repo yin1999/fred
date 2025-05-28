@@ -54,6 +54,7 @@
 
     grid-area: toc;
 
+    gap: 0.5rem;
     align-content: start;
     align-items: start;
     justify-content: space-between;
