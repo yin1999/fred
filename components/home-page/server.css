@@ -6,6 +6,12 @@
     grid-column: content;
   }
 
+  &.homepage--dark {
+    color: var(--color-text-primary);
+    color-scheme: dark;
+    background-color: var(--color-background-primary);
+  }
+
   mdn-placement-hp-main {
     grid-column: extended-full;
   }

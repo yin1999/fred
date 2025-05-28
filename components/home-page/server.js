@@ -1,6 +1,7 @@
 import { html } from "lit";
 
 import { FeaturedArticles } from "../featured-articles/server.js";
+import { HomepageHero } from "../homepage-hero/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -12,6 +13,9 @@ export class HomePage extends ServerComponent {
     return PageLayout.render(
       context,
       html`
+        <div class="homepage homepage--dark">
+          ${HomepageHero.render(context)}
+        </div>
         <div class="homepage">
           <mdn-placement-hp-main></mdn-placement-hp-main>
           <section class="homepage-section">
