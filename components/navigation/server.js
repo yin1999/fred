@@ -47,9 +47,10 @@ export class Navigation extends ServerComponent {
         <div class="navigation__popup" id="navigation__popup">
           <div class="navigation__menu">${Menu.render(context)}</div>
           <div class="navigation__search">
-            <mdn-search-modal id="search"></mdn-search-modal>
+            <mdn-search-button></mdn-search-button>
           </div>
         </div>
+        <mdn-search-modal id="search"></mdn-search-modal>
       </nav>
     `;
   }
