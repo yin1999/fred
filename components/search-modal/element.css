@@ -26,6 +26,8 @@ li[data-selected] {
   padding-left: 0.75rem;
   margin: 0;
 
+  cursor: pointer;
+
   background-color: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: calc(infinity * 1px);
