@@ -16,10 +16,3 @@
   color-scheme: dark;
   background-color: var(--color-background-primary);
 }
-
-.homepage__section {
-  h2 {
-    font-size: var(--font-size-large);
-    font-weight: 500;
-  }
-}
