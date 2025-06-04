@@ -7,7 +7,7 @@
   }
 
   mdn-placement-hp-main {
-    grid-column: full;
+    grid-column: extended-full;
   }
 }
 
