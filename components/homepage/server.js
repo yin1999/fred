@@ -1,9 +1,8 @@
 import { html } from "lit";
 
 import { FeaturedArticles } from "../featured-articles/server.js";
-import { HomepageHero } from "../homepage-hero/server.js";
+import { HomepageHeader } from "../homepage-header/server.js";
 import { LatestNews } from "../latest-news/server.js";
-import { Mandala } from "../mandala/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { RecentContributions } from "../recent-contributions/server.js";
 import { ServerComponent } from "../server/index.js";
@@ -17,17 +16,7 @@ export class Homepage extends ServerComponent {
       context,
       html`
         <div class="homepage homepage--dark">
-          <div class="homepage__header">
-            <section class="homepage__header__copy">
-              ${HomepageHero.render(context)}
-            </section>
-            <section class="homepage__header__search">
-              <mdn-homepage-search></mdn-homepage-search>
-            </section>
-            <section class="homepage__header__mandala">
-              ${Mandala.render()}
-            </section>
-          </div>
+          ${HomepageHeader.render(context)}
         </div>
         <div class="homepage">
           <mdn-placement-hp-main></mdn-placement-hp-main>
