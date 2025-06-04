@@ -83,6 +83,11 @@
   }
 
   svg {
+    pointer-events: none;
     fill: var(--color-text-primary);
   }
+}
+
+button {
+  cursor: pointer;
 }
