@@ -8,7 +8,7 @@ import { PageLayout } from "../page-layout/server.js";
 import { RecentContributions } from "../recent-contributions/server.js";
 import { ServerComponent } from "../server/index.js";
 
-export class HomePage extends ServerComponent {
+export class Homepage extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").HomePage>} context
    */
