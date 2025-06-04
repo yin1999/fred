@@ -31,18 +31,18 @@ export class HomePage extends ServerComponent {
         </div>
         <div class="homepage">
           <mdn-placement-hp-main></mdn-placement-hp-main>
-          <section class="homepage-section">
+          <section class="homepage__section">
             <h2>${context.l10n`Featured articles`}</h2>
             ${FeaturedArticles.render(context.hyData.featuredArticles)}
           </section>
-          <section class="homepage-section">
+          <section class="homepage__section">
             <h2>${context.l10n`Latest news`}</h2>
             ${LatestNews.render(
               context.hyData.latestNews.items,
               context.locale,
             )}
           </section>
-          <section class="homepage-section">
+          <section class="homepage__section">
             <h2>${context.l10n`Recent contributions`}</h2>
             ${RecentContributions.render(
               context.hyData.recentContributions.items,
