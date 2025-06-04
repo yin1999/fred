@@ -31,35 +31,38 @@
 
   column-gap: 1rem;
   justify-content: space-between; /* Move Mandala to the right. */
-
-  padding: 1rem 0;
 }
 
 .homepage__header__copy {
   grid-area: copy;
+  padding-top: 1rem;
 }
 
 .homepage__header__search {
   grid-area: search;
+  padding-bottom: 1rem;
 }
 
 .homepage__header__mandala {
   grid-area: mandala;
+  max-height: 20rem;
+  overflow: hidden;
 
   .mandala svg {
+    --height: 35rem;
     display: block;
-    width: auto;
-    height: 17rem; /* FIXME: Auto-align with left side */
+    height: var(--height);
+    margin-top: calc(-1 * var(--height) / 4);
   }
 }
 
-@media (--screen-large-and-wider) {
+@media (--screen-medium-and-wider) {
   .homepage__header {
-    grid-column-end: full-end; /* Make space for Mandala. */
+    grid-column-end: extended-full-end; /* Make space for Mandala. */
   }
 }
 
-@media (--screen-medium-and-narrower) {
+@media (--screen-small-and-narrower) {
   /* Hide Mandala on smaller screens. */
   .homepage__header {
     grid-template-areas: "copy" "search";
