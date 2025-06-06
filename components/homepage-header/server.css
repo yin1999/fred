@@ -2,7 +2,6 @@
   display: grid;
 
   grid-template-areas: "copy mandala" "search mandala";
-  grid-template-columns: max-content auto;
   grid-column-end: extended-full-end; /* Make space for Mandala. */
 
   column-gap: 1rem;
