@@ -142,7 +142,19 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                     (result) =>
                       html`<li>
                         <article>
+                          ${result.locale.toLowerCase() ===
+                          this.locale.toLowerCase()
+                            ? nothing
+                            : html`<span class="site-search__locale-indicator"
+                                >${result.locale
+                                  .split("-")
+                                  .map((value, index) =>
+                                    index > 0 ? value.toUpperCase() : value,
+                                  )
+                                  .join("-")}</span
+                              >`}
                           <h2><a href=${result.mdn_url}>${result.title}</a></h2>
+
                           <p>${result.summary}</p>
                         </article>
                       </li>`,

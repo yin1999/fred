@@ -10,3 +10,15 @@
     content: " | ";
   }
 }
+
+.site-search__locale-indicator {
+  float: left;
+
+  padding: 0.25em 0.5em;
+  margin: 0.5em;
+
+  font-size: var(--font-size-small);
+
+  background-color: var(--color-background-secondary);
+  border-radius: 1em;
+}
