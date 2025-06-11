@@ -1,0 +1,12 @@
+.site-search__options {
+  ul,
+  li {
+    display: inline-block;
+  }
+
+  li:not(:last-child)::after {
+    display: inline;
+    margin-right: 0.5ch;
+    content: " | ";
+  }
+}
