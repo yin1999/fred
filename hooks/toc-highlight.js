@@ -65,12 +65,20 @@ function highlightTOC(toc) {
     }
   };
 
-  // 4. Init observer
-  const observer = new IntersectionObserver(onIntersect, {
+  // 5. Determine options.
+  /** @type {IntersectionObserverInit} */
+  const options = {
     threshold: 0,
-  });
+  };
+  const header = document.querySelector("header");
+  if (header instanceof HTMLElement) {
+    options.rootMargin = `-${header.clientHeight}px 0px 0px 0px`;
+  }
 
-  // 5. Observe sections
+  // 5. Init observer.
+  const observer = new IntersectionObserver(onIntersect, options);
+
+  // 6. Observe sections.
   for (const section of tocItemBySection.keys()) {
     observer.observe(section);
   }
