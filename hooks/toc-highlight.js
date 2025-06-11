@@ -35,21 +35,21 @@ function highlightTOC(toc) {
 
   // 3. Handle visibility transitions
   const onIntersect = (/** @type {IntersectionObserverEntry[]} */ entries) => {
-    for (const entry of entries) {
-      if (!(entry.target instanceof HTMLElement)) {
+    for (const { target, isIntersecting } of entries) {
+      if (!(target instanceof HTMLElement)) {
         continue;
       }
-      const item = tocItemBySection.get(entry.target);
+      const item = tocItemBySection.get(target);
       if (!item) {
         continue;
       }
 
       let visibleCount = visibleCounts.get(item);
       if (typeof visibleCount === "number") {
-        visibleCount += entry.isIntersecting ? 1 : -1;
+        visibleCount += isIntersecting ? 1 : -1;
         item.ariaCurrent = visibleCount > 0 ? "true" : null;
         visibleCounts.set(item, visibleCount);
-      } else if (entry.isIntersecting) {
+      } else if (isIntersecting) {
         item.ariaCurrent = "true";
         visibleCounts.set(item, 1);
       }
