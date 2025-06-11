@@ -31,7 +31,10 @@ function highlightTOC(toc) {
   }
 
   /** @type {WeakMap<HTMLElement,number>} */
-  const visibleCounts = new WeakMap();
+  const visibleSectionsByItem = new WeakMap();
+
+  /** @type {Set<HTMLElement>} */
+  const everVisibleSections = new Set();
 
   // 3. Handle visibility transitions
   const onIntersect = (/** @type {IntersectionObserverEntry[]} */ entries) => {
@@ -39,20 +42,26 @@ function highlightTOC(toc) {
       if (!(target instanceof HTMLElement)) {
         continue;
       }
+
+      if (!everVisibleSections.has(target)) {
+        if (isIntersecting) {
+          everVisibleSections.add(target);
+        } else {
+          continue;
+        }
+      }
+
       const item = tocItemBySection.get(target);
+
       if (!item) {
         continue;
       }
 
-      let visibleCount = visibleCounts.get(item);
-      if (typeof visibleCount === "number") {
-        visibleCount += isIntersecting ? 1 : -1;
-        item.ariaCurrent = visibleCount > 0 ? "true" : null;
-        visibleCounts.set(item, visibleCount);
-      } else if (isIntersecting) {
-        item.ariaCurrent = "true";
-        visibleCounts.set(item, 1);
-      }
+      const visibleCount =
+        (visibleSectionsByItem.get(item) ?? 0) + (isIntersecting ? 1 : -1);
+
+      item.ariaCurrent = visibleCount > 0 ? "true" : null;
+      visibleSectionsByItem.set(item, visibleCount);
     }
   };
 
