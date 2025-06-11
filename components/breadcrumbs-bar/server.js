@@ -23,15 +23,18 @@ export class BreadcrumbsBar extends ServerComponent {
         ${toggleSidebar} ${Breadcrumbs.render(context)}
         <mdn-color-theme></mdn-color-theme>
         <mdn-collection-save-button></mdn-collection-save-button>
-        <mdn-language-switcher
-          locale=${context.locale}
-          translations=${JSON.stringify(
-            "doc" in context && "other_translations" in context.doc
-              ? context.doc.other_translations
-              : [],
-          )}
-          url=${context.url}
-        ></mdn-language-switcher>
+        ${"doc" in context
+          ? html`<mdn-language-switcher
+              locale=${context.locale}
+              native=${context.doc.native}
+              translations=${JSON.stringify(
+                "other_translations" in context.doc
+                  ? context.doc.other_translations
+                  : [],
+              )}
+              url=${context.url}
+            ></mdn-language-switcher>`
+          : nothing}
       </div>
     `;
   }
