@@ -15,6 +15,11 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
     locale: { type: String },
   };
 
+  constructor() {
+    super();
+    this.locale = "en-US";
+  }
+
   #loginUrl() {
     const base = globalThis.location.origin;
     const url = new URL(FXA_SIGNIN_URL, base);
@@ -34,10 +39,6 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
     const base = globalThis.location.origin;
     const url = new URL(FXA_SIGNOUT_URL, base);
     return url.toString();
-  }
-
-  #settingsUrl() {
-    return `/${this.locale || "en-US"}/plus/settings`;
   }
 
   _user = new Task(this, {
@@ -61,22 +62,64 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
          * @param {User.User} user
          */
         (user) => {
+          const links = [
+            {
+              href: `/${this.locale}/plus/ai-help`,
+              label: this.l10n`AI Help`,
+            },
+            {
+              href: `/${this.locale}/plus/collections`,
+              label: this.l10n`Collections`,
+            },
+            {
+              href: `/${this.locale}/plus/updates`,
+              label: this.l10n`Updates`,
+            },
+            {
+              href: `/${this.locale}/plus/settings`,
+              label: this.l10n("settings"),
+            },
+            {
+              href: "https://support.mozilla.org/products/mdn-plus",
+              label: this.l10n`Help`,
+              external: true,
+            },
+            {
+              href: "https://github.com/mdn/MDN-feedback",
+              label: this.l10n`Feedback`,
+              external: true,
+            },
+          ];
+
           return user.isAuthenticated
-            ? html`<mdn-dropdown>
+            ? html`<div class="user-menu"><mdn-dropdown>
               <button
                 slot="button"
-                class="user-menu-button"
+                class="user-menu__button"
                 title=${this.l10n("user_menu")}
                   ><img width="34" height="34" src=${user.avatarUrl}
                 /></button>
-                <div slot="dropdown" class="user-menu" id="user-menu">
+                <div slot="dropdown" class="user-menu__dropdown">
                   <ul>
-                    <li class="settings">
-                      <a href=${this.#settingsUrl()}>${this.l10n("settings")}</a>
+                    <li>
+                      <div class="user-menu__item">${user.email}</span>
                     </li>
-                    <li class="logout">
+                    <hr>
+                    ${links.map(
+                      (link) =>
+                        html`<li>
+                          <a
+                            class=${link.external
+                              ? "user-menu__item external"
+                              : "user-menu__item"}
+                            href=${link.href}
+                            >${link.label}</a
+                          >
+                        </li>`,
+                    )}
+                    <hr>
+                    <li>
                       <form
-                        class="logout-form"
                         method="post"
                         action=${this.#logoutUrl()}
                       >
@@ -84,19 +127,14 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
                           type="hidden"
                           name="next"
                           .value=${this.#next()}
-                        /><button
-                          type="submit"
-                          class="lognout-button"
-                        >
-                          <mdn-button class="button-wrap"
-                            >${this.l10n("logout")}</span
-                          >
-                            </mdn-button>
+                        />
+                        <button type="submit"
+                        >${this.l10n("logout")}</button>
                       </form>
                     </li>
                   </ul>
                 </div>
-              </mdn-dropdown>`
+              </mdn-dropdown></div>`
             : html`<div class="login-container">
                 <a
                   class="login"
