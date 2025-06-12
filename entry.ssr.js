@@ -2,6 +2,7 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
+import { Advertising } from "./components/advertising/server.js";
 import { BlogIndex } from "./components/blog-index/server.js";
 import { BlogPost } from "./components/blog-post/server.js";
 import { ContributorSpotlight } from "./components/contributor-spotlight/server.js";
@@ -106,8 +107,17 @@ export async function render(path, page, compilationStats) {
             return Plus.render(context);
           case "SpaSearch":
             return Search.render(context);
-          case "SpaUnknown":
-            return PageLayout.render(context, `Unknown: ${context.pageTitle}`);
+          case "SpaUnknown": {
+            switch (context.slug) {
+              case "advertising":
+                return Advertising.render(context);
+              default:
+                return PageLayout.render(
+                  context,
+                  `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
+                );
+            }
+          }
           case "SpaNotFound":
           default:
             return NotFound.render(context);
