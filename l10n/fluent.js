@@ -31,8 +31,8 @@ const ftlMap = {
   "zh-TW": zhTW_ftl,
 };
 
-const whitelistedTags = ["i", "strong", "br", "em"];
-const whitelistedAttributes = ["title", "aria-label"];
+const ALLOWED_TAGS = ["i", "strong", "br", "em"];
+const ALLOWED_ATTRIBUTES = ["title", "aria-label"];
 
 export class Fluent {
   /**
@@ -96,13 +96,13 @@ export class Fluent {
     for (const t of Object.values(elements)) {
       allowedAttributes[t.tag] = [
         ...Object.keys(t).filter((x) => x !== "tag"),
-        ...whitelistedAttributes,
+        ...ALLOWED_ATTRIBUTES,
       ];
     }
 
     const allowedTags = [
       ...Object.values(elements).map((t) => t.tag),
-      ...whitelistedTags,
+      ...ALLOWED_TAGS,
     ];
 
     let safe = true;
@@ -121,7 +121,7 @@ export class Fluent {
             }
           }
           if (
-            whitelistedTags.includes(token.tag) ||
+            ALLOWED_TAGS.includes(token.tag) ||
             (name &&
               Object.keys(elements).includes(name) &&
               elements[name]?.tag === token.tag)
