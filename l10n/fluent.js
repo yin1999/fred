@@ -2,15 +2,15 @@ import { FluentBundle, FluentResource } from "@fluent/bundle";
 import insane from "insane";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import DEStrings from "../l10n/de.flt";
-import USStrings from "../l10n/en-us.flt";
+import DEStrings from "../l10n/de.ftl";
+import USStrings from "../l10n/en-us.ftl";
 
 /**
  * @import { AllowedTags } from "insane";
  */
 
 /** @type {Record<string, string>} */
-const fltMap = { "en-US": USStrings, de: DEStrings };
+const ftlMap = { "en-US": USStrings, de: DEStrings };
 
 const whitelistedTags = ["i", "strong", "br", "em"];
 const whitelistedAttributes = ["title", "aria-label"];
@@ -182,8 +182,8 @@ function getLocale(locale) {
     return;
   }
   if (!fluent.has(locale)) {
-    const flt = fltMap[locale];
-    const localeF = new Fluent(locale, flt ? [flt] : undefined);
+    const ftl = ftlMap[locale];
+    const localeF = new Fluent(locale, ftl ? [ftl] : undefined);
     fluent.set(locale, localeF);
   }
   return fluent.get(locale);
