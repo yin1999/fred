@@ -8,7 +8,7 @@ import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
 
-export class MNDUserMenu extends L10nMixin(LitElement) {
+export class MDNUserMenu extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
@@ -58,8 +58,8 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
       pending: () => nothing,
 
       complete:
-        /*
-         * @param {User.User} user
+        /**
+         * @param {import("../user/types.js").User} user
          */
         (user) => {
           const links = [
@@ -92,49 +92,48 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
           ];
 
           return user.isAuthenticated
-            ? html`<div class="user-menu"><mdn-dropdown>
-              <button
-                slot="button"
-                class="user-menu__button"
-                title=${this.l10n("user_menu")}
-                  ><img width="34" height="34" src=${user.avatarUrl}
-                /></button>
-                <div slot="dropdown" class="user-menu__dropdown">
-                  <ul>
-                    <li>
-                      <div class="user-menu__item">${user.email}</span>
-                    </li>
-                    <hr>
-                    ${links.map(
-                      (link) =>
-                        html`<li>
-                          <a
-                            class=${link.external
-                              ? "user-menu__item external"
-                              : "user-menu__item"}
-                            href=${link.href}
-                            >${link.label}</a
-                          >
-                        </li>`,
-                    )}
-                    <hr>
-                    <li>
-                      <form
-                        method="post"
-                        action=${this.#logoutUrl()}
-                      >
-                        <input
-                          type="hidden"
-                          name="next"
-                          .value=${this.#next()}
-                        />
-                        <button type="submit"
-                        >${this.l10n("logout")}</button>
-                      </form>
-                    </li>
-                  </ul>
-                </div>
-              </mdn-dropdown></div>`
+            ? html`<div class="user-menu">
+                <mdn-dropdown>
+                  <button
+                    slot="button"
+                    class="user-menu__button"
+                    title=${this.l10n("user_menu")}
+                  >
+                    <img width="34" height="34" src=${user.avatarUrl} />
+                  </button>
+                  <div slot="dropdown" class="user-menu__dropdown">
+                    <ul>
+                      <li>
+                        <div class="user-menu__item">${user.email}</div>
+                      </li>
+                      <li class="user-menu__divider"></li>
+                      ${links.map(
+                        (link) =>
+                          html`<li>
+                            <a
+                              class=${link.external
+                                ? "user-menu__item external"
+                                : "user-menu__item"}
+                              href=${link.href}
+                              >${link.label}</a
+                            >
+                          </li>`,
+                      )}
+                      <li class="user-menu__divider"></li>
+                      <li>
+                        <form method="post" action=${this.#logoutUrl()}>
+                          <input
+                            type="hidden"
+                            name="next"
+                            .value=${this.#next()}
+                          />
+                          <button type="submit">${this.l10n("logout")}</button>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </mdn-dropdown>
+              </div>`
             : html`<div class="login-container">
                 <a
                   class="login"
@@ -148,4 +147,4 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
   }
 }
 
-customElements.define("mdn-user-menu", MNDUserMenu);
+customElements.define("mdn-user-menu", MDNUserMenu);
