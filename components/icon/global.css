@@ -22,6 +22,7 @@
 
     mask-repeat: no-repeat;
     mask-position: center;
+    mask-size: contain;
   }
 
   /* See https://github.com/mdn/rari/blob/927fac7cb89c7f7e49dd3ff265c3d74ad89d6490/crates/rari-doc/src/templ/templs/badges.rs#L43-L47 */
