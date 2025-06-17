@@ -28,9 +28,11 @@ declare global {
     "mdn-modal": import("../components/modal/element.js").MDNModal;
     "mdn-observatory-comparison-table": import("../components/observatory-comparison-table/element.js").MDNObservatoryComparisonTable;
     "mdn-observatory-form": import("../components/observatory-form/element.js").MDNObservatoryForm;
+    "mdn-observatory-header-link": import("../components/observatory-header-link/element.js").MDNObservatoryHeaderLink;
     "mdn-observatory-human-duration": import("../components/observatory-human-duration/element.js").MDNObservatoryHumanDuration;
     "mdn-observatory-rescan-button": import("../components/observatory-rescan-button/element.js").MDNObservatoryRescanButton;
     "mdn-observatory-results": import("../components/observatory-results/element.js").MDNObservatoryResults;
+    "mdn-observatory-tests-and-scores": import("../components/observatory-tests-and-scores/element.js").MDNObservatoryTestsAndScores;
     "mdn-placement-bottom": import("../components/placement-bottom/element.js").MDNPlacementBottom;
     "mdn-placement-hp-main": import("../components/placement-hp-main/element.js").MDNPlacementHpMain;
     "mdn-placement-no": import("../components/placement-no/element.js").MDNPlacementNo;
