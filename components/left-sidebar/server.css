@@ -10,6 +10,11 @@
 
     &:hover {
       background-color: var(--color-background-secondary);
+
+      &:has(a:hover) {
+        /* Don't highlight, as link click doesn't toggle. */
+        background-color: unset;
+      }
     }
   }
 
@@ -35,10 +40,13 @@
 
   a {
     color: var(--color-text-primary);
-    text-decoration: none;
 
     &:hover {
       color: var(--color-link-normal);
+    }
+
+    &:not(:hover) {
+      text-decoration: none;
     }
   }
 
