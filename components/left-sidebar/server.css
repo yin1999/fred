@@ -33,6 +33,15 @@
 
   li {
     margin-bottom: 0.5rem;
+
+    &.section {
+      font-size: 1.25rem;
+      font-weight: 400;
+
+      &:not(:first-child) {
+        margin-top: 1em;
+      }
+    }
   }
 
   a,
