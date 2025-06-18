@@ -1,4 +1,7 @@
 .left-sidebar {
+  position: sticky;
+  top: var(--sticky-header-height);
+
   h4 {
     margin: 0;
     font-size: var(--font-size-large);
@@ -62,4 +65,19 @@
   svg {
     flex-shrink: 0;
   }
+}
+
+.left-sidebar__header {
+  position: sticky;
+  top: 0;
+
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 2rem;
+
+  background: linear-gradient(
+    to bottom,
+    var(--color-background-primary) 0 calc(100% - 2rem),
+    transparent 100%
+  );
 }

@@ -40,10 +40,6 @@
 
   .reference-layout__sidebar {
     grid-area: sidebar;
-
-    .left-sidebar {
-      padding-block: 1rem;
-    }
   }
 
   .reference-layout__toc {

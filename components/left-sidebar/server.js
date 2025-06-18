@@ -15,8 +15,10 @@ export class LeftSidebar extends ServerComponent {
     }
 
     return html`<nav class="left-sidebar">
-      <mdn-sidebar-filter></mdn-sidebar-filter>
-      <section class="left-sidebar--content">${unsafeHTML(content)}</section>
+      <div class="left-sidebar__header">
+        <mdn-sidebar-filter></mdn-sidebar-filter>
+      </div>
+      <div class="left-sidebar__content">${unsafeHTML(content)}</div>
     </nav>`;
   }
 }
