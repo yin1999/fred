@@ -39,6 +39,20 @@
     letter-spacing: 0.025em;
   }
 
+  a:not([href^="#"]) {
+    &:link {
+      color: var(--color-link-normal);
+    }
+
+    &:visited {
+      color: var(--color-link-visited);
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
   code {
     padding: 0.125em 0.25em;
 
