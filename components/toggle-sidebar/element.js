@@ -1,6 +1,7 @@
 import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import panelCloseIcon from "../icon/panel-left-close.svg?lit";
 import panelIcon from "../icon/panel-left.svg?lit";
 
 import styles from "./element.css?lit";
@@ -9,6 +10,15 @@ const MAIN_SIDEBAR_ID = "main-sidebar";
 
 export class MDNToggleSidebar extends L10nMixin(LitElement) {
   static styles = styles;
+
+  static properties = {
+    _canClose: { type: Boolean, state: true },
+  };
+
+  constructor() {
+    super();
+    this._canClose = false;
+  }
 
   get _sidebar() {
     const sidebar = document.querySelector(`#${MAIN_SIDEBAR_ID}`);
@@ -21,18 +31,25 @@ export class MDNToggleSidebar extends L10nMixin(LitElement) {
   _click() {
     const sidebar = this._sidebar;
     if (sidebar) {
-      const display = getComputedStyle(sidebar).display;
-      if (display === "none") {
+      if (this._isHidden(sidebar)) {
         sidebar.style.display = "block";
+        this._canClose = true;
       } else {
         sidebar.style.removeProperty("display");
+        this._canClose = false;
       }
     }
+  }
+
+  /** @param {HTMLElement | null} el */
+  _isHidden(el) {
+    return el && getComputedStyle(el).display === "none";
   }
 
   /** @param {MediaQueryListEvent} _event */
   _mediaChange(_event) {
     this._sidebar?.style.removeProperty("display");
+    this._canClose = false;
   }
 
   connectedCallback() {
@@ -40,13 +57,14 @@ export class MDNToggleSidebar extends L10nMixin(LitElement) {
     this._matchMedia = matchMedia("(width < 769px)");
     this._mediaChange = this._mediaChange.bind(this);
     this._matchMedia.addEventListener("change", this._mediaChange);
+    this._canClose = !this._isHidden(this._sidebar);
   }
 
   render() {
     return html`<mdn-button
       @click=${this._click}
       aria-controls=${MAIN_SIDEBAR_ID}
-      .icon=${panelIcon}
+      .icon=${this._canClose ? panelCloseIcon : panelIcon}
       icon-only
       variant="plain"
     >
