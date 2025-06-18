@@ -1,12 +1,13 @@
 import { LitElement, html } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import panelIcon from "../icon/panel-left.svg?lit";
 
 import styles from "./element.css?lit";
 
 const MAIN_SIDEBAR_ID = "main-sidebar";
 
-export class MDNToggleSidebar extends LitElement {
+export class MDNToggleSidebar extends L10nMixin(LitElement) {
   static styles = styles;
 
   get _sidebar() {
@@ -49,7 +50,7 @@ export class MDNToggleSidebar extends LitElement {
       icon-only
       variant="plain"
     >
-      Toggle sidebar
+      ${this.l10n`Toggle sidebar`}
     </mdn-button>`;
   }
 }
