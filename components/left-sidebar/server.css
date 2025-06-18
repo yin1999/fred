@@ -6,7 +6,6 @@
   }
 
   summary {
-    padding: 0.5rem 0;
     cursor: pointer;
 
     &:hover {
@@ -21,20 +20,21 @@
   }
 
   details ol {
-    padding-left: 0.75rem;
+    padding-left: 0.75em;
   }
 
   li {
     margin-bottom: 0.5rem;
   }
 
-  a {
+  a,
+  span {
     display: inline-block;
+    padding: 0.25em 0;
+  }
 
-    padding: 0.25rem;
-
+  a {
     color: var(--color-text-primary);
-
     text-decoration: none;
 
     &:hover {
@@ -43,11 +43,9 @@
   }
 
   em {
-    display: inline-block;
-
     align-items: baseline;
 
-    padding: 0.25rem;
+    padding: 0.25em 0.5em;
 
     background-color: var(--color-background-blue);
     border-left: 2px solid var(--color-blue-50);
