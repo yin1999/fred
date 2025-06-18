@@ -70,3 +70,11 @@ To add a component to the sandbox, add a `sandbox.js` file to the component, whi
 - We occasionally use TypeScript files directly for writing types/interface which are too complex to easily write in JSDoc
 - Eventually we'll have a fully typed codebase, with no errors: while we're in active development we can ignore errors in the interest of development speed/pragmatism:
   - If we do so, we should use `// @ts-expect-error` so we get an error when we fix the error and don't leave unnecessary `// @ts-ignore` comments lying around. While we're in active development these can lack a comment, but eventually we'll require an explanatory comment on each.
+
+### Hydration errors
+
+If our server side rendered custom elements are different to the initial state of our custom elements when rendered client side, Lit will error out during hydration, stopping the execution of our client side JS.
+
+To avoid this, don't compute things that are server/client dependent in `connectedCallback` (or run functions which do this). Instead you must run these in `firstUpdated` (despite the warning lit will raise in development about the element scheduling an update after an update completed).
+
+This issue is tracked upstream: https://github.com/lit/lit/issues/1434
