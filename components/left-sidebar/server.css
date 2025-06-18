@@ -72,8 +72,8 @@
     border-left: 2px solid var(--color-blue-50);
   }
 
-  svg {
-    flex-shrink: 0;
+  .icon {
+    margin-left: 0.5ch;
   }
 }
 
