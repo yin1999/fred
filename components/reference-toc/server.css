@@ -30,6 +30,8 @@
 
     text-decoration: none;
 
+    box-shadow: -2px 0 0 var(--color-border-secondary);
+
     &:hover:not([aria-current="true"]) {
       color: var(--color-link-normal);
     }
