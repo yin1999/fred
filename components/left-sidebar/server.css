@@ -28,7 +28,7 @@
   }
 
   details ol {
-    padding-left: 0.75em;
+    padding-left: calc(0.75em + 2px); /* 2px to align with regular li. */
   }
 
   li {
