@@ -186,9 +186,10 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
             `}
         <mdn-button
           class="clear-sidebar-filter-button"
+          variant="plain"
           label=${this.l10n`Clear filter input`}
           .icon=${cancelIcon}
-          iconOnly
+          icon-only
           @click=${this._clearFilter}
         ></mdn-button>
       </div>
