@@ -45,6 +45,7 @@
   }
 
   a,
+  em,
   span {
     display: inline-block;
     padding: 0.25em 0;
