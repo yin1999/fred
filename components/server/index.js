@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-import { styleTagsForComponent } from "../outer-layout/utils.js";
+import { stylesForComponents } from "../outer-layout/utils.js";
 
 import { asyncLocalStorage } from "./async-local-storage.js";
 
@@ -28,12 +28,11 @@ export class ServerComponent {
     const res = new this().render(...args);
 
     if (!this.stylesInHead && compilationStats) {
-      const styleTags = styleTagsForComponent(
-        this.name,
-        compilationStats.client,
-      );
-      if (styleTags.length > 0) {
-        return html`${styleTags}${res}`;
+      const styles = stylesForComponents([this.name], compilationStats.client);
+      if (styles.length > 0) {
+        return html`${styles.map(
+          (path) => html`<link rel="stylesheet" href=${path} />`,
+        )}${res}`;
       }
     }
     return res;

@@ -6,7 +6,11 @@ import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
 
-import { styleTagsForComponent, tagsFromManifest } from "./utils.js";
+import {
+  assetsForEntry,
+  styleEntryForComponent,
+  stylesForComponents,
+} from "./utils.js";
 
 export class OuterLayout extends ServerComponent {
   /**
@@ -15,8 +19,8 @@ export class OuterLayout extends ServerComponent {
    */
   render(context, markup) {
     const {
-      componentsUsed = new Set(),
-      componentsWithStylesInHead = new Set(),
+      componentsUsed = /** @type {Set<string>} */ (new Set()),
+      componentsWithStylesInHead = /** @type {Set<string>} */ (new Set()),
       compilationStats,
     } = asyncLocalStorage.getStore() || {};
 
@@ -24,18 +28,34 @@ export class OuterLayout extends ServerComponent {
       throw new Error("compilation stats missing");
     }
 
-    let legacyTags;
+    let legacyAssets;
     if (componentsUsed.has("legacy")) {
       componentsUsed.delete("legacy");
-      legacyTags = Object.values(
-        tagsFromManifest(compilationStats.legacy),
-      ).flat();
+      legacyAssets = assetsForEntry(compilationStats.legacy).assets;
     }
 
-    const { scriptTags } = tagsFromManifest(compilationStats.client);
-    const styleTags = ["global", ...componentsWithStylesInHead].flatMap(
-      (component) => styleTagsForComponent(component, compilationStats.client),
-    );
+    const scripts = [
+      ...(assetsForEntry(compilationStats.client).assets?.js ?? []),
+      ...(legacyAssets?.js ?? []),
+    ];
+    const styles = [
+      ...(stylesForComponents(
+        ["global", ...componentsWithStylesInHead],
+        compilationStats.client,
+      ) ?? []),
+      ...(legacyAssets?.css ?? []),
+    ];
+
+    const preloadFonts = ["global"]
+      .flatMap((component) =>
+        assetsForEntry(
+          compilationStats.client,
+          styleEntryForComponent(component),
+        ).auxiliaryAssets?.woff2?.filter((path) =>
+          path.toLowerCase().includes("inter"),
+        ),
+      )
+      .filter((x) => x !== undefined);
 
     // if you want to put some script inline, put it in entry.inline.js
     // and you'll get CSP generation: see the README
@@ -52,9 +72,22 @@ export class OuterLayout extends ServerComponent {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
-          ${styleTags} ${scriptTags} ${legacyTags}
           <title>${context.pageTitle || "MDN"}</title>
+          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
+          ${styles.map((path) => html`<link rel="stylesheet" href=${path} />`)}
+          ${preloadFonts.map(
+            (path) =>
+              html`<link
+                rel="preload"
+                href=${path}
+                as="font"
+                type="font/woff2"
+                crossorigin="anonymous"
+              />`,
+          )}
+          ${scripts?.map(
+            (path) => html`<script src=${path} type="module"></script>`,
+          )}
         </head>
         ${markup}
       </html>
