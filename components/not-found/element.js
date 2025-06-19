@@ -93,10 +93,6 @@ export class MDNNotFound extends L10nMixin(LitElement) {
           }
         },
       })}
-
-      <p>
-        <a href="/">${this.l10n("not_found_back")}</a>
-      </p>
     `;
   }
 }

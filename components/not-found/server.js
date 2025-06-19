@@ -13,6 +13,9 @@ export class NotFound extends ServerComponent {
       html`<main id="content" class="not-found">
         <h1>${context.l10n("not_found_title")}</h1>
         <mdn-not-found></mdn-not-found>
+        <p>
+          <a href="/">${context.l10n("not_found_back")}</a>
+        </p>
       </main>`,
     );
   }
