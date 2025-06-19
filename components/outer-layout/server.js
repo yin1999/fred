@@ -1,34 +1,40 @@
 import { html } from "@lit-labs/ssr";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { toCamelCase } from "../../build/utils.js";
 import inlineScript from "../../entry.inline.js?source&csp=true";
 import Favicon from "../favicon/pure.js";
+import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
+
+import { styleTagsForComponent, tagsFromManifest } from "./utils.js";
 
 export class OuterLayout extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
    * @param {import("lit-html").TemplateResult} markup
-   * @param {import("@fred").CompilationStats} compilationStats
-   * @param {Set<string>} components
    */
-  render(context, markup, compilationStats, components) {
+  render(context, markup) {
+    const {
+      componentsUsed = new Set(),
+      componentsWithStylesInHead = new Set(),
+      compilationStats,
+    } = asyncLocalStorage.getStore() || {};
+
+    if (!compilationStats) {
+      throw new Error("compilation stats missing");
+    }
+
     let legacyTags;
-    if (components.has("legacy")) {
-      components.delete("legacy");
+    if (componentsUsed.has("legacy")) {
+      componentsUsed.delete("legacy");
       legacyTags = Object.values(
-        this.tagsFromManifest(compilationStats.legacy),
+        tagsFromManifest(compilationStats.legacy),
       ).flat();
     }
 
-    const { scriptTags } = this.tagsFromManifest(compilationStats.client);
-    const styleTags = ["global", ...components].flatMap(
-      (component) =>
-        this.tagsFromManifest(
-          compilationStats.client,
-          `styles-${toCamelCase(component)}`,
-        ).styleTags,
+    const { scriptTags } = tagsFromManifest(compilationStats.client);
+    const styleTags = ["global", ...componentsWithStylesInHead].flatMap(
+      (component) => styleTagsForComponent(component, compilationStats.client),
     );
 
     // if you want to put some script inline, put it in entry.inline.js
@@ -53,33 +59,5 @@ export class OuterLayout extends ServerComponent {
         ${markup}
       </html>
     `;
-  }
-
-  /**
-   * @param {import("@rspack/core").StatsCompilation} manifest
-   * @param {string} [entry]
-   */
-  tagsFromManifest(manifest, entry = "index") {
-    const publicPath = manifest.publicPath;
-    if (!publicPath) {
-      throw new Error("publicPath is not defined in manifest");
-    }
-
-    const scriptTags = [];
-    const styleTags = [];
-
-    for (const { name } of manifest.entrypoints?.[entry]?.assets || []) {
-      if (name.endsWith(".js")) {
-        scriptTags.push(
-          html`<script src=${publicPath + name} type="module"></script>`,
-        );
-      } else if (name.endsWith(".css")) {
-        styleTags.push(
-          html`<link rel="stylesheet" href=${publicPath + name} />`,
-        );
-      }
-    }
-
-    return { scriptTags, styleTags };
   }
 }
