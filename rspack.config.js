@@ -2,6 +2,7 @@ import path from "node:path";
 
 import { fileURLToPath } from "node:url";
 
+import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 import { rspack } from "@rspack/core";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import { fdir } from "fdir";
@@ -230,6 +231,17 @@ const clientConfig = merge(common, clientAndSsrCommon, clientAndLegacyCommon, {
     };
   },
   plugins: [
+    process.env.RSDOCTOR &&
+      new RsdoctorRspackPlugin(
+        process.env.RSDOCTOR_PORT
+          ? {
+              port: Number.parseInt(process.env.RSDOCTOR_PORT, 10),
+            }
+          : {
+              disableClientServer: true,
+              mode: "brief",
+            },
+      ),
     !isProd && new GenerateElementMapPlugin(),
     new rspack.CssExtractRspackPlugin({
       filename: isProd ? "[name].[contenthash].css" : "[name].css",
