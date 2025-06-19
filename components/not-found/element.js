@@ -4,6 +4,7 @@ import { LitElement, html } from "lit";
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import styles from "./element.css?lit";
+import { pathToLocale } from "./utils.js";
 
 export class MDNNotFound extends L10nMixin(LitElement) {
   // Need location (not available server-side).
@@ -67,7 +68,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
               </p>
             </div>`;
           } else {
-            const locale = location.pathname.split("/").at(1);
+            const locale = pathToLocale(location.pathname);
             const locationParts = location.pathname
               .split("/")
               .filter((part) => part && ![locale, "docs"].includes(part));
