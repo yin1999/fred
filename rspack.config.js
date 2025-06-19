@@ -27,6 +27,7 @@ const common = {
   output: {
     module: true,
     chunkFormat: "module",
+    assetModuleFilename: "[name].[hash][ext]",
   },
   experiments: {
     outputModule: true,
