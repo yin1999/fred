@@ -30,14 +30,7 @@ import { ServerComponent } from "../server/index.js";
  * @returns {context is DocParentsContext}
  */
 function hasDocParents(context) {
-  return [
-    "Doc",
-    "CurriculumModule",
-    "CurriculumLanding",
-    "CurriculumOverview",
-    "CurriculumAbout",
-    "CurriculumDefault",
-  ].includes(context.renderer);
+  return "doc" in context && "parents" in context.doc;
 }
 
 /**
@@ -46,13 +39,7 @@ function hasDocParents(context) {
  * @returns {context is DirectParentsContext}
  */
 function hasDirectParents(context) {
-  return [
-    "GenericDoc",
-    "SpaObservatoryLanding",
-    "SpaObservatoryAnalyze",
-    "GenericAbout",
-    "GenericCommunity",
-  ].includes(context.renderer);
+  return "parents" in context;
 }
 
 export class Breadcrumbs extends ServerComponent {
