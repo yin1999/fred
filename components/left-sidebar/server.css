@@ -68,6 +68,8 @@
 
     padding: 0.25em 0.5em; /* Keep in sync with `.reference-toc a` */
 
+    font-style: normal;
+
     background-color: var(--color-background-blue);
     border-left: 2px solid var(--color-blue-50);
   }
