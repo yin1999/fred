@@ -43,20 +43,22 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
           id="language-switcher__dropdown"
         >
           <ul class="language-switcher__list">
-            ${translations.map(
-              (translation) => html`
-                <li>
-                  <a
-                    class="language-switcher__option"
-                    href=${url.replace(
-                      `/${locale}/`,
-                      `/${translation.locale}/`,
-                    )}
-                    >${translation.native}</a
-                  >
-                </li>
-              `,
-            )}
+            ${translations
+              .sort((a, b) => a.locale.localeCompare(b.locale))
+              .map(
+                (translation) => html`
+                  <li>
+                    <a
+                      class="language-switcher__option"
+                      href=${url.replace(
+                        `/${locale}/`,
+                        `/${translation.locale}/`,
+                      )}
+                      >${translation.native}</a
+                    >
+                  </li>
+                `,
+              )}
           </ul>
         </div>
       </mdn-dropdown>
