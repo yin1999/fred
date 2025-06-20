@@ -28,7 +28,7 @@
 
     color: inherit;
 
-    box-shadow: -2px 0 0 var(--color-border-secondary);
+    box-shadow: -2px 0 0 var(--color-border-primary);
 
     &:not(:hover) {
       text-decoration: none;
