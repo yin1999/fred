@@ -97,7 +97,7 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
                   <button
                     slot="button"
                     class="user-menu__button"
-                    title=${this.l10n("user_menu")}
+                    title=${this.l10n("user-menu")}
                   >
                     <img width="34" height="34" src=${user.avatarUrl} />
                   </button>

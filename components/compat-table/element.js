@@ -817,20 +817,20 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     switch (status.isSupported) {
       case "yes": {
         title = this.l10n("compat-support-full")`Full support`;
-        label = status.label || this.l10n("compat_yes")`Yes`;
+        label = status.label || this.l10n("compat-yes")`Yes`;
         break;
       }
 
       case "partial": {
         title = this.l10n("compat-support-partial")`Partial support`;
-        label = status.label || this.l10n("compat_partial")`Partial`;
+        label = status.label || this.l10n("compat-partial")`Partial`;
         break;
       }
 
       case "removed-partial": {
         if (timeline) {
           title = this.l10n("compat-support-partial")`Partial support`;
-          label = status.label || this.l10n("compat_partial")`Partial`;
+          label = status.label || this.l10n("compat-partial")`Partial`;
         } else {
           title = this.l10n("compat-support-no")`No support`;
           label = status.label || this.l10n("compat-no")`No`;
