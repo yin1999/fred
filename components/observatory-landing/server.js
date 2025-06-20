@@ -40,7 +40,7 @@ export class ObservatoryLanding extends ServerComponent {
         </section>
         <section class="obs-landing-about">
           <section class="obs-landing-about__content">
-            <h2>${context.l10n("obs_about_title")`About the HTTP Observatory`}</h2>
+            <h2>${context.l10n("obs-about-title")`About the HTTP Observatory`}</h2>
             <div class="about-copy">
               <figure class="assessment">
                 ${assessmentSvg}
