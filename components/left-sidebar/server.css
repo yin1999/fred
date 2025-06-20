@@ -96,7 +96,7 @@
 
   background: linear-gradient(
     to bottom,
-    var(--color-background-primary) 0 calc(100% - 2rem),
+    var(--color-background-page) 0 calc(100% - 2rem),
     transparent 100%
   );
 }
