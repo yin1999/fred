@@ -1,5 +1,6 @@
 import { html } from "lit";
 
+import { HeadingAnchor } from "../heading-anchor/server.js";
 import { ServerComponent } from "../server/index.js";
 
 import svg from "./article-footer.svg?lit";
@@ -21,7 +22,11 @@ export class ArticleFooter extends ServerComponent {
     >
       <div class="article-footer__inner">
         <div class="article-footer__svg-container">${svg}</div>
-        <h2 id="article_footer">${context.l10n`Help improve MDN`}</h2>
+        ${HeadingAnchor.render(
+          2,
+          "article_footer",
+          context.l10n`Help improve MDN`,
+        )}
         <mdn-content-feedback locale=${context.locale}></mdn-content-feedback>
         ${Contribute(context)} ${LastModified(context)} ${Links(context)}
       </div>
