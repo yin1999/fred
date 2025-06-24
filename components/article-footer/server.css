@@ -48,6 +48,8 @@
 
     width: 20%;
     height: auto;
+
+    color: var(--color-background-secondary);
   }
 }
 
