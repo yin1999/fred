@@ -15,14 +15,17 @@ export class ArticleFooter extends ServerComponent {
       return;
     }
 
-    return html`<aside class="article-footer">
+    return html`<section
+      class="content-section article-footer"
+      aria-labelledby="article_footer"
+    >
       <div class="article-footer__inner">
         <div class="article-footer__svg-container">${svg}</div>
         <h2 id="article_footer">${context.l10n`Help improve MDN`}</h2>
         <mdn-content-feedback locale=${context.locale}></mdn-content-feedback>
         ${Contribute(context)} ${LastModified(context)} ${Links(context)}
       </div>
-    </aside>`;
+    </section>`;
   }
 }
 
