@@ -21,6 +21,12 @@
     .pagination__link {
       padding: 0 0.75rem;
       color: var(--text-primary);
+
+      svg {
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+      }
     }
 
     .pagination__link--active {

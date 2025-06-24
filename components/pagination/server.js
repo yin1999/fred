@@ -1,5 +1,8 @@
 import { html, nothing } from "lit";
 
+
+import arrowLeftIcon from "../icon/arrow-left.svg?lit";
+import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { ServerComponent } from "../server/index.js";
 
 export class Pagination extends ServerComponent {
@@ -112,9 +115,9 @@ export class Pagination extends ServerComponent {
 
     return html`
       <li class=${`pagination__item pagination__item--${prevNext}`}>
-        <a href=${url} class="pagination__link" aria-label=${label}>
-          ${prevNext === "next" ? "→" : "←"}
-        </a>
+        <a href=${url} class="pagination__link" aria-label=${label}
+          >${prevNext === "prev" ? arrowLeftIcon : arrowRightIcon}</a
+        >
       </li>
     `;
   }
