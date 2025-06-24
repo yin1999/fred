@@ -16,11 +16,7 @@
     content: "#";
   }
 
-  &:not(:hover, :focus) {
-    text-decoration: none;
-
-    &::before {
-      visibility: hidden;
-    }
+  &:not(:hover, :focus)::before {
+    visibility: hidden;
   }
 }
