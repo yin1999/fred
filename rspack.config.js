@@ -30,6 +30,37 @@ const OPTIMIZATIONS = {
   },
 };
 
+/**
+ * @param {boolean} lit
+ */
+const postcssLoader = (lit = false) => ({
+  loader: "postcss-loader",
+  options: {
+    postcssOptions: {
+      plugins: [
+        [
+          "@csstools/postcss-global-data",
+          {
+            files: [
+              "./components/media/index.css",
+              "./components/layout/global.css",
+            ],
+          },
+        ],
+        ["postcss-custom-media"],
+        [
+          "postcss-preset-env",
+          {
+            stage: 2,
+            minimumVendorImplementations: 2,
+          },
+        ],
+        ...(isProd && lit ? [["cssnano"]] : []),
+      ],
+    },
+  },
+});
+
 /** @type {import("@rspack/core").RspackOptions} */
 const common = {
   mode: isProd ? "production" : "development",
@@ -108,10 +139,11 @@ const common = {
             options: {
               exportType: "string",
               importLoaders: 1,
+              // TODO: extract inline source map into external .map file in prod
+              sourceMap: !isProd,
             },
           },
-          // TODO: compress css in prod
-          "postcss-loader",
+          postcssLoader(true),
         ],
       },
     ],
@@ -190,7 +222,7 @@ const clientAndLegacyCommon = {
               importLoaders: 1,
             },
           },
-          "postcss-loader",
+          postcssLoader(),
         ],
       },
     ],
@@ -378,7 +410,7 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
               exportType: "css-style-sheet",
             },
           },
-          "postcss-loader",
+          postcssLoader(),
           "resolve-url-loader",
           {
             loader: "sass-loader",
@@ -400,7 +432,7 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
               importLoaders: 3,
             },
           },
-          "postcss-loader",
+          postcssLoader(),
           "resolve-url-loader",
           {
             loader: "sass-loader",

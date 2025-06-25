@@ -24,21 +24,6 @@
     "Firefox ESR",
     "not dead"
   ],
-  "postcss": {
-    "plugins": {
-      "@csstools/postcss-global-data": {
-        "files": [
-          "./components/media/index.css",
-          "./components/layout/global.css"
-        ]
-      },
-      "postcss-custom-media": {},
-      "postcss-preset-env": {
-        "stage": 2,
-        "minimumVendorImplementations": 2
-      }
-    }
-  },
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-html": "^6.4.9",
