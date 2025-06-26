@@ -74,7 +74,10 @@ export class OuterLayout extends ServerComponent {
           />
           <title>${context.pageTitle || "MDN"}</title>
           ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
-          ${styles.map((path) => html`<link rel="stylesheet" href=${path} />`)}
+          ${styles.map(
+            (path) =>
+              html`<link rel="stylesheet" href=${path} fetchpriority="high" />`,
+          )}
           ${preloadFonts.map(
             (path) =>
               html`<link
@@ -83,6 +86,7 @@ export class OuterLayout extends ServerComponent {
                 as="font"
                 type="font/woff2"
                 crossorigin="anonymous"
+                fetchpriority="low"
               />`,
           )}
           ${scripts?.map(
