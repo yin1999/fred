@@ -30,8 +30,12 @@ export class ServerComponent {
     if (!this.stylesInHead && compilationStats) {
       const styles = stylesForComponents([this.name], compilationStats.client);
       if (styles.length > 0) {
+        // render block in Gecko and WebKit with empty script tag following link
+        // https://github.com/chrishtr/rendering/blob/master/stylesheet-loading-behavior.md
         return html`${styles.map(
-          (path) => html`<link rel="stylesheet" href=${path} />`,
+          (path) =>
+            html`<link rel="stylesheet" href=${path} fetchpriority="high" />
+              <script></script>`,
         )}${res}`;
       }
     }
