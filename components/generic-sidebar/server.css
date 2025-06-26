@@ -1,52 +1,81 @@
 .generic-sidebar {
+  --color-accent: var(--color-blue-50);
+  --color-background-accent: var(--color-background-blue);
+  --color-border-items: light-dark(var(--color-gray-80), var(--color-gray-20));
+
   position: sticky;
   top: var(--sticky-header-height);
+  margin-bottom: 2rem;
 
-  h4 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: normal;
-  }
+  .generic-sidebar__header {
+    h2 {
+      margin: 0 0 1rem;
 
-  summary {
-    padding: 0.75rem 1rem;
-    cursor: pointer;
+      font-size: var(--font-size-large);
+      font-weight: 400;
 
-    &:hover {
-      background-color: var(--color-background-secondary);
+      line-height: 1.2;
+
+      color: var(--color-text-secondary);
+
+      letter-spacing: 1.5px;
     }
   }
 
-  ol {
-    padding: 0;
-    margin: 0;
+  .generic-sidebar__list {
+    padding-left: 0;
+    font-size: var(--font-size-small);
     list-style: none;
   }
 
-  a {
-    display: inline flex;
+  .generic-sidebar__item {
+    margin: 0;
+  }
 
-    column-gap: 0.5rem;
-    align-items: baseline;
+  .generic-sidebar__link {
+    display: inline-block;
 
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
 
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
 
     text-decoration: none;
 
-    &:hover {
-      color: var(--color-link-normal);
+    border-left: 2px solid var(--color-border-items);
+
+    &:hover,
+    &:active {
+      color: var(--color-accent);
     }
 
     &[aria-current="true"] {
-      display: flex;
-      background-color: var(--color-background-blue);
-      border-left: 2px solid var(--color-blue-50);
+      font-weight: 600;
+
+      background-color: var(--color-background-accent);
+      border-left: 2px solid var(--color-accent);
+      border-top-right-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
     }
   }
 
-  svg {
-    flex-shrink: 0;
+  em {
+    align-items: baseline;
+
+    padding: 0.25em 0;
+
+    font-style: normal;
+
+    background-color: var(--color-background-accent);
+    border-left: 2px solid var(--color-accent);
   }
+}
+
+.generic-sidebar--plus {
+  --color-accent: var(--color-text-red);
+  --color-background-accent: var(--color-background-red);
+}
+
+.generic-sidebar--observatory {
+  --color-accent: var(--color-text-purple);
+  --color-background-accent: var(--color-background-purple);
 }
