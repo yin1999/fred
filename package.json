@@ -1,5 +1,5 @@
 {
-  "name": "fred",
+  "name": "@mdn/fred",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -9,9 +9,13 @@
     "preview": "NODE_ENV=production node ./server.js",
     "ssr": "node build/ssr.js",
     "tsc": "tsc",
-    "rari": "rari"
+    "rari": "rari",
+    "prepack": "npm run build"
   },
-  "author": "Florian Dieminger",
+  "bin": {
+    "fred-server": "scripts/server.js"
+  },
+  "author": "MDN Web Docs",
   "license": "MPL-2.0",
   "description": "",
   "browserslist": [
