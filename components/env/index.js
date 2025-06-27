@@ -15,6 +15,8 @@ export const FXA_SIGNOUT_URL = parseString(
 export const GLEAN_ENABLED = parseBool("GLEAN_ENABLED", false);
 export const GLEAN_CHANNEL = parseString("GLEAN_CHANNEL", "dev");
 
+export const WRITER_MODE = parseBool("WRITER_MODE", false);
+
 /**
  * @param {string} name
  * @param {boolean} fallback
