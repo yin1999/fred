@@ -1,7 +1,13 @@
 {
   "name": "@mdn/fred",
   "version": "0.0.5",
+  "repository": "https://github.com/mdn/fred",
+  "license": "MPL-2.0",
+  "author": "MDN Web Docs",
   "type": "module",
+  "bin": {
+    "fred-server": "scripts/server.js"
+  },
   "scripts": {
     "start": "node --env-file=.env scripts/server.js",
     "dev": "node --env-file=.env ./server.js",
@@ -12,12 +18,6 @@
     "rari": "rari",
     "prepack": "npm run build"
   },
-  "bin": {
-    "fred-server": "scripts/server.js"
-  },
-  "author": "MDN Web Docs",
-  "license": "MPL-2.0",
-  "description": "",
   "browserslist": [
     "Chrome > 0 and last 2.5 years",
     "ChromeAndroid > 0 and last 2.5 years",
