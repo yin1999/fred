@@ -14,6 +14,7 @@
     "build": "rspack build",
     "preview": "NODE_ENV=production node ./server.js",
     "ssr": "node build/ssr.js",
+    "test": "lefthook run --force pre-push",
     "tsc": "tsc",
     "rari": "rari",
     "prepack": "npm run build"
