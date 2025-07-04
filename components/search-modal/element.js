@@ -215,7 +215,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                           .replaceAll("_", " ")
                           .split("/")
                           .slice(1)
-                          .filter((p) => !["docs", this.locale].includes(p))
+                          .filter(
+                            (p) => ![this.locale, "docs", "Web"].includes(p),
+                          )
                           .join(" / ")}</span
                       >
                     </a>
