@@ -212,6 +212,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                       >
                       <span class="slug"
                         >${url
+                          .replaceAll("_", " ")
                           .split("/")
                           .slice(1)
                           .filter((p) => !["docs", this.locale].includes(p))
