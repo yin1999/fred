@@ -4,6 +4,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { Button } from "../button/server.js";
 import { ContentSection } from "../content-section/server.js";
+import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -37,8 +38,10 @@ export class ContributorSpotlight extends ServerComponent {
             ${context.l10n`Our constant quest for innovation starts here, with you. Every part of MDN (docs, demos and the site itself) springs from our incredible open community of developers. Please join us!`}
           </p>
           ${Button.render(context, {
-            label: `${context.l10n} →`,
+            label: `${context.l10n}`,
             href: `/${context.locale}/community/`,
+            icon: arrowRightIcon,
+            iconPosition: "after",
             variant: "primary",
             action: "positive",
           })}
