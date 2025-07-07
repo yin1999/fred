@@ -62,8 +62,6 @@
     }
 
     &.prev {
-      grid-column: 1;
-      justify-self: start;
       margin-right: auto;
 
       a::before {
@@ -71,20 +69,13 @@
       }
     }
 
-    &.menu {
-      grid-column: 2;
-
-      justify-self: center;
-
+    &.prev ~ &.menu {
       margin-right: auto;
       margin-left: auto;
-
       text-align: center;
     }
 
     &.next {
-      grid-column: 3;
-      justify-self: end;
       margin-left: auto;
 
       a::after {
