@@ -64,7 +64,7 @@ export class OuterLayout extends ServerComponent {
     return html`
       <!doctype html>
       <html
-        lang="en"
+        lang=${context.locale}
         style="color-scheme: light dark;"
         data-renderer=${context.renderer}
         data-noads=${ifDefined(WRITER_MODE ? "enabled" : undefined)}
