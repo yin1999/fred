@@ -1,8 +1,11 @@
 /* Tutorial nav. */
 .prev-next {
-  display: grid;
+  display: flex;
 
-  grid-template-columns: 1fr auto 1fr;
+  flex-wrap: wrap;
+
+  gap: 1rem;
+  justify-content: space-between;
 
   width: 100%;
 
@@ -16,6 +19,7 @@
 
   a {
     color: var(--color-link-normal) !important;
+    text-wrap: balance;
 
     &:visited {
       color: var(--color-link-visited) !important;
@@ -24,7 +28,11 @@
 
   li {
     display: flex;
+
+    flex-wrap: nowrap;
+
     place-items: center;
+
     background: none;
 
     .button {
@@ -56,6 +64,7 @@
     &.prev {
       grid-column: 1;
       justify-self: start;
+      margin-right: auto;
 
       a::before {
         mask-image: url("../icon/arrow-left.svg");
@@ -64,12 +73,19 @@
 
     &.menu {
       grid-column: 2;
+
       justify-self: center;
+
+      margin-right: auto;
+      margin-left: auto;
+
+      text-align: center;
     }
 
     &.next {
       grid-column: 3;
       justify-self: end;
+      margin-left: auto;
 
       a::after {
         mask-image: url("../icon/arrow-right.svg");
