@@ -7,7 +7,12 @@
 
     margin-left: 0.25em;
 
-    content: "" / " (external)";
+    /*
+      Note: Content replacement is a zero-width space to expose the alt text accessbility tree.
+      See: https://bugzilla.mozilla.org/show_bug.cgi?id=1976574
+    */
+    /* stylelint-disable-next-line no-irregular-whitespace */
+    content: "​" / " (external)";
 
     background-color: currentcolor;
 
