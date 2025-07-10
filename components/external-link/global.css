@@ -8,11 +8,10 @@
     margin-left: 0.25em;
 
     /*
-      Note: Content replacement is a zero-width space to expose the alt text accessbility tree.
+      Unicode zero width space as `<content replacement>` to expose the alt text in the a11y tree.
       See: https://bugzilla.mozilla.org/show_bug.cgi?id=1976574
     */
-    /* stylelint-disable-next-line no-irregular-whitespace */
-    content: "​" / " (external)";
+    content: "\200b" / " (external)";
 
     background-color: currentcolor;
 
