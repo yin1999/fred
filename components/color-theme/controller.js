@@ -22,19 +22,27 @@ export class ThemeController {
 
   /** @param {Event} [event] */
   _updateTheme(event) {
-    const value = (() => {
-      switch (event instanceof CustomEvent && event.detail) {
-        case "light":
-          return "light";
-        case "dark":
-          return "dark";
-        default:
-          return this._matchMedia?.matches ? "dark" : "light";
-      }
-    })();
+    let value = event instanceof CustomEvent && this._lightOrDark(event.detail);
+    value ||= this._lightOrDark(document.documentElement.style.colorScheme);
+    value ||= this._matchMedia?.matches ? "dark" : "light";
     const oldValue = this.value;
     this.value = value;
     this.#host.requestUpdate("ThemeController.value", oldValue);
+  }
+
+  /**
+   * @param {any} value
+   * @returns {"light" | "dark" | undefined}
+   */
+  _lightOrDark(value) {
+    switch (value) {
+      case "light":
+        return "light";
+      case "dark":
+        return "dark";
+      default:
+        return;
+    }
   }
 
   hostConnected() {

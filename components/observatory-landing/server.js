@@ -15,7 +15,7 @@ import { Feedback } from "./feedback.js";
 
 export class ObservatoryLanding extends ServerComponent {
   /**
-   * @param {import("@fred").Context<import("@rari").SpaPage>} context
+   * @param {import("@fred").Context<import("@rari").SPAPage>} context
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
@@ -23,7 +23,7 @@ export class ObservatoryLanding extends ServerComponent {
       context,
       html`
     <div class="obs-layout obs-layout--landing">
-      <div class="obs-layout__content obs-layout__content--landing">
+      <div id="content" class="obs-layout__content obs-layout__content--landing">
         <section class="obs-landing-top">
           <section class="obs-landing-top__form">
             <h1>

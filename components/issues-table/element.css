@@ -37,8 +37,8 @@ td {
 }
 
 th {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
 
   text-align: left;
 
@@ -60,6 +60,14 @@ td > div {
 
   gap: 1rem 1.5rem;
   align-items: baseline;
+}
+
+a {
+  color: var(--color-link-normal);
+}
+
+a:visited {
+  color: var(--color-link-visited);
 }
 
 .label {

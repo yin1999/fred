@@ -20,6 +20,7 @@ import "../placement-sidebar/element.js";
 
 /**
  * @import { MDNPlayController } from "../play-controller/element.js";
+ * @import { MDNModal } from "../modal/element.js";
  * @import { Ref } from "lit/directives/ref.js";
  */
 
@@ -28,13 +29,24 @@ const SESSION_KEY = "playground-session-code";
 export class MDNPlayground extends L10nMixin(LitElement) {
   static styles = styles;
 
+  static properties = {
+    _gistID: { state: true },
+  };
+
   constructor() {
     super();
     this._permalink = "";
+    this._autoRun = true;
+    /** @type {string | undefined} */
+    this._gistId = undefined;
   }
 
   /** @type {Ref<MDNPlayController>} */
   _controller = createRef();
+  /** @type {Ref<MDNModal>} */
+  _shareModal = createRef();
+  /** @type {Ref<MDNModal>} */
+  _reportModal = createRef();
 
   _user = new Task(this, {
     task: async () => {
@@ -50,12 +62,16 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     const controller = this._controller.value;
     if (controller) {
       controller.run();
-      controller.runOnChange = true;
+      if (!this._autoRun) {
+        this._autoRun = true;
+        controller.runOnChange = true;
+        this._storeSession();
+      }
     }
   }
 
   _share() {
-    this.shadowRoot?.querySelector("mdn-modal")?.showModal();
+    this._shareModal.value?.showModal();
   }
 
   _clear() {
@@ -138,17 +154,23 @@ ${"```"}`,
         srcPrefix,
         initialCode,
         code,
+        autoRun: this._autoRun,
       };
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
     }
   }
 
   _loadSession() {
-    const { srcPrefix, initialCode, code } = stateToSession(
+    const { srcPrefix, initialCode, code, autoRun } = stateToSession(
       JSON.parse(sessionStorage.getItem(SESSION_KEY) || "{}"),
     );
     const controller = this._controller.value;
     if (controller) {
+      if (autoRun === false) {
+        this._autoRun = false;
+        controller.runOnStart = false;
+        controller.runOnChange = false;
+      }
       controller.srcPrefix = srcPrefix;
       controller.initialCode = initialCode;
       controller.code = code;
@@ -162,13 +184,20 @@ ${"```"}`,
       const params = new URLSearchParams(location.search);
       const idParam = params.get("id");
       const stateParam = params.get("state");
+      const srcPrefixParam = params.get("srcPrefix");
 
-      const { srcPrefix, code } =
+      if (idParam) {
+        this._gistId = idParam;
+      }
+
+      const { srcPrefix: srcPrefixState, code } =
         (await (idParam
           ? this._sessionFromApi(idParam)
           : stateParam
             ? this._sessionFromState(stateParam)
             : undefined)) || {};
+
+      const srcPrefix = srcPrefixParam || srcPrefixState;
 
       if (
         srcPrefix !== undefined &&
@@ -176,6 +205,14 @@ ${"```"}`,
         (controller.srcPrefix !== srcPrefix ||
           !compareCode(controller.initialCode, code))
       ) {
+        if (
+          !opener?.location?.origin ||
+          opener?.location?.origin !== location.origin
+        ) {
+          this._autoRun = false;
+          controller.runOnStart = false;
+          controller.runOnChange = false;
+        }
         controller.srcPrefix = srcPrefix;
         controller.initialCode = code;
         controller.code = code;
@@ -214,6 +251,28 @@ ${"```"}`,
     this.requestUpdate();
   }
 
+  _reportOpen() {
+    this._reportModal.value?.showModal();
+  }
+
+  _reportCancel() {
+    this._reportModal.value?.close();
+  }
+
+  async _reportSubmit() {
+    await fetch("/api/v1/play/flag", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: this._gistId,
+        reason: this._reportModal.value?.querySelector("textarea")?.value,
+      }),
+    });
+    this._reportModal.value?.close();
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._user.run();
@@ -227,7 +286,11 @@ ${"```"}`,
 
     return html`
       <div class="wrapper">
-        <mdn-play-controller ${ref(this._controller)}>
+        <mdn-play-controller
+          ${ref(this._controller)}
+          run-on-start
+          run-on-change
+        >
           <section>
             <aside>
               <h1>${this.l10n`Playground`}</h1>
@@ -289,6 +352,11 @@ ${"```"}`,
             </details>
           </section>
           <section class="playground__runner-console">
+            ${this._gistId
+              ? html`<mdn-button @click=${this._reportOpen} variant="plain">
+                  Seeing something inappropriate?
+                </mdn-button>`
+              : nothing}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n`Console`}</div>
@@ -298,7 +366,7 @@ ${"```"}`,
           <mdn-placement-sidebar horizontal></mdn-placement-sidebar>
         </mdn-play-controller>
       </div>
-      <mdn-modal>
+      <mdn-modal ${ref(this._shareModal)} class="share">
         <section>
           <h2>${this.l10n`Share Markdown`}</h2>
           <mdn-button variant="secondary" @click=${this._copyMarkdown}
@@ -326,6 +394,21 @@ ${"```"}`,
                     >`
                 : html`<mdn-login-button></mdn-login-button>`,
           })}
+        </section>
+      </mdn-modal>
+      <mdn-modal ${ref(this._reportModal)} class="report">
+        <section>
+          <p>Report this malicious or inappropriate shared playground.</p>
+          <label>
+            Can you please share some details on what's wrong with this content:
+            <textarea></textarea>
+          </label>
+        </section>
+        <section>
+          <mdn-button variant="secondary" @click=${this._reportCancel}
+            >Cancel</mdn-button
+          >
+          <mdn-button @click=${this._reportSubmit}>Report</mdn-button>
         </section>
       </mdn-modal>
     `;

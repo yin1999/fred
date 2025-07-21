@@ -2,6 +2,7 @@ import { html, nothing } from "lit";
 
 import { Breadcrumbs } from "../breadcrumbs/server.js";
 
+import { GenericSidebar } from "../generic-sidebar/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class BreadcrumbsBar extends ServerComponent {
@@ -14,13 +15,9 @@ export class BreadcrumbsBar extends ServerComponent {
     )
       ? "dark"
       : "";
-    const toggleSidebar = ["Doc", "CurriculumModule"].includes(context.renderer)
-      ? html`<mdn-toggle-sidebar></mdn-toggle-sidebar>`
-      : nothing;
-
     return html`
       <div class="breadcrumbs-bar" data-scheme=${colorScheme}>
-        ${toggleSidebar} ${Breadcrumbs.render(context)}
+        ${this._renderToggleSidebar(context)} ${Breadcrumbs.render(context)}
         ${context.renderer === "Doc"
           ? html`<mdn-collection-save-button
               doc-url=${context.doc.mdn_url}
@@ -28,19 +25,55 @@ export class BreadcrumbsBar extends ServerComponent {
             ></mdn-collection-save-button>`
           : nothing}
         <mdn-color-theme></mdn-color-theme>
-        ${"doc" in context
-          ? html`<mdn-language-switcher
-              locale=${context.locale}
-              native=${context.doc.native}
-              translations=${JSON.stringify(
-                "other_translations" in context.doc
-                  ? context.doc.other_translations
-                  : [],
-              )}
-              url=${context.url}
-            ></mdn-language-switcher>`
-          : nothing}
+        ${this._renderLanguageSwitcher(context)}
       </div>
     `;
+  }
+
+  /**
+   * @param {import("@fred").Context} context
+   */
+  _renderToggleSidebar(context) {
+    const sidebar = Boolean(
+      (() => {
+        switch (context.renderer) {
+          case "Doc":
+            return context.doc.sidebarHTML;
+          case "CurriculumModule":
+            return context.doc.sidebar;
+          case "GenericDoc":
+            return GenericSidebar.sidebarName(context);
+          default:
+            return;
+        }
+      })(),
+    );
+    return sidebar ? html`<mdn-toggle-sidebar></mdn-toggle-sidebar>` : nothing;
+  }
+
+  /**
+   * @param {import("@fred").Context} context
+   */
+  _renderLanguageSwitcher(context) {
+    const translations =
+      "other_translations" in context
+        ? context.other_translations
+        : "doc" in context && "other_translations" in context.doc
+          ? context.doc.other_translations
+          : [];
+    const native = translations.find(
+      (t) => t.locale === context.locale,
+    )?.native;
+
+    if (!native) {
+      return nothing;
+    }
+
+    return html`<mdn-language-switcher
+      locale=${context.locale}
+      native=${native}
+      translations=${JSON.stringify(translations)}
+      url=${context.url}
+    ></mdn-language-switcher>`;
   }
 }

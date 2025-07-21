@@ -1,6 +1,7 @@
 export interface SearchResponse {
   metadata: SearchMetadata;
   documents: SearchDocument[];
+  suggestions: SearchSuggestion[];
 }
 
 export type SearchHighlight = {
@@ -26,6 +27,8 @@ export type SearchTotal = {
 export interface SearchMetadata {
   took_ms: number;
   total: SearchTotal;
+  page: number;
+  size: 10;
 }
 
 export interface SearchSuggestion {

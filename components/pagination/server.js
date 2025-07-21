@@ -1,7 +1,5 @@
 import { html, nothing } from "lit";
 
-import arrowLeftIcon from "../icon/arrow-left.svg?lit";
-import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { ServerComponent } from "../server/index.js";
 
 export class Pagination extends ServerComponent {
@@ -30,7 +28,7 @@ export class Pagination extends ServerComponent {
 
     return html`
       <nav class="pagination" aria-label=${context.l10n`Pagination`}>
-        <ul class="pagination__list">
+        <ul>
           ${this.renderPrevNextButton(
             "prev",
             currentPage - 1,
@@ -113,10 +111,8 @@ export class Pagination extends ServerComponent {
     }[prevNext]();
 
     return html`
-      <li class=${`pagination__item pagination__item--${prevNext}`}>
-        <a href=${url} class="pagination__link" aria-label=${label}
-          >${prevNext === "prev" ? arrowLeftIcon : arrowRightIcon}</a
-        >
+      <li>
+        <a href=${url} data-type=${prevNext} aria-label=${label}></a>
       </li>
     `;
   }
@@ -132,8 +128,8 @@ export class Pagination extends ServerComponent {
     return pageNumbers.map((pageNumber) => {
       if (pageNumber === "...") {
         return html`
-          <li class="pagination__item pagination__item--ellipsis">
-            <span class="pagination__ellipsis">…</span>
+          <li>
+            <span>…</span>
           </li>
         `;
       }
@@ -142,12 +138,9 @@ export class Pagination extends ServerComponent {
       const url = isCurrentPage ? "#" : pageUrl(pageNumber);
 
       return html`
-        <li class="pagination__item">
+        <li>
           <a
             href=${url}
-            class="pagination__link ${isCurrentPage
-              ? "pagination__link--active"
-              : ""}"
             aria-current=${isCurrentPage ? "page" : "false"}
             aria-label=${isCurrentPage
               ? context.l10n("pagination-current")

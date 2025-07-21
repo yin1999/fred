@@ -1,7 +1,8 @@
 import { html, nothing } from "lit";
 
-import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
+import { AuthorDateReadTime } from "../blog/utils.js";
 import { Button } from "../button/server.js";
+import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { PageLayout } from "../page-layout/server.js";
 import { Pagination } from "../pagination/server.js";
 import { ServerComponent } from "../server/index.js";
@@ -13,12 +14,22 @@ import { ServerComponent } from "../server/index.js";
  * @param {string} params.slug
  * @param {number} params.width
  * @param {number} params.height
+ * @param {boolean} params.lazyLoad
  */
-export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
-  const src = `./${slug}/${image.file}`;
-  return html`<figure class="blog-image">
-    <a href="./${slug}/">
-      <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
+export function BlogIndexImageFigure(
+  _context,
+  { image, slug, width, height, lazyLoad },
+) {
+  const src = `/en-US/blog/${slug}/${image.file}`;
+  return html`<figure class="blog-post-preview__figure">
+    <a href="/en-US/blog/${slug}/">
+      <img
+        alt=${image.alt || ""}
+        src=${src}
+        width=${width}
+        height=${height}
+        loading=${lazyLoad ? "lazy" : "eager"}
+      />
     </a>
   </figure>`;
 }
@@ -27,31 +38,35 @@ export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
  *
  * @param {import("@fred").Context} context
  * @param {import("@rari").BlogMeta} blogMeta
+ * @param {boolean} lazyLoad
  */
-function PostPreview(context, blogMeta) {
-  return html`<article class="blog-index__article">
-    <header>
+function PostPreview(context, blogMeta, lazyLoad = false) {
+  return html`<article class="blog-post-preview">
+    <header data-x="bla" class="blog-post-preview__header">
       ${BlogIndexImageFigure(context, {
         image: blogMeta.image,
         slug: blogMeta.slug,
-        width: 200,
-        height: 200,
+        width: 1200,
+        height: 630,
+        lazyLoad,
       })}
       <h2>
-        <a href="./${blogMeta.slug}/">${blogMeta.title}</a>
+        <a href="/en-US/blog/${blogMeta.slug}/">${blogMeta.title}</a>
       </h2>
-      <div class="blog-index__author-read-time">
-        ${AuthorDateReadTime(context, { blogMeta })}
+      <div class="blog-post-preview__author-read-time">
+        ${AuthorDateReadTime(context, blogMeta, lazyLoad)}
       </div>
     </header>
-    <p>${blogMeta.description}</p>
-    <footer>
+    <p class="blog-post-preview__description">${blogMeta.description}</p>
+    <footer class="blog-post-preview__footer">
       ${blogMeta.sponsored
-        ? html`<span class="sponsored">Sponsored</span>`
+        ? html`<span class="blog-post-preview__sponsored">Sponsored</span>`
         : nothing}
       ${Button.render(context, {
-        label: "Read more →",
-        href: `./${blogMeta.slug}/`,
+        label: "Read more",
+        href: `/en-US/blog/${blogMeta.slug}/`,
+        icon: arrowRightIcon,
+        iconPosition: "after",
       })}
     </footer>
   </article>`;
@@ -60,32 +75,33 @@ function PostPreview(context, blogMeta) {
 export class BlogIndex extends ServerComponent {
   /**
    *
-   * @param {import("@fred").Context<import("@rari").BlogPage>} context
+   * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    const content = BlogContainer(
+    return PageLayout.render(
       context,
       html`
-        <div class="blog-index__main">
+        <div class="blog-index">
           <header class="blog-index__header">
-            <h1 class="mify">${context.l10n`Blog it better`}</h1>
+            <h1>${context.l10n`Blog it better`}</h1>
           </header>
-          <section class="blog-index__articles">
-            ${context.hyData?.posts.map((blogMeta) => {
-              return PostPreview(context, blogMeta);
+          <div class="blog-index__main">
+            <section class="blog-index__articles">
+              ${context.hyData?.posts.map((blogMeta, index) =>
+                PostPreview(context, blogMeta, index >= 2),
+              )}
+            </section>
+            ${Pagination.render(context, {
+              ...context.hyData?.pagination,
+              pageUrl: (page) =>
+                page === 1
+                  ? `/${context.locale}/blog/`
+                  : `/${context.locale}/blog/${page}/`,
             })}
-          </section>
-          ${Pagination.render(context, {
-            ...context.hyData?.pagination,
-            pageUrl: (page) =>
-              page === 1
-                ? `/${context.locale}/blog/`
-                : `/${context.locale}/blog/${page}/`,
-          })}
+          </div>
         </div>
       `,
     );
-    return PageLayout.render(context, content);
   }
 }

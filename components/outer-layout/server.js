@@ -1,7 +1,10 @@
 import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
+import { ROBOTS_GLOBAL_ALLOW, WRITER_MODE } from "../env/index.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
@@ -57,14 +60,21 @@ export class OuterLayout extends ServerComponent {
       )
       .filter((x) => x !== undefined);
 
+    const area =
+      context.path.split("/")[3]?.toLowerCase() === "learn_web_development"
+        ? "learn"
+        : undefined;
+
     // if you want to put some script inline, put it in entry.inline.js
     // and you'll get CSP generation: see the README
     return html`
       <!doctype html>
       <html
-        lang="en"
+        lang=${context.locale}
         style="color-scheme: light dark;"
         data-renderer=${context.renderer}
+        data-noads=${ifDefined(WRITER_MODE ? "enabled" : undefined)}
+        data-current-area=${ifDefined(area)}
       >
         <head>
           <meta charset="UTF-8" />
@@ -73,7 +83,7 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
+          ${unsafeHTML(`<script>${inlineScript}</script>`)}
           ${styles.map(
             (path) =>
               html`<link rel="stylesheet" href=${path} fetchpriority="high" />`,
@@ -92,9 +102,67 @@ export class OuterLayout extends ServerComponent {
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}
+          ${Favicon()} ${this._renderMeta(context)}
+          <link
+            rel="canonical"
+            href=${`https://developer.mozilla.org${context.url}`}
+          />
         </head>
         ${markup}
       </html>
     `;
+  }
+
+  /**
+   * @param {import("@fred").Context} context
+   */
+  _renderMeta(context) {
+    const noIndexing =
+      "doc" in context
+        ? context.doc.noIndexing
+        : "noIndexing" in context
+          ? context.noIndexing
+          : false;
+    const onlyFollow = "onlyFollow" in context ? context.onlyFollow : false;
+    const robots =
+      !ROBOTS_GLOBAL_ALLOW || noIndexing
+        ? "noindex, nofollow"
+        : onlyFollow
+          ? "noindex, follow"
+          : "";
+
+    const title =
+      ("doc" in context ? context.doc.pageTitle : context.pageTitle) ||
+      "MDN Web Docs";
+    const description =
+      ("pageDescription" in context
+        ? context.pageDescription
+        : "doc" in context && "summary" in context.doc
+          ? context.doc.summary
+          : "") ||
+      "The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.";
+
+    const entries = {
+      robots,
+      description,
+      "og:url": `https://developer.mozilla.org${context.url}`,
+      "og:title": title,
+      "og:locale": context.locale.replace("-", "_"),
+      "og:description": description,
+      "og:image":
+        "https://developer.mozilla.org/mdn-social-share.d893525a4fb5fb1f67a2.png",
+      "og:image:type": "image/png",
+      "og:image:height": "1080",
+      "og:image:width": "1920",
+      "og:image:alt":
+        "The MDN Web Docs logo, featuring a blue accent color, displayed on a solid black background.",
+      "og:site_name": "MDN Web Docs",
+      "twitter:card": "summary_large_image",
+      "twitter:creator": "MozDevNet",
+    };
+
+    return Object.entries(entries).map(([key, value]) =>
+      value ? html`<meta name=${key} content=${value} />` : nothing,
+    );
   }
 }

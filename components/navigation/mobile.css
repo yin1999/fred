@@ -1,6 +1,6 @@
 /* Mobile */
 
-@media (width <= 1006px) {
+@media (--screen-menu-hamburger) {
   :root {
     --top-nav-height: 2.9rem;
   }
@@ -8,8 +8,10 @@
   .navigation {
     display: grid;
 
-    grid-template-columns: 1fr min-content;
+    grid-template-columns: 1fr min-content min-content;
 
+    column-gap: 0.25rem;
+    align-items: center;
     justify-items: start;
 
     height: var(--top-nav-height);
@@ -32,6 +34,7 @@
   .navigation__popup {
     display: none;
     grid-column: 1 / -1;
+    justify-self: stretch;
   }
 
   .navigation[data-open="true"] .navigation__popup {
@@ -41,7 +44,7 @@
   /* Logo */
 
   .navigation__logo {
-    padding: 0.7rem;
+    padding: 0.2rem;
   }
 
   /* Button */
@@ -51,28 +54,53 @@
     margin: 0;
 
     cursor: pointer;
+    outline-offset: -2px;
 
     background-color: transparent;
     border: none;
-  }
 
-  .navigation__button-icon {
-    display: none;
-    fill: currentcolor;
-
-    [aria-expanded="false"] &[data-type="open"] {
-      display: block;
+    &:hover {
+      background-color: var(--color-background-secondary);
     }
 
-    [aria-expanded="true"] &[data-type="close"] {
+    &::before {
       display: block;
+
+      width: 1.5rem;
+      height: 1.5rem;
+
+      content: "";
+
+      background-color: currentcolor;
+
+      mask-size: cover;
+    }
+
+    &[aria-expanded="true"]::before {
+      mask-image: url("../icon/cancel.svg");
+    }
+
+    &[aria-expanded="false"]::before {
+      mask-image: url("../icon/menu.svg");
     }
   }
 
   /* Search */
 
   .navigation__search {
-    padding: 0.7rem;
-    border-top: 1px solid var(--color-border-secondary);
+    &[data-view="mobile"] {
+      display: block;
+    }
+
+    &[data-view="desktop"] {
+      display: none;
+    }
+  }
+
+  /* User menu */
+
+  mdn-user-menu {
+    display: block;
+    border-top: 1px solid var(--color-border-primary);
   }
 }

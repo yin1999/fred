@@ -12,6 +12,7 @@ import { StatsWriterPlugin } from "webpack-stats-plugin";
 
 import { CSPHashPlugin } from "./build/plugins/csp-hash.js";
 import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.js";
+import { override as svgoOverride } from "./svgo.config.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -80,11 +81,6 @@ const common = {
     new StatsWriterPlugin({
       fields: ["publicPath", "entrypoints"],
     }),
-    new rspack.EnvironmentPlugin({
-      FRED_PLAYGROUND_BASE_HOST: "mdnplay.dev",
-      GLEAN_ENABLED: "false",
-      GLEAN_CHANNEL: "dev",
-    }),
   ],
   optimization: {
     minimizer: [
@@ -152,17 +148,41 @@ const common = {
 
 /** @type {import("@rspack/core").RspackOptions} */
 const clientAndSsrCommon = {
+  plugins: [
+    new rspack.DefinePlugin({
+      "process.env": JSON.stringify({
+        ...Object.fromEntries(
+          Object.entries(process.env).filter(([key]) =>
+            key.startsWith("FRED_"),
+          ),
+        ),
+      }),
+    }),
+  ],
   module: {
     rules: [
       {
         test: /\.svg$/i,
-        loader: "svgo-loader",
         oneOf: [
           {
             resourceQuery: /lit/,
-            loader: "./build/loaders/lit-svg.js",
+            use: ["./build/loaders/lit-svg.js", "svgo-loader"],
           },
           {
+            loader: "svgo-loader",
+            options: svgoOverride(
+              {
+                cleanupIds: false,
+              },
+              [
+                {
+                  name: "cleanupIds",
+                  params: {
+                    preserve: ["light", "dark"],
+                  },
+                },
+              ],
+            ),
             type: "asset/resource",
           },
         ],

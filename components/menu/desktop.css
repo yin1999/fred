@@ -1,7 +1,9 @@
 /* Desktop */
 
-@media (width > 1006px) {
+@media (--screen-menu-full) {
   .menu {
+    --menu-button-padding: 0.5rem 0.7rem;
+
     position: relative;
     display: flex;
     align-items: center;
@@ -14,6 +16,8 @@
 
     column-gap: 0.125rem;
     align-items: center;
+
+    padding: var(--menu-button-padding);
 
     border: 1px solid transparent;
     border-bottom: none;
@@ -28,6 +32,12 @@
     &::after {
       margin-right: -4px;
     }
+  }
+
+  /* Link */
+
+  .menu__tab-link {
+    padding: var(--menu-button-padding);
   }
 
   /* Label */
@@ -73,5 +83,29 @@
 
   .menu__panel-content {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* HTML CSS */
+  .menu__tab[data-section="html"],
+  .menu__tab[data-section="css"] {
+    dl:nth-of-type(2) {
+      border-right: 1px solid var(--color-border-primary);
+    }
+  }
+
+  /* Learn */
+  .menu__tab[data-section="learn"] {
+    .menu__panel-content dl:nth-of-type(1) {
+      grid-column: span 3;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--color-border-primary);
+    }
+  }
+
+  /* About */
+  .menu__tab[data-section="about"] {
+    .menu__panel-content ul {
+      row-gap: 1.4rem;
+    }
   }
 }

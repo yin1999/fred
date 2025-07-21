@@ -1,4 +1,5 @@
-@import url("prismjs/themes/prism.css");
+@import url("../global/global.css");
+@import url("./prism.css");
 @import url("./common.css");
 
 .code-example {

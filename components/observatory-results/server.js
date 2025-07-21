@@ -6,7 +6,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class ObservatoryResults extends ServerComponent {
   /**
-   * @param {import("@fred").Context<import("@rari").SpaPage>} context
+   * @param {import("@fred").Context<import("@rari").SPAPage>} context
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
@@ -26,14 +26,17 @@ export class ObservatoryResults extends ServerComponent {
       extendedContext,
       html`
         <div class="obs-layout obs-layout--results">
-          <div class="obs-layout__content obs-layout__content--results">
+          <div
+            id="content"
+            class="obs-layout__content obs-layout__content--results"
+          >
             <section class="obs-results">
               <section class="obs-results__header">
                 <h1 class="obs-results__title">
                   <span class="obs-results__title-accent"
                     >${context.l10n("obs-title")}</span
                   >
-                  ${context.l10n("Report")}
+                  ${context.l10n("obs-report")}
                 </h1>
                 <div class="obs-results__feedback">${Feedback(context)}</div>
               </section>
