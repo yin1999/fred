@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prefer-query-selector */
 /**
  * @import { MDNCodeExample } from "../components/code-example/element.js";
  */
@@ -12,12 +11,10 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
       /** @type {MDNCodeExample[]} */
       const codeExamples = [];
 
-      for (const element of [
-        // use getElementsByClassName as liveId can contain dots,
-        // which breaks querySelectorAll
-        ...document.getElementsByClassName(`live-sample___${liveId}`),
-        ...document.getElementsByClassName(`live-sample---${liveId}`),
-      ]) {
+      const escapedId = liveId.replaceAll(".", String.raw`\.`);
+      for (const element of document.querySelectorAll(
+        `.live-sample___${escapedId}, .live-sample---${escapedId}`,
+      )) {
         const { MDNCodeExample, upgradePre } = await import(
           "../components/code-example/element.js"
         );
