@@ -31,6 +31,16 @@ export function parseString(name, fallback, options) {
 
 /**
  * @param {string} name
+ * @param {number} fallback
+ * @param {Options} [options]
+ */
+export function parseInt(name, fallback, options) {
+  const value = getEnv(name, options);
+  return value && /^\d+$/.test(value) ? Number(value) : fallback;
+}
+
+/**
+ * @param {string} name
  * @param {Options} [options]
  * @returns {string | undefined}
  */

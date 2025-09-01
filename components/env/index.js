@@ -1,10 +1,15 @@
-import { parseBool, parseString } from "./utils.js";
+import { parseBool, parseInt, parseString } from "./utils.js";
 
 export const PLAYGROUND_BASE_HOST = parseString(
   "PLAYGROUND_BASE_HOST",
   "mdnplay.dev",
 );
 export const PLAYGROUND_LOCAL = parseBool("PLAYGROUND_LOCAL", false);
+
+export const PORT = parseInt("PORT", 3000, { runtime: true });
+export const PLAYGROUND_PORT = parseInt("PLAYGROUND_PORT", PORT + 1, {
+  runtime: true,
+});
 
 export const FXA_SIGNIN_URL = parseString(
   "FXA_SIGNIN_URL",
