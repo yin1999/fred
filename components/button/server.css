@@ -34,7 +34,7 @@
     background-color: light-dark(var(--color-black), var(--color-white));
 
     &:hover {
-      background-color: light-dark(var(--color-gray-20), var(--color-gray-60));
+      background-color: light-dark(var(--color-gray-40), var(--color-gray-60));
     }
 
     &[data-action="positive"] {
