@@ -12,13 +12,33 @@ export class Menu extends ServerComponent {
    */
   render(context) {
     /**
+     * Holds the id of the section being rendered.
+     *
+     * @type {string|null}
+     */
+    let currentSection = null;
+
+    /**
+     * Generates a Glean ID for menu/submenu links.
+     *
+     * @param {string} href - The href of the link.
+     * @param {object} [options]
+     * @param {boolean} [options.primary] - Whether this is the primary link (in the panel title).
+     * @returns {string} the Glean ID.
+     */
+    const gleanId = (href, { primary = false } = {}) =>
+      `${primary ? "menu_click_menu" : "menu_click_submenu"}: ${currentSection ?? "?"} -> ${href}`;
+
+    /**
      * Renders a link to a page.
      *
-     * @param {string} slug
-     * @param {string} text
-     * @param {string} [label]
+     * @param {string} slug - The link slug (the part after `/en-US/docs/`!).
+     * @param {string} text - The link text.
+     * @param {object} [options]
+     * @param {string} [options.label] - The title and aria-label of the link.
+     * @param {boolean} [options.primary] - Whether this is the primary link (in the panel title).
      */
-    const link = (slug, text, label) => {
+    const link = (slug, text, { label, primary = false } = {}) => {
       const locale =
         context.locale in MISSING_DOCS &&
         MISSING_DOCS[context.locale]?.includes(slug)
@@ -34,20 +54,22 @@ export class Menu extends ServerComponent {
         href=${href}
         aria-label=${ifDefined(label)}
         title=${ifDefined(label)}
+        data-glean-id=${gleanId(href, { primary })}
         >${text}</a
       >`;
     };
 
-    return html`
-      <nav class="menu">
-        <div class="menu__tab" data-section="html">
-          <mdn-dropdown>
+    const sections = [
+      {
+        id: "html",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">HTML</span>
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/HTML", "HTML: Markup language")}
+                ${link("Web/HTML", "HTML: Markup language", { primary: true })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -67,11 +89,9 @@ export class Menu extends ServerComponent {
                         ${link("Web/HTML/Reference/Attributes", "Attributes")}
                       </li>
                       <li>
-                        ${link(
-                          "Web/HTML/Reference",
-                          "See all…",
-                          "See all HTML references",
-                        )}
+                        ${link("Web/HTML/Reference", "See all…", {
+                          label: "See all HTML references",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -96,11 +116,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/HTML/Guides",
-                          "See all…",
-                          "See all HTML guides",
-                        )}
+                        ${link("Web/HTML/Guides", "See all…", {
+                          label: "See all HTML guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -117,16 +135,18 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="css">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "css",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">CSS</span>
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/CSS", "CSS: Styling language")}
+                ${link("Web/CSS", "CSS: Styling language", { primary: true })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -143,11 +163,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/CSS/Reference",
-                          "See all…",
-                          "See all CSS references",
-                        )}
+                        ${link("Web/CSS/Reference", "See all…", {
+                          label: "See all CSS references",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -176,11 +194,9 @@ export class Menu extends ServerComponent {
                       </li>
                       <li>${link("Web/CSS/CSS_colors", "Colors")}</li>
                       <li>
-                        ${link(
-                          "Web/CSS/Guides",
-                          "See all…",
-                          "See all CSS guides",
-                        )}
+                        ${link("Web/CSS/Guides", "See all…", {
+                          label: "See all CSS guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -213,17 +229,21 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="javascript">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "javascript",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label" data-type="long">JavaScript</span>
               <span class="menu__tab-label" data-type="short">JS</span>
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/JavaScript", "JavaScript: Scripting language")}
+                ${link("Web/JavaScript", "JavaScript: Scripting language", {
+                  primary: true,
+                })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -255,11 +275,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/JavaScript/Reference",
-                          "See all…",
-                          "See all JavaScript references",
-                        )}
+                        ${link("Web/JavaScript/Reference", "See all…", {
+                          label: "See all JavaScript references",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -293,27 +311,29 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/JavaScript/Guide",
-                          "See all…",
-                          "See all JavaScript guides",
-                        )}
+                        ${link("Web/JavaScript/Guide", "See all…", {
+                          label: "See all JavaScript guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="webapis">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "webapis",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Web APIs</span>
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/API", "Web APIs: Programming interfaces")}
+                ${link("Web/API", "Web APIs: Programming interfaces", {
+                  primary: true,
+                })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -336,7 +356,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link("Web/API", "See all…", "See all Web API guides")}
+                        ${link("Web/API", "See all…", {
+                          label: "See all Web API guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -380,16 +402,18 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="all">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "all",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">All</span>
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web", "All web technology")}
+                ${link("Web", "All web technology", { primary: true })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -408,11 +432,9 @@ export class Menu extends ServerComponent {
                       <li>${link("WebAssembly", "WebAssembly")}</li>
                       <li>${link("Web/WebDriver", "WebDriver")}</li>
                       <li>
-                        ${link(
-                          "Web",
-                          "See all…",
-                          "See all web technology references",
-                        )}
+                        ${link("Web", "See all…", {
+                          label: "See all web technology references",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -436,16 +458,20 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="learn">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "learn",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Learn</span>
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Learn_web_development", "Learn web development")}
+                ${link("Learn_web_development", "Learn web development", {
+                  primary: true,
+                })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -472,6 +498,7 @@ export class Menu extends ServerComponent {
                               : "only-in-en-us",
                           )}
                           href="/en-US/curriculum/"
+                          data-glean-id=${gleanId("/en-US/curriculum/")}
                           >Curriculum</a
                         >
                       </li>
@@ -537,10 +564,12 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="tools">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "tools",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Tools</span>
             </button>
@@ -553,6 +582,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="circle-play"
                       href=${`/en-US/play`}
+                      data-glean-id=${gleanId("/en-US/play/")}
                     >
                       Playground
                     </a>
@@ -562,6 +592,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="shield-check"
                       href=${`/en-US/observatory`}
+                      data-glean-id=${gleanId("/en-US/observatory/")}
                     >
                       HTTP Observatory
                     </a>
@@ -595,10 +626,12 @@ export class Menu extends ServerComponent {
                 </ul>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="about">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "about",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">About</span>
             </button>
@@ -611,6 +644,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="mdn-m"
                       href=${`/en-US/about`}
+                      data-glean-id=${gleanId("/en-US/about")}
                     >
                       About MDN
                     </a>
@@ -620,6 +654,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="chart-no-axes-combined"
                       href=${`/en-US/advertising`}
+                      data-glean-id=${gleanId("/en-US/advertising")}
                     >
                       Advertise with us
                     </a>
@@ -631,6 +666,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="users"
                       href=${`/en-US/community`}
+                      data-glean-id=${gleanId("/en-US/community")}
                     >
                       Community
                     </a>
@@ -640,6 +676,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="github"
                       href="https://github.com/mdn"
+                      data-glean-id=${gleanId("https://github.com/mdn")}
                     >
                       MDN on GitHub
                     </a>
@@ -647,11 +684,30 @@ export class Menu extends ServerComponent {
                 </ul>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="blog">
-          <a class="menu__tab-link" href=${`/en-US/blog/`}>Blog</a>
-        </div>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "blog",
+        render: () =>
+          html`<a
+            class="menu__tab-link"
+            href=${`/en-US/blog/`}
+            data-glean-id=${`menu_click_link: top-level -> /en-US/blog/`}
+            >Blog</a
+          >`,
+      },
+    ];
+
+    return html`
+      <nav class="menu">
+        ${sections.map((section) => {
+          currentSection = section.id;
+          const result = html`<div class="menu__tab" data-section=${section.id}>
+            ${section.render()}
+          </div>`;
+          currentSection = null;
+          return result;
+        })}
       </nav>
     `;
   }
