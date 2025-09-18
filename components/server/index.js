@@ -1,6 +1,8 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+
 import { stylesForComponents } from "../outer-layout/utils.js";
 
 import { asyncLocalStorage } from "./async-local-storage.js";
@@ -8,6 +10,8 @@ import { asyncLocalStorage } from "./async-local-storage.js";
 export class ServerComponent {
   static stylesInHead = true;
   static legacy = false;
+  /** @type {string | undefined} */
+  static inlineScript;
 
   /**
    * @template {typeof ServerComponent} T
@@ -31,7 +35,7 @@ export class ServerComponent {
       componentsUsed.add("legacy");
     }
 
-    const res = new this().render(...args);
+    let res = new this().render(...args);
 
     if (!res || res === nothing) {
       if (!componentUsedBefore) {
@@ -39,6 +43,11 @@ export class ServerComponent {
         componentsWithStylesInHead.delete(this.name);
       }
       return nothing;
+    }
+
+    const { inlineScript } = this;
+    if (inlineScript) {
+      res = html`${res}${unsafeHTML(`<script>${inlineScript}</script>`)}`;
     }
 
     if (!this.stylesInHead) {
