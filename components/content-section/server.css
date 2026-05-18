@@ -384,6 +384,18 @@
     }
   }
 
+  /* Alphabetical/grouped indexes (rari `CSS_Ref`, `ListGroups`, `APIListAlpha`, `css_ref_list`) */
+  .index {
+    ul {
+      columns: 18rem;
+      column-gap: 2rem;
+    }
+
+    li {
+      break-inside: avoid;
+    }
+  }
+
   /* Article footer */
   &.article-footer {
     margin: 2rem 0;
