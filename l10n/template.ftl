@@ -51,8 +51,9 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
 compat-link-source-title = File: { $filename }
-compat-support-prefix = Implemented with the vendor prefix: { $prefix }
-compat-support-altname = Alternate name: { $altname }
+compat-branch-prefix = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>
+compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
